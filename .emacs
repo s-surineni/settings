@@ -78,3 +78,7 @@
       (require 'tern-auto-complete)
       (tern-ac-setup)))
 ;;tern mode
+
+;webmode
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+;webmode
