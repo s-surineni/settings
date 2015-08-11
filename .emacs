@@ -69,3 +69,12 @@
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
+;;auto complete
+
+;;tern mode
+(add-hook 'js-mode-hook (lambda () (tern-mode t)))
+(eval-after-load 'tern
+   '(progn
+      (require 'tern-auto-complete)
+      (tern-ac-setup)))
+;;tern mode
