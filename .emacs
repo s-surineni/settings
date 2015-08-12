@@ -9,7 +9,7 @@
 (global-set-key (kbd "RET") 'newline-and-indent);return will indent now
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region);for commenting and uncommenting
 
-(require 'autopair);turns auto-parining on
+;(require 'autopair);turns auto-parining on
 
 ;;loads extra packages
 (load "package")
@@ -71,6 +71,7 @@
 (ac-config-default)
 ;;auto complete
 
+
 ;;tern mode
 (add-hook 'js-mode-hook (lambda () (tern-mode t)))
 (eval-after-load 'tern
@@ -82,3 +83,10 @@
 ;webmode
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 ;webmode
+
+;for themes
+(add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized")
+
+
+(load-theme 'solarized t)
+;;for theme
