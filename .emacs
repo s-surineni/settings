@@ -9,7 +9,7 @@
 (global-set-key (kbd "RET") 'newline-and-indent);return will indent now
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region);for commenting and uncommenting
 
-;(require 'autopair);turns auto-parining on
+(require 'autopair);turns auto-parining on
 
 ;;loads extra packages
 (load "package")
