@@ -4,12 +4,18 @@
 (global-linum-mode t);;may be numbers on left??
 (column-number-mode 1);;column number
 (setq initial-scratch-message nil);;empty buffer will be null now
-(scroll-bar-mode -1);;no scrollbar
 (tool-bar-mode -1);;no tool bar
 (menu-bar-mode -1);;no menu bar
+(scroll-bar-mode -1);;hides scroll bar
 (setq x-select-enable-clipboard t);respond to system clipboard
 (global-set-key (kbd "RET") 'newline-and-indent);return will indent now
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region);for commenting and uncommenting
+(show-paren-mode 1);shows the parenthesis pair
+;;deletes hilighted text
+(delete-selection-mode t)
+(transient-mark-mode t)
+(setq x-select-enable-clipboard t)
+;;deletes hilighted text
 
 ;(require 'autopair);turns auto-parining on
 
@@ -23,7 +29,7 @@
 
 (setq package-archive-enable-alist '(("melpa" deft magit)))
 ;;loads extra packages
-
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode)) ;starts org mode
 ;;list of needed packages
 (defvar abedra/packages '(auto-complete
                           web-mode
@@ -86,23 +92,31 @@
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 ;webmode
 
+;auto-pair
+(add-hook 'prog-mode-hook #'(lambda() (autopair-mode)))
+;auto-pair
+
 ;for themes
 (add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized")
 
 
-(load-theme 'solarized t)
+;(load-theme 'solarized t)
 ;;for theme
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default))))
-(custom-set-variables
- '(initial-frame-alist (quote ((fullscreen . maximized)))))
+ '(custom-enabled-themes (quote (solarized)))
+ '(custom-safe-themes (quote ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
+ '(frame-background-mode (quote dark))
+ '(initial-frame-alist (quote ((fullscreen . maximized))))
+ '(kill-whole-line t))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(enable-theme 'solarized)
