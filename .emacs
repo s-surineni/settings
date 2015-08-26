@@ -120,3 +120,89 @@
  ;; If there is more than one, they won't work right.
  )
 (enable-theme 'solarized)
+
+
+;;cut whole line
+(defun xah-cut-line-or-region ()
+  "Cut current line, or text selection.
+When `universal-argument' is called first, cut whole buffer (respects `narrow-to-region').
+
+URL `http://ergoemacs.org/emacs/emacs_copy_cut_current_line.html'
+Version 2015-06-10"
+  (interactive)
+  (if current-prefix-arg
+      (progn ; not using kill-region because we don't want to include previous kill
+        (kill-new (buffer-string))
+        (delete-region (point-min) (point-max)))
+    (progn (if (use-region-p)
+               (kill-region (region-beginning) (region-end) t)
+             (kill-region (line-beginning-position) (line-beginning-position 2))))))
+
+
+;key bindings
+
+
+;;deleting and not killing
+(defun my-delete-word (arg)
+  "Delete characters forward until encountering the end of a word.
+With argument, do this that many times.
+This command does not push text to `kill-ring'."
+  (interactive "p")
+  (delete-region
+   (point)
+   (progn
+     (forward-word arg)
+     (point))))
+
+(defun my-backward-delete-word (arg)
+  "Delete characters backward until encountering the beginning of a word.
+With argument, do this that many times.
+This command does not push text to `kill-ring'."
+  (interactive "p")
+  (my-delete-word (- arg)))
+
+(defun my-delete-line ()
+  "Delete text from current position to end of line char.
+This command does not push text to `kill-ring'."
+  (interactive)
+  (delete-region
+   (point)
+   (progn (end-of-line 1) (point)))
+  (delete-char 1))
+
+(defun my-delete-line-backward ()
+  "Delete text between the beginning of the line to the cursor position.
+This command does not push text to `kill-ring'."
+  (interactive)
+  (let (p1 p2)
+    (setq p1 (point))
+    (beginning-of-line 1)
+    (setq p2 (point))
+    (delete-region p1 p2)))
+
+;;for copying current line if region is not active
+(defun my-kill-ring-save (beg end flash)
+      (interactive (if (use-region-p)
+                       (list (region-beginning) (region-end) nil)
+                     (list (line-beginning-position)
+                           (line-beginning-position 2) 'flash)))
+      (kill-ring-save beg end)
+      (when flash
+        (save-excursion
+          (if (equal (current-column) 0)
+              (goto-char end)
+            (goto-char beg))
+          (sit-for blink-matching-delay))))
+    (global-set-key [remap kill-ring-save] 'my-kill-ring-save)
+
+; bind them to emacs's default shortcut keys:
+(global-set-key (kbd "C-S-d") 'my-delete-line-backward) ; Ctrl+Shift+k
+(global-set-key (kbd "C-d") 'my-delete-line)
+(global-set-key (kbd "M-d") 'my-delete-word)
+(global-set-key (kbd "<M-backspace>") 'my-backward-delete-word)
+(global-set-key (kbd "C-w") 'xah-cut-line-or-region) ; cut
+(global-set-key (kbd "C-o") 'find-file) ; finding files
+(global-set-key (kbd "C-s") 'save-buffer) ; cut
+(global-set-key (kbd "C-f") 'isearch-forward) ; cut
+(global-set-key (kbd "C-S-f") 'isearch-backward) ; cut
+(global-set-key (kbd "C-S-k") 'kill-buffer) ; cut
