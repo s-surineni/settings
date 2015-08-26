@@ -109,6 +109,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes (quote (solarized)))
  '(custom-safe-themes (quote ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
+ '(desktop-save-mode t)
  '(frame-background-mode (quote dark))
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(kill-whole-line t))
@@ -204,5 +205,9 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-o") 'find-file) ; finding files
 (global-set-key (kbd "C-s") 'save-buffer) ; cut
 (global-set-key (kbd "C-f") 'isearch-forward) ; cut
+;(global-set-key (kbd "C-f") 'isearch-repeat-forward) ; cut
 (global-set-key (kbd "C-S-f") 'isearch-backward) ; cut
+;(global-set-key (kbd "C-S-f") 'isearch-repeat-backward) ; cut
 (global-set-key (kbd "C-S-k") 'kill-buffer) ; cut
+(global-set-key (kbd "C-S-b") 'switch-to-buffer) ; cut
+(global-set-key (kbd "C-c") 'kill-ring-save) ; cut
