@@ -209,5 +209,5 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-S-f") 'isearch-backward) ; cut
 ;(global-set-key (kbd "C-S-f") 'isearch-repeat-backward) ; cut
 (global-set-key (kbd "C-S-k") 'kill-buffer) ; cut
-(global-set-key (kbd "C-S-b") 'switch-to-buffer) ; cut
+(global-set-key (kbd "C-b") 'switch-to-buffer) ; cut
 (global-set-key (kbd "C-c") 'kill-ring-save) ; cut
