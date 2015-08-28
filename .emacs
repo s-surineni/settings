@@ -1,15 +1,15 @@
-(setq frame-title-format "%b");;filename as window name
+(set-language-environment "UTF-8")
+(set-default-coding-systems 'utf-8-unix)
+;(setq frame-title-format "%b");;filename as window name
 (setq inhibit-splash-screen t);;stops tutorial at the beginning
 (setq scroll-step 1);;line by line scrolling
-(global-linum-mode t);;may be numbers on left??
-(column-number-mode 1);;column number
+;(global-linum-mode t);;may be numbers on left??
+;(column-number-mode 1);;column number
 (setq initial-scratch-message nil);;empty buffer will be null now
 (tool-bar-mode -1);;no tool bar
 (menu-bar-mode -1);;no menu bar
 (scroll-bar-mode -1);;hides scroll bar
 (setq x-select-enable-clipboard t);respond to system clipboard
-(global-set-key (kbd "RET") 'newline-and-indent);return will indent now
-(global-set-key (kbd "C-;") 'comment-or-uncomment-region);for commenting and uncommenting
 (show-paren-mode 1);shows the parenthesis pair
 ;;deletes hilighted text
 (delete-selection-mode t)
@@ -182,19 +182,41 @@ This command does not push text to `kill-ring'."
     (delete-region p1 p2)))
 
 ;;for copying current line if region is not active
-(defun my-kill-ring-save (beg end flash)
-      (interactive (if (use-region-p)
-                       (list (region-beginning) (region-end) nil)
-                     (list (line-beginning-position)
-                           (line-beginning-position 2) 'flash)))
-      (kill-ring-save beg end)
-      (when flash
-        (save-excursion
-          (if (equal (current-column) 0)
-              (goto-char end)
-            (goto-char beg))
-          (sit-for blink-matching-delay))))
-    (global-set-key [remap kill-ring-save] 'my-kill-ring-save)
+;; (defun my-kill-ring-save (beg end flash)
+;;       (interactive (if (use-region-p)
+;;                        (list (region-beginning) (region-end) nil)
+;;                      (list (line-beginning-position)
+;;                            (line-beginning-position 2) 'flash)))
+;;       (kill-ring-save beg end)
+;;       (when flash
+;;         (save-excursion
+;;           (if (equal (current-column) 0)
+;;               (goto-char end)
+;;             (goto-char beg))
+;;           (sit-for blink-matching-delay))))
+;;     (global-set-key [remap kill-ring-save] 'my-kill-ring-save)
+
+
+(defun xah-copy-line-or-region ()
+  "Copy current line, or text selection.
+When `universal-argument' is called first, copy whole buffer (respects `narrow-to-region').
+
+URL `http://ergoemacs.org/emacs/emacs_copy_cut_current_line.html'
+Version 2015-05-06"
+  (interactive)
+  (let (ξp1 ξp2)
+    (if current-prefix-arg
+        (progn (setq ξp1 (point-min))
+               (setq ξp2 (point-max)))
+      (progn (if (use-region-p)
+                 (progn (setq ξp1 (region-beginning))
+                        (setq ξp2 (region-end)))
+               (progn (setq ξp1 (line-beginning-position))
+                      (setq ξp2 (line-end-position))))))
+    (kill-ring-save ξp1 ξp2)
+    (if current-prefix-arg
+        (message "buffer text copied")
+      (message "text copied"))))
 
 ; bind them to emacs's default shortcut keys:
 (global-set-key (kbd "C-S-d") 'my-delete-line-backward) ; Ctrl+Shift+k
@@ -202,12 +224,40 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "M-d") 'my-delete-word)
 (global-set-key (kbd "<M-backspace>") 'my-backward-delete-word)
 (global-set-key (kbd "C-w") 'xah-cut-line-or-region) ; cut
+(global-set-key (kbd "M-w") 'xah-copy-line-or-region) ; copy
 (global-set-key (kbd "C-o") 'find-file) ; finding files
 (global-set-key (kbd "C-s") 'save-buffer) ; cut
 (global-set-key (kbd "C-f") 'isearch-forward) ; cut
 ;(global-set-key (kbd "C-f") 'isearch-repeat-forward) ; cut
 (global-set-key (kbd "C-S-f") 'isearch-backward) ; cut
 ;(global-set-key (kbd "C-S-f") 'isearch-repeat-backward) ; cut
-(global-set-key (kbd "C-S-k") 'kill-buffer) ; cut
 (global-set-key (kbd "C-b") 'switch-to-buffer) ; cut
-(global-set-key (kbd "C-c") 'kill-ring-save) ; cut
+;(global-set-key (kbd "C-c") 'xah-copy-line-or-region) ; cut
+(global-set-key [f5] 'revert-buffer)
+(global-set-key (kbd "C-k") 'kill-buffer)
+(global-set-key (kbd "C-a") 'mark-whole-buffer)
+(global-set-key (kbd "C-,") 'move-beginning-of-line)
+(global-set-key (kbd "C-.") 'move-end-of-line)
+(global-set-key (kbd "M-,") 'beginning-of-buffer)
+(global-set-key (kbd "M-.") 'end-of-buffer)
+(global-set-key (kbd "C-e") 'delete-window)
+(global-set-key (kbd "RET") 'newline-and-indent);return will indent now
+(global-set-key (kbd "C-;") 'comment-or-uncomment-region);for commenting and uncommenting
+
+;;Frame title bar formatting to show full path of file
+;; Frame title bar formatting to show full path of file
+
+
+;;for all region operations
+;; (do-all-symbols (symbol)
+;;       (when (and (commandp symbol t)
+;;                  (string-match-p "-region$\\|kill-ring-save" (symbol-name symbol)))
+;;         (put symbol 'interactive-form
+;;              '(interactive
+;;                (if (use-region-p)
+;;                    (list (region-beginning) (region-end))
+;;                  (list (line-beginning-position) (line-beginning-position 2)))))))
+
+;;whole path as status bar
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'reverse)
