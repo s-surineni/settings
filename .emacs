@@ -15,7 +15,7 @@
 (delete-selection-mode t)
 (transient-mark-mode t)
 (setq x-select-enable-clipboard t)
-;;deletes hilighted text
+;deletes hilighted text
 
 ;(require 'autopair);turns auto-parining on
 
@@ -34,7 +34,7 @@
 (defvar abedra/packages '(auto-complete
                           web-mode
                           )
-  "Default packages")
+   "Default packages")
 ;;list of needed packages
 
 ;(defun abedra/packages-installed-p ()
@@ -90,7 +90,7 @@
 
 ;webmode
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-;webmode
+;webmodeb
 
 ;auto-pair
 (add-hook 'prog-mode-hook #'(lambda() (autopair-mode)))
@@ -223,8 +223,8 @@ Version 2015-05-06"
 (global-set-key (kbd "C-d") 'my-delete-line)
 (global-set-key (kbd "M-d") 'my-delete-word)
 (global-set-key (kbd "<M-backspace>") 'my-backward-delete-word)
-(global-set-key (kbd "C-w") 'xah-cut-line-or-region) ; cut
-(global-set-key (kbd "M-w") 'xah-copy-line-or-region) ; copy
+(global-set-key (kbd "<f2>") 'xah-cut-line-or-region) ; cut
+(global-set-key (kbd "<f3>") 'xah-copy-line-or-region) ; copy
 (global-set-key (kbd "C-o") 'find-file) ; finding files
 (global-set-key (kbd "C-s") 'save-buffer) ; cut
 (global-set-key (kbd "C-f") 'isearch-forward) ; cut
@@ -243,7 +243,7 @@ Version 2015-05-06"
 (global-set-key (kbd "C-e") 'delete-window)
 (global-set-key (kbd "RET") 'newline-and-indent);return will indent now
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region);for commenting and uncommenting
-
+(global-set-key (kbd "<escape>") 'keyboard-quit);for commenting and uncommenting
 ;;Frame title bar formatting to show full path of file
 ;; Frame title bar formatting to show full path of file
 
