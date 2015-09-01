@@ -18,58 +18,8 @@
 
 (add-hook 'prog-mode-hook #'(lambda() (autopair-mode)));auto-pair
 
-;;loads extra packages
 (load "package")
 (package-initialize)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
-(setq package-archive-enable-alist '(("melpa" deft magit)))
-;;loads extra packages
-(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode)) ;starts org mode
-;;list of needed packages
-(defvar abedra/packages '(auto-complete
-                          web-mode
-                          )
-   "Default packages")
-;;list of needed packages
-
-;(defun abedra/packages-installed-p ()
- ; (loop for pkg in abedra/packages
-  ;      when (not (package-installed-p pkg)) do (return nil)
-   ;     finally (return t)))
-
-;(unless (abedra/packages-installed-p)
- ; (message "%s" "Refreshing package database...")
-  ;(package-refresh-contents)
-  ;(dolist (pkg abedra/packages)
-   ; (when (not (package-installed-p pkg))
-    ;  (package-install pkg))))
-
-;package manager config
-(require 'package)
-(dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
-                  ("elpa" . "http://tromey.com/elpa/")
-                  ;; TODO: Maybe, use this after emacs24 is released
-                  ;; (development versions of packages)
-                  ("melpa" . "http://melpa.milkbox.net/packages/")
-                  ))
-  (add-to-list 'package-archives source t))
-(package-initialize)
-
-;package manager config
-
-;specifying package list
-(when (not package-archive-contents)
-  (package-refresh-contents))
-(defvar tmtxt/packages
-  '(auto-complete web-mode))
-(dolist (p tmtxt/packages)
-  (when (not (package-installed-p p))
-    (package-install p)))
-;specifying package list
 
 ;; auto complete mod
 (require 'auto-complete-config)
