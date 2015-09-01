@@ -1,23 +1,22 @@
+;encoding system
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8-unix)
-;(setq frame-title-format "%b");;filename as window name
-(setq inhibit-splash-screen t);;stops tutorial at the beginning
-(setq scroll-step 1);;line by line scrolling
-;(global-linum-mode t);;may be numbers on left??
-;(column-number-mode 1);;column number
-(setq initial-scratch-message nil);;empty buffer will be null now
+
+(setq frame-title-format "%b");;filename as window name
 (tool-bar-mode -1);;no tool bar
 (menu-bar-mode -1);;no menu bar
 (scroll-bar-mode -1);;hides scroll bar
-(setq x-select-enable-clipboard t);respond to system clipboard
-(show-paren-mode 1);shows the parenthesis pair
-;;deletes hilighted text
-(delete-selection-mode t)
-(transient-mark-mode t)
-(setq x-select-enable-clipboard t)
-;deletes hilighted text
+(setq inhibit-splash-screen t);;stops tutorial at the beginning
+(setq initial-scratch-message nil);;empty buffer will be null now
+(setq scroll-step 1);;line by line scrolling
 
-;(require 'autopair);turns auto-parining on
+(show-paren-mode 1);shows the parenthesis pair
+(setq x-select-enable-clipboard t);respond to system clipboard
+(which-function-mode 1);shows which function the line is in
+(delete-selection-mode t);;deletes hilighted text
+(transient-mark-mode t);deletes hilighted text
+
+(add-hook 'prog-mode-hook #'(lambda() (autopair-mode)));auto-pair
 
 ;;loads extra packages
 (load "package")
@@ -72,13 +71,14 @@
     (package-install p)))
 ;specifying package list
 
-;;; auto complete mod
-;;; should be loaded after yasnippet so that they can work together
+;; auto complete mod
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
 ;;auto complete
 
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'reverse)
 
 ;;tern mode
 (add-hook 'js-mode-hook (lambda () (tern-mode t)))
@@ -88,19 +88,9 @@
       (tern-ac-setup)))
 ;;tern mode
 
-;webmode
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-;webmodeb
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode));webmodeb
+(add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized");for themes
 
-;auto-pair
-(add-hook 'prog-mode-hook #'(lambda() (autopair-mode)))
-;auto-pair
-
-;for themes
-(add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized")
-
-
-;(load-theme 'solarized t)
 ;;for theme
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -114,14 +104,14 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(kill-whole-line t))
 
+(enable-theme 'solarized);theme enabling
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-(enable-theme 'solarized)
-
 
 ;;cut whole line
 (defun xah-cut-line-or-region ()
@@ -139,9 +129,26 @@ Version 2015-06-10"
                (kill-region (region-beginning) (region-end) t)
              (kill-region (line-beginning-position) (line-beginning-position 2))))))
 
+(defun xah-copy-line-or-region ()
+  "Copy current line, or text selection.
+When `universal-argument' is called first, copy whole buffer (respects `narrow-to-region').
 
-;key bindings
-
+URL `http://ergoemacs.org/emacs/emacs_copy_cut_current_line.html'
+Version 2015-05-06"
+  (interactive)
+  (let (ξp1 ξp2)
+    (if current-prefix-arg
+        (progn (setq ξp1 (point-min))
+               (setq ξp2 (point-max)))
+      (progn (if (use-region-p)
+                 (progn (setq ξp1 (region-beginning))
+                        (setq ξp2 (region-end)))
+               (progn (setq ξp1 (line-beginning-position))
+                      (setq ξp2 (line-end-position))))))
+    (kill-ring-save ξp1 ξp2)
+    (if current-prefix-arg
+        (message "buffer text copied")
+      (message "text copied"))))
 
 ;;deleting and not killing
 (defun my-delete-word (arg)
@@ -196,28 +203,6 @@ This command does not push text to `kill-ring'."
 ;;           (sit-for blink-matching-delay))))
 ;;     (global-set-key [remap kill-ring-save] 'my-kill-ring-save)
 
-
-(defun xah-copy-line-or-region ()
-  "Copy current line, or text selection.
-When `universal-argument' is called first, copy whole buffer (respects `narrow-to-region').
-
-URL `http://ergoemacs.org/emacs/emacs_copy_cut_current_line.html'
-Version 2015-05-06"
-  (interactive)
-  (let (ξp1 ξp2)
-    (if current-prefix-arg
-        (progn (setq ξp1 (point-min))
-               (setq ξp2 (point-max)))
-      (progn (if (use-region-p)
-                 (progn (setq ξp1 (region-beginning))
-                        (setq ξp2 (region-end)))
-               (progn (setq ξp1 (line-beginning-position))
-                      (setq ξp2 (line-end-position))))))
-    (kill-ring-save ξp1 ξp2)
-    (if current-prefix-arg
-        (message "buffer text copied")
-      (message "text copied"))))
-
 ; bind them to emacs's default shortcut keys:
 (global-set-key (kbd "C-S-d") 'my-delete-line-backward) ; Ctrl+Shift+k
 (global-set-key (kbd "C-d") 'my-delete-line)
@@ -228,11 +213,7 @@ Version 2015-05-06"
 (global-set-key (kbd "C-o") 'find-file) ; finding files
 (global-set-key (kbd "C-s") 'save-buffer) ; cut
 (global-set-key (kbd "C-f") 'isearch-forward) ; cut
-;(global-set-key (kbd "C-f") 'isearch-repeat-forward) ; cut
-(global-set-key (kbd "C-S-f") 'isearch-backward) ; cut
-;(global-set-key (kbd "C-S-f") 'isearch-repeat-backward) ; cut
 (global-set-key (kbd "C-b") 'switch-to-buffer) ; cut
-;(global-set-key (kbd "C-c") 'xah-copy-line-or-region) ; cut
 (global-set-key [f5] 'revert-buffer)
 (global-set-key (kbd "C-k") 'kill-buffer)
 (global-set-key (kbd "C-a") 'mark-whole-buffer)
@@ -244,9 +225,6 @@ Version 2015-05-06"
 (global-set-key (kbd "RET") 'newline-and-indent);return will indent now
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region);for commenting and uncommenting
 (global-set-key (kbd "<escape>") 'keyboard-quit);for commenting and uncommenting
-;;Frame title bar formatting to show full path of file
-;; Frame title bar formatting to show full path of file
-
 
 ;;for all region operations
 ;; (do-all-symbols (symbol)
@@ -259,5 +237,5 @@ Version 2015-05-06"
 ;;                  (list (line-beginning-position) (line-beginning-position 2)))))))
 
 ;;whole path as status bar
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'reverse)
+
+
