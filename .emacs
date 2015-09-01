@@ -188,4 +188,30 @@ This command does not push text to `kill-ring'."
 
 ;;whole path as status bar
 
+;;; Emacs is not a package manager, and here we load its package manager!
+(require 'package)
+(dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
+                  ("elpa" . "http://tromey.com/elpa/")
+                  ;; TODO: Maybe, use this after emacs24 is released
+                  ;; (development versions of packages)
+                  ("melpa" . "http://melpa.milkbox.net/packages/")
+                  ))
+  (add-to-list 'package-archives source t))
+(package-initialize)
+
+;;; Required packages
+;;; everytime emacs starts, it will automatically check if those packages are
+;;; missing, it will install them automatically
+(when (not package-archive-contents)
+  (package-refresh-contents))
+(defvar tmtxt/packages
+  '(auto-complete
+    autopair
+    org
+    ;solarized-theme
+    web-mode
+    ))
+(dolist (p tmtxt/packages)
+  (when (not (package-installed-p p))
+    (package-install p)))
 
