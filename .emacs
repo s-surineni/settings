@@ -18,43 +18,6 @@
 
 (add-hook 'prog-mode-hook #'(lambda() (autopair-mode)));auto-pair
 
-(load "package")
-(package-initialize)
-
-;; auto complete mod
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(ac-config-default)
-;;auto complete
-
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'reverse)
-
-;;tern mode
-(add-hook 'js-mode-hook (lambda () (tern-mode t)))
-(eval-after-load 'tern
-   '(progn
-      (require 'tern-auto-complete)
-      (tern-ac-setup)))
-;;tern mode
-
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode));webmodeb
-(add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized");for themes
-
-;;for theme
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (solarized)))
- '(custom-safe-themes (quote ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
- '(desktop-save-mode t)
- '(frame-background-mode (quote dark))
- '(initial-frame-alist (quote ((fullscreen . maximized))))
- '(kill-whole-line t))
-
-(enable-theme 'solarized);theme enabling
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -188,13 +151,18 @@ This command does not push text to `kill-ring'."
 
 ;;whole path as status bar
 
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "https://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.org/packages/")))
+
+
 ;;; Emacs is not a package manager, and here we load its package manager!
 (require 'package)
 (dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
                   ("elpa" . "http://tromey.com/elpa/")
                   ;; TODO: Maybe, use this after emacs24 is released
                   ;; (development versions of packages)
-                  ("melpa" . "http://melpa.milkbox.net/packages/")
+                  ("melpa" . "http://melpa.org/packages/")
                   ))
   (add-to-list 'package-archives source t))
 (package-initialize)
@@ -208,10 +176,76 @@ This command does not push text to `kill-ring'."
   '(auto-complete
     autopair
     org
-    ;solarized-theme
+;    magit
+    solarized-theme
     web-mode
     ))
 (dolist (p tmtxt/packages)
   (when (not (package-installed-p p))
     (package-install p)))
 
+(package-initialize)
+
+;; auto complete mod
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
+;auto complete
+
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'reverse)
+
+;;tern mode
+(add-hook 'js-mode-hook (lambda () (tern-mode t)))
+(eval-after-load 'tern
+   '(progn
+      (require 'tern-auto-complete)
+      (tern-ac-setup)))
+;;tern mode
+
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode));webmodeb
+(add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized");for themes
+
+;;for theme
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(cursor-type (quote bar))
+ '(custom-enabled-themes (quote (solarized)))
+ '(custom-safe-themes
+   (quote
+    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
+ '(desktop-save-mode t)
+ '(frame-background-mode (quote dark))
+ '(initial-frame-alist (quote ((fullscreen . maximized))))
+ '(kill-whole-line t))
+
+(enable-theme 'solarized);theme enabling
+
+(defvar prelude-packages
+  '(ack-and-a-half auctex clojure-mode coffee-mode deft expand-region
+                   gist groovy-mode haml-mode haskell-mode inf-ruby
+                   markdown-mode paredit projectile python
+                   sass-mode rainbow-mode scss-mode solarized-theme
+                   volatile-highlights yaml-mode yari zenburn-theme)
+  "A list of packages to ensure are installed at launch.")
+
+(defun prelude-packages-installed-p ()
+  (cl-loop for p in prelude-packages
+        when (not (package-installed-p p)) do (cl-return nil)
+        finally (cl-return t)))
+
+(unless (prelude-packages-installed-p)
+  ;; check for new packages (package versions)
+  (message "%s" "Emacs Prelude is now refreshing its package database...")
+  (package-refresh-contents)
+  (message "%s" " done.")
+  ;; install the missing packages
+  (dolist (p prelude-packages)
+    (when (not (package-installed-p p))
+      (package-install p))))
+
+(provide 'prelude-packages)
+;;; prelude-packages.el ends here
