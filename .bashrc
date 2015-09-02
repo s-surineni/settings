@@ -115,3 +115,5 @@ fi
 
 export GENV=/home/sampath/projects/analytic-env
 export GNANA_CLIENT_ENV=/home/sampath/projects/pyenv
+
+PATH=$PATH:/opt/google/chrome; #export PATH

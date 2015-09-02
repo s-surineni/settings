@@ -138,6 +138,8 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "RET") 'newline-and-indent);return will indent now
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region);for commenting and uncommenting
 (global-set-key (kbd "<escape>") 'keyboard-quit);for commenting and uncommenting
+(global-set-key (kbd "C-S-h") 'split-window-below);splits window horizontally
+(global-set-key (kbd "C-S-v") 'split-window-right);splits windwo vertically
 
 ;;for all region operations
 ;; (do-all-symbols (symbol)
