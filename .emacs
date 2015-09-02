@@ -194,6 +194,8 @@ This command does not push text to `kill-ring'."
 (ac-config-default)
 ;auto complete
 
+(add-to-list 'ac-modes 'org-mode);auto complete in org mode
+
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'reverse)
 

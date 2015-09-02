@@ -1,4 +1,5 @@
 alias sst="/home/sampath/server.sh"
+alias mst="/home/sampath/mserver.sh"
 alias cs="/home/sampath/client.sh"
 alias cdr="cd /home/sampath/projects/python-sdk/src/"
 alias sd="cd /home/sampath/projects/analytics-server/"
