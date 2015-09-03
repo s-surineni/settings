@@ -18,7 +18,6 @@
 
 (add-hook 'prog-mode-hook #'(lambda() (autopair-mode)));auto-pair
 
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -253,3 +252,5 @@ This command does not push text to `kill-ring'."
 
 (provide 'prelude-packages)
 ;;; prelude-packages.el ends here
+
+(autopair-global-mode) ;; enable autopair in all buffers
