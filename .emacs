@@ -129,7 +129,6 @@ This command does not push text to `kill-ring'."
 (global-set-key [f5] 'revert-buffer)
 (global-set-key (kbd "C-k") 'kill-buffer)
 (global-set-key (kbd "C-a") 'mark-whole-buffer)
-(global-set-key (kbd "C-,") 'move-beginning-of-line)
 (global-set-key (kbd "C-.") 'move-end-of-line)
 (global-set-key (kbd "M-,") 'beginning-of-buffer)
 (global-set-key (kbd "M-.") 'end-of-buffer)
@@ -139,7 +138,9 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "<escape>") 'keyboard-quit);for commenting and uncommenting
 (global-set-key (kbd "C-S-h") 'split-window-below);splits window horizontally
 (global-set-key (kbd "C-S-v") 'split-window-right);splits windwo vertically
-
+(global-set-key (kbd "C-,") 'back-to-indentation)
+;(global-set-key (kbd "C-w") 'kill-ring-save);splits windwo vertically
+;(global-set-key (kbd "A-w") 'kill-region);splits windwo vertically
 ;;for all region operations
 ;; (do-all-symbols (symbol)
 ;;       (when (and (commandp symbol t)
@@ -177,7 +178,7 @@ This command does not push text to `kill-ring'."
   '(auto-complete
     autopair
     org
-;    magit
+    magit
     solarized-theme
     web-mode
     ))
@@ -254,3 +255,9 @@ This command does not push text to `kill-ring'."
 ;;; prelude-packages.el ends here
 
 (autopair-global-mode) ;; enable autopair in all buffers
+
+(defun auto-complete-mode-maybe ()
+  "No maybe for you. Only AC!"
+  (unless (minibufferp (current-buffer))
+    (auto-complete-mode 1)))
+(setq ac-disable-faces nil)
