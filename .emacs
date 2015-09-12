@@ -1,8 +1,19 @@
-;encoding system
+;; Disable loading of “default.el” at startup,
+;; in Fedora all it does is fix window title which I rather configure differently
+(setq inhibit-default-init t)
+
+;; SHOW FILE PATH IN FRAME TITLE
+(setq-default frame-title-format "%b (%f)")
+					;encoding system
+;; (setq frame-title-format
+;;       '((:eval (if (buffer-file-name)
+;;                    (abbreviate-file-name (buffer-file-name))
+;;                  "%b"))))
+
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8-unix)
 
-(setq frame-title-format "%b");;filename as window name
+;(setq frame-title-format "%b");;filename as window name
 (tool-bar-mode -1);;no tool bar
 (menu-bar-mode -1);;no menu bar
 (scroll-bar-mode -1);;hides scroll bar
@@ -10,8 +21,10 @@
 (setq initial-scratch-message nil);;empty buffer will be null now
 (setq scroll-step 1);;line by line scrolling
 
+(setq show-paren-delay 0);no delay for showing matching parenthesis
 (show-paren-mode 1);shows the parenthesis pair
 (setq x-select-enable-clipboard t);respond to system clipboard
+(setq web-mode-markup-indent-offset 4)
 (which-function-mode 1);shows which function the line is in
 (delete-selection-mode t);;deletes hilighted text
 (transient-mark-mode t);deletes hilighted text
@@ -116,29 +129,6 @@ This command does not push text to `kill-ring'."
 ;;     (global-set-key [remap kill-ring-save] 'my-kill-ring-save)
 
 ; bind them to emacs's default shortcut keys:
-(global-set-key (kbd "C-S-d") 'my-delete-line-backward) ; Ctrl+Shift+k
-(global-set-key (kbd "C-d") 'my-delete-line)
-(global-set-key (kbd "M-d") 'my-delete-word)
-(global-set-key (kbd "<M-backspace>") 'my-backward-delete-word)
-(global-set-key (kbd "<f2>") 'xah-cut-line-or-region) ; cut
-(global-set-key (kbd "<f3>") 'xah-copy-line-or-region) ; copy
-(global-set-key (kbd "C-o") 'find-file) ; finding files
-(global-set-key (kbd "C-s") 'save-buffer) ; cut
-(global-set-key (kbd "C-f") 'isearch-forward) ; cut
-(global-set-key (kbd "C-b") 'switch-to-buffer) ; cut
-(global-set-key [f5] 'revert-buffer)
-(global-set-key (kbd "C-k") 'kill-buffer)
-(global-set-key (kbd "C-a") 'mark-whole-buffer)
-(global-set-key (kbd "C-.") 'move-end-of-line)
-(global-set-key (kbd "M-,") 'beginning-of-buffer)
-(global-set-key (kbd "M-.") 'end-of-buffer)
-(global-set-key (kbd "C-e") 'delete-window)
-(global-set-key (kbd "RET") 'newline-and-indent);return will indent now
-(global-set-key (kbd "C-;") 'comment-or-uncomment-region);for commenting and uncommenting
-(global-set-key (kbd "<escape>") 'keyboard-quit);for commenting and uncommenting
-(global-set-key (kbd "C-S-h") 'split-window-below);splits window horizontally
-(global-set-key (kbd "C-S-v") 'split-window-right);splits windwo vertically
-(global-set-key (kbd "C-,") 'back-to-indentation)
 ;(global-set-key (kbd "C-w") 'kill-ring-save);splits windwo vertically
 ;(global-set-key (kbd "A-w") 'kill-region);splits windwo vertically
 ;;for all region operations
@@ -261,3 +251,35 @@ This command does not push text to `kill-ring'."
   (unless (minibufferp (current-buffer))
     (auto-complete-mode 1)))
 (setq ac-disable-faces nil)
+
+(global-set-key (kbd "M-S-d") 'my-delete-line-backward) ; Ctrl+Shift+k
+(global-set-key (kbd "M-d") 'my-delete-line)
+(global-set-key (kbd "C-d") 'my-delete-word)
+(global-set-key (kbd "C-S-d") 'my-backward-delete-word)
+(global-set-key (kbd "<M-backspace>") 'my-backward-delete-word)
+
+(global-set-key (kbd "<f2>") 'xah-cut-line-or-region) ; cut
+(global-set-key (kbd "<f3>") 'xah-copy-line-or-region) ; copy
+(global-set-key (kbd "C-o") 'find-file) ; finding files
+(global-set-key (kbd "C-S-s") 'save-buffer) ; cut
+(global-set-key (kbd "M-b") 'switch-to-buffer) ; cut
+(global-set-key (kbd "C-b") 'backward-word) ; cut
+(global-set-key (kbd "C-f") 'forward-word) ; cut
+(global-set-key [f5] 'revert-buffer)
+(global-set-key (kbd "C-k") 'kill-buffer)
+(global-set-key (kbd "C-a") 'back-to-indentation)
+(global-set-key (kbd "C-S-e") 'delete-window)
+(global-set-key (kbd "C-a") 'back-to-indentation)
+(global-set-key (kbd "M-a") 'beginning-of-buffer)
+(global-set-key (kbd "M-e") 'end-of-buffer)
+(global-set-key (kbd "C-e") 'move-end-of-line)
+(global-set-key (kbd "RET") 'newline-and-indent);return will indent now
+(global-set-key (kbd "C-;") 'comment-or-uncomment-region);for commenting and uncommenting
+(global-set-key (kbd "<escape>") 'keyboard-quit);for commenting and uncommenting
+(global-set-key (kbd "C-S-h") 'split-window-below);splits window horizontally
+(global-set-key (kbd "C-S-v") 'split-window-right);splits windwo vertically
+(global-set-key (kbd "C-S-a") 'mark-whole-buffer)
+(global-set-key (kbd "C-v") 'yank)
+(global-set-key (kbd "C-y") 'scroll-up)
+(global-set-key (kbd "C-S-y") 'scroll-down)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
