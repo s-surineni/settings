@@ -3,7 +3,7 @@
 (setq inhibit-default-init t)
 
 ;; SHOW FILE PATH IN FRAME TITLE
-(setq-default frame-title-format "%b (%f)")
+(setq-default frame-title-format "%l %b (%f)")
 					;encoding system
 ;; (setq frame-title-format
 ;;       '((:eval (if (buffer-file-name)
@@ -24,7 +24,6 @@
 (setq show-paren-delay 0);no delay for showing matching parenthesis
 (show-paren-mode 1);shows the parenthesis pair
 (setq x-select-enable-clipboard t);respond to system clipboard
-(setq web-mode-markup-indent-offset 4)
 (which-function-mode 1);shows which function the line is in
 (delete-selection-mode t);;deletes hilighted text
 (transient-mark-mode t);deletes hilighted text
@@ -198,6 +197,13 @@ This command does not push text to `kill-ring'."
 ;;tern mode
 
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode));webmodeb
+
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-markup-indent-offset 4)
+)
+(add-hook 'web-mode-hook  'my-web-mode-hook)
+
 (add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized");for themes
 
 ;;for theme
