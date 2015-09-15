@@ -1,28 +1,27 @@
+
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized");for themes
+
 ;; Disable loading of “default.el” at startup,
 ;; in Fedora all it does is fix window title which I rather configure differently
 (setq inhibit-default-init t)
 
 ;; SHOW FILE PATH IN FRAME TITLE
 (setq-default frame-title-format "%l %b (%f)")
-					;encoding system
-;; (setq frame-title-format
-;;       '((:eval (if (buffer-file-name)
-;;                    (abbreviate-file-name (buffer-file-name))
-;;                  "%b"))))
+(set-language-environment "UTF-8")					;encoding system
 
-(set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8-unix)
 
-;(setq frame-title-format "%b");;filename as window name
 (tool-bar-mode -1);;no tool bar
 (menu-bar-mode -1);;no menu bar
 (scroll-bar-mode -1);;hides scroll bar
+
 (setq inhibit-splash-screen t);;stops tutorial at the beginning
 (setq initial-scratch-message nil);;empty buffer will be null now
 (setq scroll-step 1);;line by line scrolling
 
-(setq show-paren-delay 0);no delay for showing matching parenthesis
 (show-paren-mode 1);shows the parenthesis pair
+(setq show-paren-delay 0);no delay for showing matching parenthesis
 (setq x-select-enable-clipboard t);respond to system clipboard
 (which-function-mode 1);shows which function the line is in
 (delete-selection-mode t);;deletes hilighted text
@@ -112,35 +111,20 @@ This command does not push text to `kill-ring'."
     (setq p2 (point))
     (delete-region p1 p2)))
 
-;;for copying current line if region is not active
-;; (defun my-kill-ring-save (beg end flash)
-;;       (interactive (if (use-region-p)
-;;                        (list (region-beginning) (region-end) nil)
-;;                      (list (line-beginning-position)
-;;                            (line-beginning-position 2) 'flash)))
-;;       (kill-ring-save beg end)
-;;       (when flash
-;;         (save-excursion
-;;           (if (equal (current-column) 0)
-;;               (goto-char end)
-;;             (goto-char beg))
-;;           (sit-for blink-matching-delay))))
-;;     (global-set-key [remap kill-ring-save] 'my-kill-ring-save)
-
-; bind them to emacs's default shortcut keys:
-;(global-set-key (kbd "C-w") 'kill-ring-save);splits windwo vertically
-;(global-set-key (kbd "A-w") 'kill-region);splits windwo vertically
-;;for all region operations
-;; (do-all-symbols (symbol)
-;;       (when (and (commandp symbol t)
-;;                  (string-match-p "-region$\\|kill-ring-save" (symbol-name symbol)))
-;;         (put symbol 'interactive-form
-;;              '(interactive
-;;                (if (use-region-p)
-;;                    (list (region-beginning) (region-end))
-;;                  (list (line-beginning-position) (line-beginning-position 2)))))))
-
-;;whole path as status bar
+;for copying current line if region is not active
+(defun my-kill-ring-save (beg end flash)
+      (interactive (if (use-region-p)
+                       (list (region-beginning) (region-end) nil)
+                     (list (line-beginning-position)
+                           (line-beginning-position 2) 'flash)))
+      (kill-ring-save beg end)
+      (when flash
+        (save-excursion
+          (if (equal (current-column) 0)
+              (goto-char end)
+            (goto-char beg))
+          (sit-for blink-matching-delay))))
+    (global-set-key [remap kill-ring-save] 'my-kill-ring-save)
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "https://marmalade-repo.org/packages/")
@@ -157,6 +141,8 @@ This command does not push text to `kill-ring'."
                   ))
   (add-to-list 'package-archives source t))
 (package-initialize)
+
+(require 'transpose-frame)
 
 ;;; Required packages
 ;;; everytime emacs starts, it will automatically check if those packages are
@@ -198,13 +184,26 @@ This command does not push text to `kill-ring'."
 
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode));webmodeb
 
+;;auto indent yanked test
+(dolist (command '(yank yank-pop))
+  (eval `(defadvice ,command (after indent-region activate)
+	   (and (not current-prefix-arg)
+		(member major-mode '(emacs-lisp-mode lisp-mode
+						     clojure-mode    scheme-mode
+						     haskell-mode    ruby-mode
+						     rspec-mode      python-mode
+						     c-mode          c++-mode
+						     objc-mode       latex-mode
+						     plain-tex-mode  web-mode))
+		(let ((mark-even-if-inactive transient-mark-mode))
+		  (indent-region (region-beginning) (region-end) nil))))))
+
 (defun my-web-mode-hook ()
   "Hooks for Web mode."
   (setq web-mode-markup-indent-offset 4)
 )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized");for themes
 
 ;;for theme
 (custom-set-variables
@@ -212,17 +211,45 @@ This command does not push text to `kill-ring'."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
  '(cursor-type (quote bar))
- '(custom-enabled-themes (quote (solarized)))
+ '(custom-enabled-themes (quote (monokai)))
  '(custom-safe-themes
    (quote
-    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
+    ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "05c3bc4eb1219953a4f182e10de1f7466d28987f48d647c01f1f0037ff35ab9a" "ccaa9318209539f3390b663e5313c9036fd3da9c9327e4a1b99b10aad91f5dc1" "fd9ca77431b92fdf4c0ef0026de0059bcbadb738fc22fe1bc8d8f2ce1a1e7607" "06770ee8b0d0185a3fb824045536fa71964e1984afa51af6b76c008486deca53" "aa0ed50536db21db2316f8e1fef83b298e2b6c19c7e0a6a1689bf1483246fb62" "19352d62ea0395879be564fc36bc0b4780d9768a964d26dfae8aad218062858d" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
  '(desktop-save-mode t)
+ '(fci-rule-color "#383838")
  '(frame-background-mode (quote dark))
  '(initial-frame-alist (quote ((fullscreen . maximized))))
- '(kill-whole-line t))
+ '(kill-whole-line t)
+ '(nrepl-message-colors
+   (quote
+    ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
+ '(vc-annotate-background "#2B2B2B")
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#BC8383")
+     (40 . "#CC9393")
+     (60 . "#DFAF8F")
+     (80 . "#D0BF8F")
+     (100 . "#E0CF9F")
+     (120 . "#F0DFAF")
+     (140 . "#5F7F5F")
+     (160 . "#7F9F7F")
+     (180 . "#8FB28F")
+     (200 . "#9FC59F")
+     (220 . "#AFD8AF")
+     (240 . "#BFEBBF")
+     (260 . "#93E0E3")
+     (280 . "#6CA0A3")
+     (300 . "#7CB8BB")
+     (320 . "#8CD0D3")
+     (340 . "#94BFF3")
+     (360 . "#DC8CC3"))))
+ '(vc-annotate-very-old-color "#DC8CC3"))
 
-(enable-theme 'solarized);theme enabling
+;(enable-theme 'solarized);theme enabling
 
 (defvar prelude-packages
   '(ack-and-a-half auctex clojure-mode coffee-mode deft expand-region
@@ -289,3 +316,5 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-y") 'scroll-up)
 (global-set-key (kbd "C-S-y") 'scroll-down)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+
+(load-theme 'monokai t)
