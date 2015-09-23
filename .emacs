@@ -1,15 +1,15 @@
-
+					;emacs load paths
 (add-to-list 'load-path "~/.emacs.d/lisp/")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized");for themes
+(add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized")
+(load-theme 'solarized t)
 
 ;; Disable loading of “default.el” at startup,
-;; in Fedora all it does is fix window title which I rather configure differently
 (setq inhibit-default-init t)
-
+;(setq solarized-scale-org-headlines nil)
 ;; SHOW FILE PATH IN FRAME TITLE
 (setq-default frame-title-format "%l %b (%f)")
-(set-language-environment "UTF-8")					;encoding system
 
+(set-language-environment "UTF-8")					;encoding system
 (set-default-coding-systems 'utf-8-unix)
 
 (tool-bar-mode -1);;no tool bar
@@ -27,15 +27,9 @@
 (delete-selection-mode t);;deletes hilighted text
 (transient-mark-mode t);deletes hilighted text
 
-(add-hook 'prog-mode-hook #'(lambda() (autopair-mode)));auto-pair
+					;(add-hook 'prog-mode-hook #'(lambda() (autopair-mode)));auto-pair
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
+					;funtion definitions
 ;;cut whole line
 (defun xah-cut-line-or-region ()
   "Cut current line, or text selection.
@@ -67,7 +61,7 @@ Version 2015-05-06"
                  (progn (setq ξp1 (region-beginning))
                         (setq ξp2 (region-end)))
                (progn (setq ξp1 (line-beginning-position))
-                      (setq ξp2 (line-end-position))))))
+                      (setq ξp2 (+ (line-end-position) 1))))))
     (kill-ring-save ξp1 ξp2)
     (if current-prefix-arg
         (message "buffer text copied")
@@ -132,6 +126,7 @@ This command does not push text to `kill-ring'."
 
 
 ;;; Emacs is not a package manager, and here we load its package manager!
+
 (require 'package)
 (dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
                   ("elpa" . "http://tromey.com/elpa/")
@@ -141,8 +136,6 @@ This command does not push text to `kill-ring'."
                   ))
   (add-to-list 'package-archives source t))
 (package-initialize)
-
-(require 'transpose-frame)
 
 ;;; Required packages
 ;;; everytime emacs starts, it will automatically check if those packages are
@@ -154,109 +147,78 @@ This command does not push text to `kill-ring'."
     autopair
     org
     magit
-    solarized-theme
     web-mode
     ))
 (dolist (p tmtxt/packages)
   (when (not (package-installed-p p))
     (package-install p)))
-
 (package-initialize)
 
+
+(require 'aggressive-indent)
+(global-aggressive-indent-mode 1)
+					;(add-to-list 'aggressive-indent-excluded-modes 'html-mode)
 ;; auto complete mod
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
-;auto complete
-
+					;auto complete
 (add-to-list 'ac-modes 'org-mode);auto complete in org mode
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode));webmodeb
+
+(require 'transpose-frame)
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'reverse)
 
+(setq py-install-directory "~/.emacs.d/lisp/")
+(add-to-list 'load-path py-install-directory)
+(require 'python-mode)
+
 ;;tern mode
 (add-hook 'js-mode-hook (lambda () (tern-mode t)))
 (eval-after-load 'tern
-   '(progn
-      (require 'tern-auto-complete)
-      (tern-ac-setup)))
+  '(progn
+     (require 'tern-auto-complete)
+     (tern-ac-setup)))
 ;;tern mode
-
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode));webmodeb
-
-;;auto indent yanked test
-(dolist (command '(yank yank-pop))
-  (eval `(defadvice ,command (after indent-region activate)
-	   (and (not current-prefix-arg)
-		(member major-mode '(emacs-lisp-mode lisp-mode
-						     clojure-mode    scheme-mode
-						     haskell-mode    ruby-mode
-						     rspec-mode      python-mode
-						     c-mode          c++-mode
-						     objc-mode       latex-mode
-						     plain-tex-mode  web-mode))
-		(let ((mark-even-if-inactive transient-mark-mode))
-		  (indent-region (region-beginning) (region-end) nil))))))
 
 (defun my-web-mode-hook ()
   "Hooks for Web mode."
   (setq web-mode-markup-indent-offset 4)
-)
+  )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
+(autopair-global-mode) ;; enable autopair in all buffers
 
-;;for theme
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
- '(cursor-type (quote bar))
- '(custom-enabled-themes (quote (monokai)))
- '(custom-safe-themes
-   (quote
-    ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "05c3bc4eb1219953a4f182e10de1f7466d28987f48d647c01f1f0037ff35ab9a" "ccaa9318209539f3390b663e5313c9036fd3da9c9327e4a1b99b10aad91f5dc1" "fd9ca77431b92fdf4c0ef0026de0059bcbadb738fc22fe1bc8d8f2ce1a1e7607" "06770ee8b0d0185a3fb824045536fa71964e1984afa51af6b76c008486deca53" "aa0ed50536db21db2316f8e1fef83b298e2b6c19c7e0a6a1689bf1483246fb62" "19352d62ea0395879be564fc36bc0b4780d9768a964d26dfae8aad218062858d" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
- '(desktop-save-mode t)
- '(fci-rule-color "#383838")
- '(frame-background-mode (quote dark))
- '(initial-frame-alist (quote ((fullscreen . maximized))))
- '(kill-whole-line t)
- '(nrepl-message-colors
-   (quote
-    ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
- '(vc-annotate-background "#2B2B2B")
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#BC8383")
-     (40 . "#CC9393")
-     (60 . "#DFAF8F")
-     (80 . "#D0BF8F")
-     (100 . "#E0CF9F")
-     (120 . "#F0DFAF")
-     (140 . "#5F7F5F")
-     (160 . "#7F9F7F")
-     (180 . "#8FB28F")
-     (200 . "#9FC59F")
-     (220 . "#AFD8AF")
-     (240 . "#BFEBBF")
-     (260 . "#93E0E3")
-     (280 . "#6CA0A3")
-     (300 . "#7CB8BB")
-     (320 . "#8CD0D3")
-     (340 . "#94BFF3")
-     (360 . "#DC8CC3"))))
- '(vc-annotate-very-old-color "#DC8CC3"))
+;; ;;auto indent yanked test
+;; (dolist (command '(yank yank-pop))
+;;   (eval `(defadvice ,command (after indent-region activate)
+;; 	   (and (not current-prefix-arg)
+;; 		(member major-mode '(emacs-lisp-mode lisp-mode
+;; 						     clojure-mode    scheme-mode
+;; 						     haskell-mode    ruby-mode
+;; 						     rspec-mode      python-mode
+;; 						     c-mode          c++-mode
+;; 						     objc-mode       latex-mode
+;; 						     plain-tex-mode  web-mode))
+;; 		(let ((mark-even-if-inactive transient-mark-mode))
+;; 		  (indent-region (region-beginning) (region-end) nil))))))
 
-;(enable-theme 'solarized);theme enabling
+
+
+
+
+					;(enable-theme 'solarized);theme enabling
+
+;;;Prelude starts here
 
 (defvar prelude-packages
   '(ack-and-a-half auctex clojure-mode coffee-mode deft expand-region
                    gist groovy-mode haml-mode haskell-mode inf-ruby
-                   markdown-mode paredit projectile python
-                   sass-mode rainbow-mode scss-mode solarized-theme
-                   volatile-highlights yaml-mode yari zenburn-theme)
+                   markdown-mode paredit projectile 
+                   sass-mode rainbow-mode scss-mode volatile-highlights
+		   yaml-mode yari )
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
@@ -277,22 +239,32 @@ This command does not push text to `kill-ring'."
 (provide 'prelude-packages)
 ;;; prelude-packages.el ends here
 
-(autopair-global-mode) ;; enable autopair in all buffers
+(defun my-disable-electric-indent ()
+  (set (make-local-variable 'electric-indent-mode) nil))
 
-(defun auto-complete-mode-maybe ()
-  "No maybe for you. Only AC!"
-  (unless (minibufferp (current-buffer))
-    (auto-complete-mode 1)))
+(auto-complete-mode 1)
+;; (defun auto-complete-mode-maybe ()
+;;   "No maybe for you. Only AC!"
+;;   (unless (minibufferp (current-buffer))
+;;     (auto-complete-mode 1)))
 (setq ac-disable-faces nil)
 
+(add-hook 'python-mode-hook (lambda () (electric-indent-local-mode -1)))
+(add-hook 'python-mode-hook 'auto-indent-mode)
+
+(global-set-key (kbd "C-l") 'goto-line) ; Ctrl+Shift+k
 (global-set-key (kbd "M-S-d") 'my-delete-line-backward) ; Ctrl+Shift+k
 (global-set-key (kbd "M-d") 'my-delete-line)
 (global-set-key (kbd "C-d") 'my-delete-word)
 (global-set-key (kbd "C-S-d") 'my-backward-delete-word)
 (global-set-key (kbd "<M-backspace>") 'my-backward-delete-word)
+(global-set-key (kbd "C-z") 'undo)
+(global-set-key (kbd "C-/") 'other-window)
 
 (global-set-key (kbd "<f2>") 'xah-cut-line-or-region) ; cut
 (global-set-key (kbd "<f3>") 'xah-copy-line-or-region) ; copy
+					;(global-set-key (kbd "C-c") 'my-kill-ring-save) ; copy
+;(global-set-key (kbd "C-x") 'kill-region) ; copy
 (global-set-key (kbd "C-o") 'find-file) ; finding files
 (global-set-key (kbd "C-S-s") 'save-buffer) ; cut
 (global-set-key (kbd "M-b") 'switch-to-buffer) ; cut
@@ -317,4 +289,91 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-S-y") 'scroll-down)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-(load-theme 'monokai t)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#eee8d5" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#839496"])
+ '(compilation-message-face (quote default))
+ '(cua-global-mark-cursor-color "#2aa198")
+ '(cua-normal-cursor-color "#657b83")
+ '(cua-overwrite-cursor-color "#b58900")
+ '(cua-read-only-cursor-color "#859900")
+ '(cursor-type (quote bar))
+ '(custom-enabled-themes (quote (solarized)))
+ '(custom-safe-themes
+   (quote
+    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+ '(desktop-save-mode t)
+ '(fci-rule-color "#eee8d5")
+ '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
+ '(highlight-symbol-colors
+   (--map
+    (solarized-color-blend it "#fdf6e3" 0.25)
+    (quote
+     ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
+ '(highlight-symbol-foreground-color "#586e75")
+ '(highlight-tail-colors
+   (quote
+    (("#eee8d5" . 0)
+     ("#B4C342" . 20)
+     ("#69CABF" . 30)
+     ("#69B7F0" . 50)
+     ("#DEB542" . 60)
+     ("#F2804F" . 70)
+     ("#F771AC" . 85)
+     ("#eee8d5" . 100))))
+ '(hl-bg-colors
+   (quote
+    ("#DEB542" "#F2804F" "#FF6E64" "#F771AC" "#9EA0E5" "#69B7F0" "#69CABF" "#B4C342")))
+ '(hl-fg-colors
+   (quote
+    ("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3")))
+ '(initial-frame-alist (quote ((vertical-scroll-bars) (fullscreen . maximized))))
+ '(kill-whole-line t)
+ '(magit-diff-use-overlays nil)
+ '(nrepl-message-colors
+   (quote
+    ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
+ '(pos-tip-background-color "#eee8d5")
+ '(pos-tip-foreground-color "#586e75")
+ '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
+ '(term-default-bg-color "#fdf6e3")
+ '(term-default-fg-color "#657b83")
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#dc322f")
+     (40 . "#c85d17")
+     (60 . "#be730b")
+     (80 . "#b58900")
+     (100 . "#a58e00")
+     (120 . "#9d9100")
+     (140 . "#959300")
+     (160 . "#8d9600")
+     (180 . "#859900")
+     (200 . "#669b32")
+     (220 . "#579d4c")
+     (240 . "#489e65")
+     (260 . "#399f7e")
+     (280 . "#2aa198")
+     (300 . "#2898af")
+     (320 . "#2793ba")
+     (340 . "#268fc6")
+     (360 . "#268bd2"))))
+ '(vc-annotate-very-old-color nil)
+ '(weechat-color-list
+   (quote
+    (unspecified "#fdf6e3" "#eee8d5" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#657b83" "#839496")))
+ '(xterm-color-names
+   ["#eee8d5" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#073642"])
+ '(xterm-color-names-bright
+   ["#fdf6e3" "#cb4b16" "#93a1a1" "#839496" "#657b83" "#6c71c4" "#586e75" "#002b36"]))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
