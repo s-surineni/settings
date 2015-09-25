@@ -129,7 +129,7 @@ This command does not push text to `kill-ring'."
 
 (require 'package)
 (dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
-                  ("elpa" . "http://tromey.com/elpa/")
+                  ;("elpa" . "http://tromey.com/elpa/")
                   ;; TODO: Maybe, use this after emacs24 is released
                   ;; (development versions of packages)
                   ("melpa" . "http://melpa.org/packages/")
@@ -177,6 +177,9 @@ This command does not push text to `kill-ring'."
 
 ;;tern mode
 (add-hook 'js-mode-hook (lambda () (tern-mode t)))
+(add-hook 'js-mode-hook 'js2-minor-mode)
+(add-hook 'js2-mode-hook 'ac-js2-mode)
+
 (eval-after-load 'tern
   '(progn
      (require 'tern-auto-complete)
@@ -332,6 +335,7 @@ This command does not push text to `kill-ring'."
    (quote
     ("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3")))
  '(initial-frame-alist (quote ((vertical-scroll-bars) (fullscreen . maximized))))
+ '(isearch-allow-scroll t)
  '(kill-whole-line t)
  '(magit-diff-use-overlays nil)
  '(nrepl-message-colors
