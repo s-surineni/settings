@@ -5,7 +5,7 @@
 
 ;; Disable loading of “default.el” at startup,
 (setq inhibit-default-init t)
-;(setq solarized-scale-org-headlines nil)
+					;(setq solarized-scale-org-headlines nil)
 ;; SHOW FILE PATH IN FRAME TITLE
 (setq-default frame-title-format "%l %b (%f)")
 
@@ -105,20 +105,20 @@ This command does not push text to `kill-ring'."
     (setq p2 (point))
     (delete-region p1 p2)))
 
-;for copying current line if region is not active
+					;for copying current line if region is not active
 (defun my-kill-ring-save (beg end flash)
-      (interactive (if (use-region-p)
-                       (list (region-beginning) (region-end) nil)
-                     (list (line-beginning-position)
-                           (line-beginning-position 2) 'flash)))
-      (kill-ring-save beg end)
-      (when flash
-        (save-excursion
-          (if (equal (current-column) 0)
-              (goto-char end)
-            (goto-char beg))
-          (sit-for blink-matching-delay))))
-    (global-set-key [remap kill-ring-save] 'my-kill-ring-save)
+  (interactive (if (use-region-p)
+		   (list (region-beginning) (region-end) nil)
+		 (list (line-beginning-position)
+		       (line-beginning-position 2) 'flash)))
+  (kill-ring-save beg end)
+  (when flash
+    (save-excursion
+      (if (equal (current-column) 0)
+	  (goto-char end)
+	(goto-char beg))
+      (sit-for blink-matching-delay))))
+(global-set-key [remap kill-ring-save] 'my-kill-ring-save)
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "https://marmalade-repo.org/packages/")
@@ -129,13 +129,15 @@ This command does not push text to `kill-ring'."
 
 (require 'package)
 (dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
-                  ;("elpa" . "http://tromey.com/elpa/")
+					;("elpa" . "http://tromey.com/elpa/")
                   ;; TODO: Maybe, use this after emacs24 is released
                   ;; (development versions of packages)
                   ("melpa" . "http://melpa.org/packages/")
                   ))
   (add-to-list 'package-archives source t))
 (package-initialize)
+
+(elpy-enable)
 
 ;;; Required packages
 ;;; everytime emacs starts, it will automatically check if those packages are
@@ -226,8 +228,8 @@ This command does not push text to `kill-ring'."
 
 (defun prelude-packages-installed-p ()
   (cl-loop for p in prelude-packages
-        when (not (package-installed-p p)) do (cl-return nil)
-        finally (cl-return t)))
+	   when (not (package-installed-p p)) do (cl-return nil)
+	   finally (cl-return t)))
 
 (unless (prelude-packages-installed-p)
   ;; check for new packages (package versions)
@@ -254,7 +256,7 @@ This command does not push text to `kill-ring'."
 
 (add-hook 'python-mode-hook (lambda () (electric-indent-local-mode -1)))
 (add-hook 'python-mode-hook 'auto-indent-mode)
-
+(global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-l") 'goto-line) ; Ctrl+Shift+k
 (global-set-key (kbd "M-S-d") 'my-delete-line-backward) ; Ctrl+Shift+k
 (global-set-key (kbd "M-d") 'my-delete-line)
@@ -262,12 +264,12 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-S-d") 'my-backward-delete-word)
 (global-set-key (kbd "<M-backspace>") 'my-backward-delete-word)
 (global-set-key (kbd "C-z") 'undo)
-(global-set-key (kbd "C-/") 'other-window)
+(global-set-key (kbd "C-n") 'other-window)
 
 (global-set-key (kbd "<f2>") 'xah-cut-line-or-region) ; cut
 (global-set-key (kbd "<f3>") 'xah-copy-line-or-region) ; copy
 					;(global-set-key (kbd "C-c") 'my-kill-ring-save) ; copy
-;(global-set-key (kbd "C-x") 'kill-region) ; copy
+					;(global-set-key (kbd "C-x") 'kill-region) ; copy
 (global-set-key (kbd "C-o") 'find-file) ; finding files
 (global-set-key (kbd "C-S-s") 'save-buffer) ; cut
 (global-set-key (kbd "M-b") 'switch-to-buffer) ; cut
@@ -310,6 +312,7 @@ This command does not push text to `kill-ring'."
    (quote
     ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(desktop-save-mode t)
+ '(electric-indent-mode nil)
  '(fci-rule-color "#eee8d5")
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
  '(highlight-symbol-colors
@@ -334,6 +337,7 @@ This command does not push text to `kill-ring'."
  '(hl-fg-colors
    (quote
     ("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3")))
+ '(ido-mode (quote both) nil (ido))
  '(initial-frame-alist (quote ((vertical-scroll-bars) (fullscreen . maximized))))
  '(isearch-allow-scroll t)
  '(kill-whole-line t)
@@ -343,6 +347,7 @@ This command does not push text to `kill-ring'."
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
  '(pos-tip-background-color "#eee8d5")
  '(pos-tip-foreground-color "#586e75")
+ '(server-mode t)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
  '(term-default-bg-color "#fdf6e3")
  '(term-default-fg-color "#657b83")
