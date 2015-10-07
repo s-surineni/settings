@@ -115,5 +115,7 @@ fi
 
 export GENV=/home/sampath/projects/analytic-env
 export GNANA_CLIENT_ENV=/home/sampath/projects/pyenv
+export TENV=/home/sampath/test/dependencyTester/testerDependencyV
 
 PATH=$PATH:/opt/google/chrome; #export PATH
+PATH=$PATH:/home/sampath/eclipse/java-mars/eclipse; #export PATH
