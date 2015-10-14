@@ -106,7 +106,7 @@ Version 2015-09-18"
             (progn (setq ¦Îp1 (region-beginning))
                    (setq ¦Îp2 (region-end)))
           (progn (setq ¦Îp1 (line-beginning-position))
-                 (setq ¦Îp2 (line-end-position))))))
+                 (setq ¦Îp2 (+ (line-end-position) 1))))))
     (if (eq last-command this-command)
         (progn
           (kill-append "\n" nil)
@@ -214,7 +214,8 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-S-h") 'split-window-below);splits window horizontally
 (global-set-key (kbd "C-S-s") 'save-buffer) ; cut
 (global-set-key (kbd "C-S-v") 'split-window-right);splits windwo vertically
-(global-set-key (kbd "C-S-x") 'server-edit) ; 
+(global-set-key (kbd "C-S-x") 'server-edit) ;
+(global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "M-S-d") 'my-delete-line-backward) ; Ctrl+Shift+k
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
