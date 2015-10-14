@@ -20,9 +20,13 @@
  '(desktop-save-mode t)
  '(electric-indent-mode t)
  '(electric-pair-mode t)
+ '(flx-ido-mode t)
  '(global-aggressive-indent-mode nil)
  '(global-auto-complete-mode t)
+ '(ido-enable-flex-matching t)
+ '(ido-everywhere t)
  '(ido-mode (quote both) nil (ido))
+ '(ido-use-faces nil)
  '(inhibit-startup-screen t)
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(initial-scratch-message nil)
@@ -221,7 +225,8 @@ This command does not push text to `kill-ring'."
 
 (defvar prelude-packages
   '(aggressive-indent auto-complete magit org solarized-theme web-mode
-		      js2-mode ac-js2 tern tern-auto-complete transpose-frame elpy)
+		      js2-mode ac-js2 tern tern-auto-complete transpose-frame elpy
+		      flx-ido)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
