@@ -4,10 +4,15 @@
 * jquery
 ** $(".dropdown").click(function(evntSrc)
 ** $( "p" ).addClass( "myClass yourClass" );
+** $( "a[hreflang|='en']" )
 * grep
 ** grep -r -i --include \*.h --include \*.cpp CP_Image ~/path[12345] | mailx -s GREP email@domain.com
+** grep -rl --include \*.py date
+** grep -rl P'<'tenant_name
 * git
 ** git reset HEAD --hard
 ** git rm --cached [filenames...]
 * linux
 ** lsof -i :8080x
+* django
+** 'tenant/'+window.Info.client+'/config'
