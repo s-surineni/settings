@@ -222,6 +222,9 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "M-S-d") 'my-delete-line-backward) ; Ctrl+Shift+k
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+(define-key yas-minor-mode-map (kbd "<tab>") nil)
+(define-key yas-minor-mode-map (kbd "TAB") nil)
+(define-key yas-minor-mode-map (kbd "<C-tab>") 'yas-expand)
 
 (defvar prelude-packages
   '(aggressive-indent auto-complete magit org solarized-theme web-mode

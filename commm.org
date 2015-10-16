@@ -16,3 +16,5 @@
 ** lsof -i :8080x
 * django
 ** 'tenant/'+window.Info.client+'/config'
+* mongodb
+** db.taskcheck.com.datameta.drop()
