@@ -44,6 +44,7 @@
  '(show-paren-mode t)
  '(solarized-scale-org-headlines nil)
  '(tool-bar-mode nil)
+ '(uniquify-buffer-name-style (quote reverse) nil (uniquify))
  '(web-mode-markup-indent-offset 4)
  '(which-function-mode t)
  '(yas-global-mode t nil (yasnippet)))
