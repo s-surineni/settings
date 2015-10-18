@@ -1,16 +1,18 @@
-(set-language-environment "UTF-8")					;encoding system
+;encoding system
+(set-language-environment "UTF-8")					
 (set-default-coding-systems 'utf-8-unix)
-(fset 'yes-or-no-p 'y-or-n-p)
 (package-initialize)
+(fset 'yes-or-no-p 'y-or-n-p)
+;setting env variables
 (setq confirm-nonexistent-file-or-buffer nil)
 (setq ido-create-new-buffer 'always)
+(setq make-backup-files nil);stop making bakcup files
 (elpy-enable)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ac-disable-faces nil)
  '(cursor-type (quote bar))
  '(custom-enabled-themes (quote (solarized-light)))
  '(custom-safe-themes
@@ -47,7 +49,9 @@
  '(uniquify-buffer-name-style (quote reverse) nil (uniquify))
  '(web-mode-markup-indent-offset 4)
  '(which-function-mode t)
- '(yas-global-mode t nil (yasnippet)))
+ '(yas-global-mode t nil (yasnippet))
+ '(ac-disable-faces nil))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -55,6 +59,12 @@
  ;; If there is more than one, they won't work right.
  )
 ;functions
+;;; set the trigger key so that it can work together with yasnippet on tab key,
+;;; if the word exists in yasnippet, pressing tab will cause yasnippet to
+;;; activate, otherwise, auto-complete will
+(ac-config-default)
+(ac-set-trigger-key "TAB")
+(ac-set-trigger-key "<tab>")
 (dolist (command '(yank yank-pop))
    (eval `(defadvice ,command (after indent-region activate)
             (and (not current-prefix-arg)
@@ -186,7 +196,6 @@ This command does not push text to `kill-ring'."
 )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 (require 'auto-complete-config)
-(ac-config-default)
 (setq ac-show-menu-immediately-on-auto-complete t)
 ;key bindings
 (global-set-key (kbd "RET") 'newline-and-indent);return will indent now
@@ -223,8 +232,8 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "M-S-d") 'my-delete-line-backward) ; Ctrl+Shift+k
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-(define-key yas-minor-mode-map (kbd "<tab>") nil)
-(define-key yas-minor-mode-map (kbd "TAB") nil)
+;(define-key yas-minor-mode-map (kbd "<tab>") nil)
+;(define-key yas-minor-mode-map (kbd "TAB") nil)
 (define-key yas-minor-mode-map (kbd "<C-tab>") 'yas-expand)
 
 (defvar prelude-packages
