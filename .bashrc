@@ -113,8 +113,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export GENV=/home/sampath/projects/analytic-env
-export GNANA_CLIENT_ENV=/home/sampath/projects/pyenv
+export GENV=/home/sam/projects/servenv
+export GNANA_CLIENT_ENV=/home/sam/projects/pyenv
 export TENV=/home/sampath/test/dependencyTester/testerDependencyV
 
 PATH=$PATH:/opt/google/chrome; #export PATH

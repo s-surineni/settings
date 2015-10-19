@@ -18,3 +18,9 @@
 ** 'tenant/'+window.Info.client+'/config'
 * mongodb
 ** db.taskcheck.com.datameta.drop()
+
+* vim
+
+  * end of line $,A
+  * Begin of line I
+  * :%s/foo/bar/gc search replace
