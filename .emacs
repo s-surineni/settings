@@ -221,6 +221,7 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "M-d") 'delete-and-join-forward)
 (global-set-key (kbd "M-e") 'end-of-buffer)
 (global-set-key (kbd "M-w") 'xah-cut-line-or-region)
+(global-set-key (kbd "M-y") 'scroll-down)
 (global-set-key (kbd "<M-backspace>") 'my-backward-delete-word)
 (global-set-key (kbd "C-S-a") 'mark-whole-buffer)
 (global-set-key (kbd "C-S-d") 'my-backward-delete-word)
