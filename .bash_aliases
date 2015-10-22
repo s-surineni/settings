@@ -1,7 +1,7 @@
 alias sst="/home/sampath/server.sh"
 alias mst="/home/sampath/mserver.sh"
 alias cs="/home/sampath/client.sh"
-alias ct="git commit -am "
+alias ct="git commit -m "
 alias stt="git status"
 alias sd="cd /home/sampath/projects/analytics-server/"
 alias worker="/home/sampath/worker.sh"
