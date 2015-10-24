@@ -146,7 +146,7 @@ This command does not push text to `kill-ring'."
 (defvar prelude-packages
   '(aggressive-indent auto-complete org solarized-theme web-mode
 		      js2-mode ac-js2 tern tern-auto-complete transpose-frame elpy
-		      flx-ido)
+		      flx-ido magit beacon)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
@@ -165,6 +165,7 @@ This command does not push text to `kill-ring'."
       (package-install p))))
 
 (provide 'prelude-packages)
+(beacon-mode 1)
 (fset 'yes-or-no-p 'y-or-n-p)
 ;setting env variables
 (setq confirm-nonexistent-file-or-buffer nil)
