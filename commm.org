@@ -11,14 +11,24 @@
 ** grep -rl P'<'tenant_name
 * git
 ** git reset HEAD --hard
+** git reset --hard #Revert changes to modified files including modified
+** git clean -fd #remove all untracked files and directories
+** git checkout -- . #remove only unstaged changes
 ** git rm --cached [filenames...]
 * linux
 ** lsof -i :8080x
+** SIGTSTP
+** kill -SIGCONT [pid]
 * django
 ** 'tenant/'+window.Info.client+'/config'
 * mongodb
 ** db.taskcheck.com.datameta.drop()
-
+** db.users.find({"name": /.*m.*/})
+** db.getCollectionNames().forEach(function(c) {
+   if(c.match("^damballa")) { 
+       print(c);
+   }
+ });
 * vim
 
   * end of line $,A
