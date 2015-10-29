@@ -112,7 +112,6 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-f") 'forward-word) ; cut
 (global-set-key (kbd "C-k") 'volatile-kill-buffer)
 (global-set-key (kbd "C-l") 'goto-line) ; Ctrl+Shift+k
-(global-set-key (kbd "C-n") 'other-window)
 (global-set-key (kbd "C-o") 'find-file) ; finding files
 (global-set-key (kbd "C-v") 'yank)
 (global-set-key (kbd "C-w") 'xah-copy-line-or-region)
