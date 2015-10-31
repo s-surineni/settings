@@ -119,7 +119,6 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region);for commenting and uncommenting
 (global-set-key (kbd "M-a") 'beginning-of-buffer)
-(global-set-key (kbd "M-b") 'switch-to-buffer) ; cut
 (global-set-key (kbd "M-d") 'delete-and-join-forward)
 (global-set-key (kbd "M-e") 'end-of-buffer)
 (global-set-key (kbd "M-w") 'xah-cut-line-or-region)
@@ -132,7 +131,7 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-S-s") 'save-buffer) ; cut
 (global-set-key (kbd "C-x \\") 'split-window-right);splits windwo vertically
 (global-set-key (kbd "C-S-x") 'server-edit) ;
-(global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-x g") 'magit-status)x
 (global-set-key (kbd "M-S-d") 'my-delete-line-backward) ; Ctrl+Shift+k
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (require 'package)
