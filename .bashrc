@@ -114,8 +114,11 @@ if ! shopt -oq posix; then
 fi
 
 export GENV=/home/sampath/projects/analytic-env
-export GNANA_CLIENT_ENV=/home/sampath/projects/pyenv
+export GNANA_CLIENT_ENV=/home/sampath/projects/clienv
 export TENV=/home/sampath/test/dependencyTester/testerDependencyV
 
 PATH=$PATH:/opt/google/chrome; #export PATH
 PATH=$PATH:/home/sampath/eclipse/java-mars/eclipse; #export PATH
+alias android-connect="mtpfs -o allow_other /media/HTC"
+alias android-disconnect="fusermount -u /media/HTC"
+[ -z "$TMUX" ] && export TERM=xterm-256color

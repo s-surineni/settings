@@ -15,9 +15,10 @@
 ** git clean -fd #remove all untracked files and directories
 ** git checkout -- . #remove only unstaged changes
 ** git rm --cached [filenames...]
+** git show branch:file
 * linux
 ** lsof -i :8080x
-** SIGTSTP
+** SIGSToP
 ** kill -SIGCONT [pid]
 * django
 ** 'tenant/'+window.Info.client+'/config'

@@ -106,8 +106,10 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "<f3>") 'xah-copy-line-or-region) ; copy
 (global-set-key [f5] 'revert-buffer)
 (global-set-key (kbd "C-a") 'back-to-indentation)
+(global-set-key (kbd "C-b") 'backward-word)
 (global-set-key (kbd "C-d") 'my-delete-word) ; cut
 (global-set-key (kbd "C-e") 'move-end-of-line)
+(global-set-key (kbd "C-f") 'forward-word)
 (global-set-key (kbd "C-k") 'volatile-kill-buffer)
 (global-set-key (kbd "C-l") 'goto-line) ; Ctrl+Shift+k
 (global-set-key (kbd "C-o") 'find-file) ; finding files
@@ -117,8 +119,10 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region);for commenting and uncommenting
 (global-set-key (kbd "M-a") 'beginning-of-buffer)
+(global-set-key (kbd "M-b") 'backward-char)
 (global-set-key (kbd "M-d") 'delete-and-join-forward)
 (global-set-key (kbd "M-e") 'end-of-buffer)
+(global-set-key (kbd "M-f") 'forward-char)
 (global-set-key (kbd "M-w") 'xah-cut-line-or-region)
 (global-set-key (kbd "M-y") 'scroll-down)
 (global-set-key (kbd "<M-backspace>") 'my-backward-delete-word)
@@ -162,6 +166,7 @@ This command does not push text to `kill-ring'."
 
 (provide 'prelude-packages)
 (beacon-mode 1)
+(windmove-default-keybindings)		;move windows with shift and arrow keys
 (fset 'yes-or-no-p 'y-or-n-p)
 ;setting env variables
 (setq confirm-nonexistent-file-or-buffer nil)
