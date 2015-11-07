@@ -127,8 +127,12 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "M-y") 'scroll-down)
 (global-set-key (kbd "<M-backspace>") 'my-backward-delete-word)
 (global-set-key (kbd "C-S-a") 'mark-whole-buffer)
+(global-set-key (kbd "C-S-b") 'windmove-left)
 (global-set-key (kbd "C-S-d") 'my-backward-delete-word)
 (global-set-key (kbd "C-S-e") 'delete-window)
+(global-set-key (kbd "C-S-f") 'windmove-right)
+(global-set-key (kbd "C-S-n") 'windmove-down)
+(global-set-key (kbd "C-S-p") 'windmove-up)
 (global-set-key (kbd "C-x -") 'split-window-below);splits window horizontally
 (global-set-key (kbd "C-S-s") 'save-buffer) ; cut
 (global-set-key (kbd "C-x \\") 'split-window-right);splits windwo vertically
@@ -146,7 +150,7 @@ This command does not push text to `kill-ring'."
 (defvar prelude-packages
   '(aggressive-indent auto-complete org solarized-theme web-mode
 		      js2-mode ac-js2 tern tern-auto-complete transpose-frame elpy
-		      flx-ido magit beacon)
+		      flx-ido magit beacon dash dash-functional)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
