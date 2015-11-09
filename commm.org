@@ -1,4 +1,6 @@
 * tmux
+** -w (equivalent to the set-window-option command)
+** -g is given, the global session or window option is set
 ** new session: tmux new -s *basic* 
 ** :source-file ~/.tmux.conf
 * jquery
