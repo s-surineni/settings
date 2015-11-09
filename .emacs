@@ -131,11 +131,11 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-S-d") 'my-backward-delete-word)
 (global-set-key (kbd "C-S-e") 'delete-window)
 (global-set-key (kbd "C-S-f") 'windmove-right)
+(global-set-key (kbd "C-S-h") 'split-window-below);splits window horizontally
 (global-set-key (kbd "C-S-n") 'windmove-down)
 (global-set-key (kbd "C-S-p") 'windmove-up)
-(global-set-key (kbd "C-x -") 'split-window-below);splits window horizontally
 (global-set-key (kbd "C-S-s") 'save-buffer) ; cut
-(global-set-key (kbd "C-x \\") 'split-window-right);splits windwo vertically
+(global-set-key (kbd "C-S-v") 'split-window-right);splits windwo vertically
 (global-set-key (kbd "C-S-x") 'server-edit) ;
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "M-S-d") 'my-delete-line-backward) ; Ctrl+Shift+k
