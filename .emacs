@@ -117,7 +117,7 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-w") 'xah-copy-line-or-region)
 (global-set-key (kbd "C-y") 'scroll-up)
 (global-set-key (kbd "C-z") 'undo)
-(global-set-key (kbd "C-;") 'comment-or-uncomment-region);for commenting and uncommenting
+(global-set-key (kbd "C-;") 'comment-or-uncomment-region-or-line);for commenting and uncommenting
 (global-set-key (kbd "M-a") 'beginning-of-buffer)
 (global-set-key (kbd "M-b") 'backward-char)
 (global-set-key (kbd "M-d") 'delete-and-join-forward)
@@ -247,6 +247,16 @@ This command does not push text to `kill-ring'."
   "Returns the major mode associated with a buffer."
   (with-current-buffer buffer-or-string
     major-mode))
+
+;; for commenting uncommenting current line
+(defun comment-or-uncomment-region-or-line ()
+  "Comments or uncomments the region or the current line if there's no active region."
+  (interactive)
+  (let (beg end)
+    (if (region-active-p)
+	(setq beg (region-beginning) end (region-end))
+      (setq beg (line-beginning-position) end (line-end-position)))
+    (comment-or-uncomment-region beg end)))
 
 ;enables auto complete in all places!!!!
 (defun auto-complete-mode-maybe ()
