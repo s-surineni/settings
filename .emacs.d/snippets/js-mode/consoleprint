@@ -1,6 +1,0 @@
-# -*- mode: snippet; require-final-newline: nil -*-
-# name: consoleprint
-# key: con
-# binding: direct-keybinding
-# --
-console.log($0);

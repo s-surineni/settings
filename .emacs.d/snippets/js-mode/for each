@@ -1,8 +1,0 @@
-# -*- mode: snippet; require-final-newline: nil -*-
-# name: for each
-# key: for
-# binding: direct-keybinding
-# --
-for(var trkr in $0) {
-
-}
