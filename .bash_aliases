@@ -1,0 +1,18 @@
+alias sst="/home/sampath/server.sh"
+alias mst="/home/sampath/mserver.sh"
+alias cs="/home/sampath/client.sh"
+alias ct="git commit -m "
+alias stt="git status"
+alias sd="cd /home/sampath/projects/analytics-server/"
+alias worker="/home/sampath/worker.sh"
+alias batch="/home/sampath/batch.sh"
+alias mister="/home/sampath/master.sh"
+alias x="exit"
+alias pus="git push origin master"
+alias pul="git pull origin master"
+alias tst="cd /home/sampath/test"
+alias cot="git checkout "
+# grep
+alias gpyf="grep -rin --include \*.py"
+alias gaf="grep -rl"
+

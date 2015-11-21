@@ -106,8 +106,10 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "<f3>") 'xah-copy-line-or-region) ; copy
 (global-set-key [f5] 'revert-buffer)
 (global-set-key (kbd "C-a") 'back-to-indentation)
+(global-set-key (kbd "C-b") 'backward-word)
 (global-set-key (kbd "C-d") 'my-delete-word) ; cut
 (global-set-key (kbd "C-e") 'move-end-of-line)
+(global-set-key (kbd "C-f") 'forward-word)
 (global-set-key (kbd "C-k") 'volatile-kill-buffer)
 (global-set-key (kbd "C-l") 'goto-line) ; Ctrl+Shift+k
 (global-set-key (kbd "C-o") 'find-file) ; finding files
@@ -115,19 +117,25 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-w") 'xah-copy-line-or-region)
 (global-set-key (kbd "C-y") 'scroll-up)
 (global-set-key (kbd "C-z") 'undo)
-(global-set-key (kbd "C-;") 'comment-or-uncomment-region);for commenting and uncommenting
+(global-set-key (kbd "C-;") 'comment-or-uncomment-region-or-line);for commenting and uncommenting
 (global-set-key (kbd "M-a") 'beginning-of-buffer)
+(global-set-key (kbd "M-b") 'backward-char)
 (global-set-key (kbd "M-d") 'delete-and-join-forward)
 (global-set-key (kbd "M-e") 'end-of-buffer)
+(global-set-key (kbd "M-f") 'forward-char)
 (global-set-key (kbd "M-w") 'xah-cut-line-or-region)
 (global-set-key (kbd "M-y") 'scroll-down)
 (global-set-key (kbd "<M-backspace>") 'my-backward-delete-word)
 (global-set-key (kbd "C-S-a") 'mark-whole-buffer)
+(global-set-key (kbd "C-S-b") 'windmove-left)
 (global-set-key (kbd "C-S-d") 'my-backward-delete-word)
 (global-set-key (kbd "C-S-e") 'delete-window)
-(global-set-key (kbd "C-x -") 'split-window-below);splits window horizontally
+(global-set-key (kbd "C-S-f") 'windmove-right)
+(global-set-key (kbd "C-S-h") 'split-window-below);splits window horizontally
+(global-set-key (kbd "C-S-n") 'windmove-down)
+(global-set-key (kbd "C-S-p") 'windmove-up)
 (global-set-key (kbd "C-S-s") 'save-buffer) ; cut
-(global-set-key (kbd "C-x \\") 'split-window-right);splits windwo vertically
+(global-set-key (kbd "C-S-v") 'split-window-right);splits windwo vertically
 (global-set-key (kbd "C-S-x") 'server-edit) ;
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "M-S-d") 'my-delete-line-backward) ; Ctrl+Shift+k
@@ -142,7 +150,7 @@ This command does not push text to `kill-ring'."
 (defvar prelude-packages
   '(aggressive-indent auto-complete org solarized-theme web-mode
 		      js2-mode ac-js2 tern tern-auto-complete transpose-frame elpy
-		      flx-ido magit beacon)
+		      flx-ido magit beacon dash dash-functional)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
@@ -162,6 +170,7 @@ This command does not push text to `kill-ring'."
 
 (provide 'prelude-packages)
 (beacon-mode 1)
+(windmove-default-keybindings)		;move windows with shift and arrow keys
 (fset 'yes-or-no-p 'y-or-n-p)
 ;setting env variables
 (setq confirm-nonexistent-file-or-buffer nil)
@@ -238,6 +247,16 @@ This command does not push text to `kill-ring'."
   "Returns the major mode associated with a buffer."
   (with-current-buffer buffer-or-string
     major-mode))
+
+;; for commenting uncommenting current line
+(defun comment-or-uncomment-region-or-line ()
+  "Comments or uncomments the region or the current line if there's no active region."
+  (interactive)
+  (let (beg end)
+    (if (region-active-p)
+	(setq beg (region-beginning) end (region-end))
+      (setq beg (line-beginning-position) end (line-end-position)))
+    (comment-or-uncomment-region beg end)))
 
 ;enables auto complete in all places!!!!
 (defun auto-complete-mode-maybe ()
