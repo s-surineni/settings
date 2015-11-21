@@ -33,7 +33,8 @@
    }
  });
 * vim
-
-  * end of line $,A
-  * Begin of line I
-  * :%s/foo/bar/gc search replace
+** end of line $,A
+** Begin of line I
+** :%s/foo/bar/gc search replace
+* find
+** find / -name art  2>&1 | grep -v "Permission denied"
