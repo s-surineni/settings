@@ -1,6 +1,6 @@
 #!/bin/bash
-cd /home/sampath/projects/python-sdk/src/
-source /home/sampath/projects/clienv/bin/activate
-/home/sampath/projects/python-sdk/src/notebook.sh
+cd $HOME/projects/python-sdk/src/
+source $HOME/projects/clienv/bin/activate
+$HOME/projects/python-sdk/src/notebook.sh
 
 
