@@ -147,8 +147,10 @@ This command does not push text to `kill-ring'."
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("elpa" . "http://elpa.gnu.org/packages/") t)
 (defvar prelude-packages
-  '(aggressive-indent auto-complete org solarized-theme web-mode
+  '(aggressive-indent org solarized-theme web-mode
 		      js2-mode ac-js2 tern tern-auto-complete transpose-frame elpy
 		      flx-ido magit beacon dash dash-functional)
   "A list of packages to ensure are installed at launch.")
@@ -193,7 +195,7 @@ This command does not push text to `kill-ring'."
  '(electric-pair-mode t)
  '(flx-ido-mode t)
  '(global-aggressive-indent-mode nil)
- '(global-auto-complete-mode t)
+ ;; '(global-auto-complete-mode t)
  '(ido-enable-flex-matching t)
  '(ido-everywhere t)
  '(ido-mode (quote both) nil (ido))
@@ -226,9 +228,9 @@ This command does not push text to `kill-ring'."
 ;;; set the trigger key so that it can work together with yasnippet on tab key,
 ;;; if the word exists in yasnippet, pressing tab will cause yasnippet to
 ;;; activate, otherwise, auto-complete will
-(ac-config-default)
-(ac-set-trigger-key "TAB")
-(ac-set-trigger-key "<tab>")
+;; (ac-config-default)
+;; (ac-set-trigger-key "TAB")
+;; (ac-set-trigger-key "<tab>")
 (dolist (command '(yank yank-pop))
    (eval `(defadvice ,command (after indent-region activate)
             (and (not current-prefix-arg)
@@ -259,9 +261,9 @@ This command does not push text to `kill-ring'."
     (comment-or-uncomment-region beg end)))
 
 ;enables auto complete in all places!!!!
-(defun auto-complete-mode-maybe ()
-  "No maybe for you. Only AC!"
-  (auto-complete-mode 1))
+;; (defun auto-complete-mode-maybe ()
+;;   "No maybe for you. Only AC!"
+;;   (auto-complete-mode 1))
 
 
 (defun my-web-mode-hook ()
@@ -272,8 +274,9 @@ This command does not push text to `kill-ring'."
   (setq web-mode-script-padding 4)
 )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
-(require 'auto-complete-config)
-(setq ac-show-menu-immediately-on-auto-complete t)
+(add-hook 'after-init-hook 'global-company-mode)
+;; (require 'auto-complete-config)
+;; (setq ac-show-menu-immediately-on-auto-complete t) ;
 ;(define-key yas-minor-mode-map (kbd "<tab>") nil)
 ;(define-key yas-minor-mode-map (kbd "TAB") nil)
 (define-key yas-minor-mode-map (kbd "<C-tab>") 'yas-expand)
