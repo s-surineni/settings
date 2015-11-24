@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/sampath/projects/analytics-server/
-source /home/sampath/projects/analytic-env/bin/activate
-/home/sampath/projects/analytics-server/g runserver
+cd $HOME/projects/analytics-server/
+source $HOME/projects/analytic-env/bin/activate
+$HOME/projects/analytics-server/g runserver
 
