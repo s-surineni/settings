@@ -18,6 +18,7 @@
 ** git checkout -- . #remove only unstaged changes
 ** git rm --cached [filenames...]
 ** git show branch:file
+** git diff mybranch master -- myfile.cs
 * linux
 ** lsof -i :8080x
 ** SIGSToP
