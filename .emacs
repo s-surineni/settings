@@ -151,7 +151,7 @@ This command does not push text to `kill-ring'."
              '("elpa" . "http://elpa.gnu.org/packages/") t)
 (defvar prelude-packages
   '(aggressive-indent org solarized-theme web-mode
-		      js2-mode ac-js2 tern tern-auto-complete transpose-frame elpy
+		      js2-mode ac-js2 tern transpose-frame elpy
 		      flx-ido magit beacon dash dash-functional)
   "A list of packages to ensure are installed at launch.")
 
