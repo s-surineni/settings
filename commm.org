@@ -32,6 +32,7 @@
        print(c);
    }
  });
+** db.students.drop()
 * vim
 
   * end of line $,A
