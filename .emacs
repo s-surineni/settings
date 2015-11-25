@@ -285,11 +285,11 @@ This command does not push text to `kill-ring'."
 (add-hook 'js-mode-hook 'js2-minor-mode)
 (add-hook 'js2-mode-hook 'ac-js2-mode)
 
-(add-hook 'js-mode-hook (lambda () (tern-mode t)))
-(eval-after-load 'tern
-  '(progn
-     (require 'tern-auto-complete)
-     (tern-ac-setup)))
+;; (add-hook 'js-mode-hook (lambda () (tern-mode t)))
+;; (eval-after-load 'tern
+;;   '(progn
+;;      (require 'tern-auto-complete)
+;;      (tern-ac-setup)))
 
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 ;; SHOW FILE PATH IN FRAME TITLE
