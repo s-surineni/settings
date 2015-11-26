@@ -14,7 +14,10 @@ tmux send-keys -t development:2.3 'worker' C-m
 tmux new-window -n client -t development
 tmux send-keys -t development:3 'cs' C-m
 
+tmux new-window -n mongo -t development
+tmux send-keys -t development:4 'mongo gnana' C-m
+
 tmux new-window -n console -t development
-tmux select-window -t development:4
+tmux select-window -t development:5
 tmux attach -t development
 
