@@ -12,6 +12,7 @@
 ** grep -rl --include \*.py date
 ** grep -rl P'<'tenant_name
 * git
+** git remote set-url --push origin git@github.com:User/forked.git
 ** git reset HEAD --hard
 ** git reset --hard #Revert changes to modified files including modified
 ** git clean -fd #remove all untracked files and directories
