@@ -1,5 +1,5 @@
 #!/bin/bash
 cd $HOME/projects/analytics-server/
-source $HOME/projects/analytic-env/bin/activate
+source $HOME/projects/servenv/bin/activate
 $HOME/projects/analytics-server/g runserver
 

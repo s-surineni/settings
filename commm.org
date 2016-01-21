@@ -35,8 +35,11 @@
    }
  });
 ** db.students.drop()
+** db['zuora_cac.com.target_spec'].find({},{'object.name':1})
+** db.inventory.remove( { type : "food" } )
 * vim
-
-  * end of line $,A
-  * Begin of line I
-  * :%s/foo/bar/gc search replace
+** end of line $,A
+** Begin of line I
+** :%s/foo/bar/gc search replace 
+* Ubuntu
+** /usr/local/bin

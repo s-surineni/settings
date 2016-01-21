@@ -118,6 +118,7 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-y") 'scroll-up)
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region-or-line);for commenting and uncommenting
+(global-set-key (kbd "<backtab>") 'company-complete)
 (global-set-key (kbd "M-a") 'beginning-of-buffer)
 (global-set-key (kbd "M-b") 'backward-char)
 (global-set-key (kbd "M-d") 'delete-and-join-forward)
@@ -184,6 +185,8 @@ This command does not push text to `kill-ring'."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ac-disable-faces nil)
+ '(company-dabbrev-downcase nil)
  '(cursor-type (quote bar))
  '(custom-enabled-themes (quote (solarized-light)))
  '(custom-safe-themes
@@ -195,7 +198,6 @@ This command does not push text to `kill-ring'."
  '(electric-pair-mode t)
  '(flx-ido-mode t)
  '(global-aggressive-indent-mode nil)
- ;; '(global-auto-complete-mode t)
  '(ido-enable-flex-matching t)
  '(ido-everywhere t)
  '(ido-mode (quote both) nil (ido))
@@ -215,8 +217,7 @@ This command does not push text to `kill-ring'."
  '(uniquify-buffer-name-style (quote reverse) nil (uniquify))
  '(web-mode-markup-indent-offset 4)
  '(which-function-mode t)
- '(yas-global-mode t nil (yasnippet))
- '(ac-disable-faces nil))
+ '(yas-global-mode t nil (yasnippet)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -277,8 +278,8 @@ This command does not push text to `kill-ring'."
 (add-hook 'after-init-hook 'global-company-mode)
 ;; (require 'auto-complete-config)
 ;; (setq ac-show-menu-immediately-on-auto-complete t) ;
-;(define-key yas-minor-mode-map (kbd "<tab>") nil)
-;(define-key yas-minor-mode-map (kbd "TAB") nil)
+(define-key yas-minor-mode-map (kbd "<tab>") nil)
+(define-key yas-minor-mode-map (kbd "TAB") nil)
 (define-key yas-minor-mode-map (kbd "<C-tab>") 'yas-expand)
 
 
