@@ -154,7 +154,7 @@ This command does not push text to `kill-ring'."
              '("elpa" . "http://elpa.gnu.org/packages/") t)
 (defvar prelude-packages
   '(aggressive-indent org solarized-theme web-mode projectile epc 
-		      jedi js2-mode ac-js2 tern transpose-frame elpy
+		      js2-mode ac-js2 tern transpose-frame elpy
 		      flx-ido magit beacon dash dash-functional)
   "A list of packages to ensure are installed at launch.")
 
@@ -220,7 +220,7 @@ This command does not push text to `kill-ring'."
  '(web-mode-markup-indent-offset 4)
  '(which-function-mode t)
  '(yas-global-mode t nil (yasnippet)))
-
+(projectile-global-mode)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -262,7 +262,8 @@ This command does not push text to `kill-ring'."
 	(setq beg (region-beginning) end (region-end))
       (setq beg (line-beginning-position) end (line-end-position)))
     (comment-or-uncomment-region beg end)))
-
+(when (not (boundp 'remote-file-name-inhibit-cache))
+  (setq remote-file-name-inhibit-cache t))
 ;enables auto complete in all places!!!!
 ;; (defun auto-complete-mode-maybe ()
 ;;   "No maybe for you. Only AC!"
