@@ -99,7 +99,9 @@ This command does not push text to `kill-ring'."
    (interactive)
    (let ((buffer-modified-p nil))
      (kill-buffer (current-buffer))))
-
+(add-hook 'python-mode-hook
+          (lambda()
+            (local-unset-key (kbd "<backtab>"))))
 ;key bindings
 (global-set-key (kbd "RET") 'newline-and-indent);return will indent now
 (global-set-key (kbd "<f2>") 'xah-cut-line-or-region) ; cut
