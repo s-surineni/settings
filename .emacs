@@ -211,7 +211,7 @@ This command does not push text to `kill-ring'."
  '(revert-without-query (quote ("*")))
  '(scroll-bar-mode nil)
  '(scroll-step 1)
- '(server-mode t)
+ ;; '(server-mode t)
  '(show-paren-delay 0)
  '(show-paren-mode t)
  '(solarized-scale-org-headlines nil)

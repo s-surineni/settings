@@ -122,3 +122,6 @@ PATH=$PATH:/opt/google/chrome; #export PATH
 PATH=$PATH:/home/sampath/eclipse/java-mars/eclipse; #export PATH
 [ -z "$TMUX" ] && export TERM=xterm-256color
 
+export ALTERNATE_EDITOR=""
+export EDITOR=emacsclient
+export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI with non-daemon as alternate
