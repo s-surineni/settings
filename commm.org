@@ -37,6 +37,7 @@
 ** db.students.drop()
 ** db['zuora_cac.com.target_spec'].find({},{'object.name':1})
 ** db.inventory.remove( { type : "food" } )
+** db.products.update(   { _id: 100 },   { $set: { "details.make": "zzz" } })
 * vim
 ** end of line $,A
 ** Begin of line I
