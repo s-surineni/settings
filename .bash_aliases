@@ -1,6 +1,8 @@
 alias sst="$HOME/server.sh"
 alias mst="$HOME/mserver.sh"
 alias cs="$HOME/client.sh"
+
+#git
 alias ct="git commit -m "
 alias act="git commit -am "
 alias stt="git status"
@@ -15,6 +17,7 @@ alias pus="git push origin master"
 alias pul="git pull origin master"
 alias tst="cd $HOME/test"
 alias cot="git checkout "
+alias gtrash="git checkout -- ."
 # grep
 alias gpyf="grep -rn --include \*.py"
 alias gpyfi="grep -rin --include \*.py"

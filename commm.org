@@ -44,3 +44,5 @@
 ** :%s/foo/bar/gc search replace 
 * Ubuntu
 ** /usr/local/bin
+* curl
+** curl -s -XPOST http://localhost:9200/_bulk --data-binary @damballa ;echo

@@ -155,7 +155,8 @@ This command does not push text to `kill-ring'."
 (defvar prelude-packages
   '(aggressive-indent org solarized-theme web-mode projectile epc 
 		      js2-mode ac-js2 tern transpose-frame elpy
-		      flx-ido magit beacon dash dash-functional)
+		      flx-ido magit beacon dash dash-functional
+		      flymake-jslint)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
@@ -174,6 +175,9 @@ This command does not push text to `kill-ring'."
       (package-install p))))
 
 (provide 'prelude-packages)
+
+(require 'flymake-jslint)
+(add-hook 'js-mode-hook 'flymake-jslint-load)
 (beacon-mode 1)
 (windmove-default-keybindings)		;move windows with shift and arrow keys
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -188,6 +192,7 @@ This command does not push text to `kill-ring'."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ac-disable-faces nil)
+ '(column-number-mode t)
  '(company-dabbrev-downcase nil)
  '(cursor-type (quote bar))
  '(custom-enabled-themes (quote (solarized-light)))
@@ -208,10 +213,14 @@ This command does not push text to `kill-ring'."
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(initial-scratch-message nil)
  '(menu-bar-mode nil)
+ '(mode-line-format
+   (quote
+    ("%e" mode-line-front-space mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification "   " mode-line-position
+     (vc-mode vc-mode)
+     "  " mode-line-misc-info mode-line-end-spaces)))
  '(revert-without-query (quote ("*")))
  '(scroll-bar-mode nil)
  '(scroll-step 1)
- ;; '(server-mode t)
  '(show-paren-delay 0)
  '(show-paren-mode t)
  '(solarized-scale-org-headlines nil)
@@ -302,4 +311,4 @@ This command does not push text to `kill-ring'."
 (setq web-mode-enable-auto-pairing t)
 (setq web-mode-enable-auto-expanding t)
 (setq web-mode-enable-css-colorization t)
-              
+					; the mode line format
