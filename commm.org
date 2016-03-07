@@ -11,6 +11,10 @@
 ** grep -r -i --include \*.h --include \*.cpp CP_Image ~/path[12345] | mailx -s GREP email@domain.com
 ** grep -rl --include \*.py date
 ** grep -rl P'<'tenant_name
+* find 
+** find . -name tecmint.txt
+** find /home -iname tecmint.txt
+** find . -type f -name "*.php"
 * git
 ** git remote set-url --push origin git@github.com:User/forked.git
 ** git reset HEAD --hard
