@@ -50,3 +50,9 @@
 ** /usr/local/bin
 * curl
 ** curl -s -XPOST http://localhost:9200/_bulk --data-binary @damballa ;echo
+** ssh sampath@sg-bastion.avisoaws.com
+** ssh -i keys/sg-vpc-es-keys.pem ubuntu@10.1.15.203
+source /opt/sdk-env/bin/activate
+cd /opt/python-sdk/src
+~/elasticsearch-2.2.0/bin/elasticsearch
+$ curl -XGET 'http://localhost:9200/_cluster/health?pretty=true'

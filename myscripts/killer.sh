@@ -1,0 +1,2 @@
+pkill chrome
+pkill chrome
