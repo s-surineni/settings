@@ -27,6 +27,8 @@ alias ghtf="grep -rn --include \*.html"
 alias ghtfi="grep -rin --include \*.html"
 alias gaf="grep -ril"
 
-alias emax="emacsclient -t"                      # used to be "emacs -nw"
+alias emax="emacsclient -n"                      # used to be "emacs -nw"
 alias semac="sudo emacsclient -t"                # used to be "sudo emacs -nw"
 alias emacsc="emacsclient -c -a emacs"           # new - opens the GUI with alternate non-daemon
+alias superKill="/home/sam/myscripts/killer.sh"           # new - opens the GUI with alternate non-daemon
+alias sttu="git status -uno"           # new - opens the GUI with alternate non-daemon

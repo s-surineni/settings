@@ -365,7 +365,7 @@ This command does not push text to `kill-ring'."
 (define-key yas-minor-mode-map (kbd "<tab>") nil)
 (define-key yas-minor-mode-map (kbd "TAB") nil)
 (define-key yas-minor-mode-map (kbd "<C-tab>") 'yas-expand)
-
+(server-start)
 
 (add-hook 'js-mode-hook 'js2-minor-mode)
 (add-hook 'js2-mode-hook 'ac-js2-mode)
@@ -383,4 +383,4 @@ This command does not push text to `kill-ring'."
 (setq web-mode-enable-auto-pairing t)
 (setq web-mode-enable-auto-expanding t)
 (setq web-mode-enable-css-colorization t)
-					; the mode line format
+
