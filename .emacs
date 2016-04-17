@@ -156,7 +156,7 @@ This command does not push text to `kill-ring'."
   '(aggressive-indent org solarized-theme web-mode projectile epc 
 		      js2-mode ac-js2 tern transpose-frame elpy
 		      flx-ido magit beacon dash dash-functional
-		      flymake-jslint)
+		      flymake-jslint keyfreq)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
