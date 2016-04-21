@@ -120,4 +120,5 @@ export JAVA_HOME=/usr/lib/jvm/java-8-oracle
 
 PATH=$PATH:/opt/google/chrome; #export PATH
 PATH=$PATH:/home/sampath/eclipse/java-mars/eclipse; #export PATH
+PATH=$PATH:/home/vinnu/installed/gradle/bin
 [ -z "$TMUX" ] && export TERM=xterm-256color
