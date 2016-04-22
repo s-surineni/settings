@@ -113,7 +113,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export GENV=$HOME/projects/servenv
+export GENV=$HOME/projects/analytics-server-env
 export GNANA_CLIENT_ENV=$HOME/projects/clienv
 export TENV=$HOME/test/dependencyTester/testerDependencyV
 export JAVA_HOME=/usr/lib/jvm/java-8-oracle
