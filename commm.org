@@ -56,3 +56,5 @@ source /opt/sdk-env/bin/activate
 cd /opt/python-sdk/src
 ~/elasticsearch-2.2.0/bin/elasticsearch
 $ curl -XGET 'http://localhost:9200/_cluster/health?pretty=true'
+* virtualenv
+** pip install ./downloads/SomePackage-1.0.4.tar.gz
