@@ -58,6 +58,9 @@ bluez						install
 bluez-cups					install
 bluez-obexd					install
 bnd						install
+bogofilter					install
+bogofilter-bdb					install
+bogofilter-common				install
 branding-ubuntu					install
 brltty						install
 bsdmainutils					install
@@ -160,9 +163,12 @@ espeak-data:amd64				install
 ethtool						install
 evince						install
 evince-common					install
+evolution					install
+evolution-common				install
 evolution-data-server				install
 evolution-data-server-common			install
 evolution-data-server-online-accounts		install
+evolution-plugins				install
 example-content					install
 fakeroot					install
 fastjar						install
@@ -568,6 +574,8 @@ libcgi-fast-perl				install
 libcgi-pm-perl					install
 libcglib3-java					install
 libcgmanager0:amd64				install
+libchamplain-0.12-0:amd64			install
+libchamplain-gtk-0.12-0:amd64			install
 libcheese-gtk25:amd64				install
 libcheese8:amd64				install
 libcilkrts5:amd64				install
@@ -611,6 +619,7 @@ libcompizconfig0:amd64				install
 libcrack2:amd64					install
 libcroco3:amd64					install
 libcryptsetup4:amd64				install
+libcryptui0a:amd64				install
 libcups2:amd64					install
 libcupscgi1:amd64				install
 libcupsfilters1:amd64				install
@@ -687,6 +696,7 @@ libetonyek-0.1-1:amd64				install
 libevdev2:amd64					install
 libevdocument3-4:amd64				install
 libevent-2.0-5:amd64				install
+libevolution					install
 libevview3-3:amd64				install
 libexempi3:amd64				install
 libexif12:amd64					install
@@ -839,6 +849,7 @@ libgrilo-0.2-1:amd64				install
 libgs9:amd64					install
 libgs9-common					install
 libgsettings-qt1:amd64				install
+libgsl2:amd64					install
 libgssapi-krb5-2:amd64				install
 libgssapi3-heimdal:amd64			install
 libgssrpc4:amd64				install
@@ -1199,6 +1210,7 @@ libprotobuf9v5:amd64				install
 libproxy1-plugin-gsettings:amd64		install
 libproxy1-plugin-networkmanager:amd64		install
 libproxy1v5:amd64				install
+libpst4:amd64					install
 libpthread-stubs0-dev:amd64			install
 libpulse-mainloop-glib0:amd64			install
 libpulse0:amd64					install
@@ -1570,6 +1582,7 @@ libyaml-libyaml-perl				install
 libyaml-snake-java				install
 libyaml-tiny-perl				install
 libyelp0:amd64					install
+libytnef0:amd64					install
 libzeitgeist-1.0-1:amd64			install
 libzeitgeist-2.0-0:amd64			install
 light-themes					install
@@ -1874,6 +1887,7 @@ sane-utils					install
 sat4j						install
 sbsigntool					install
 seahorse					install
+seahorse-daemon					install
 secureboot-db					install
 sed						install
 sendmail					install
