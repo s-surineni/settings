@@ -1,3 +1,4 @@
+-e git+https://github.com/gnanarepo/py-schema.git@634d1daee8d88492f66e2e59929f2263acc7a12b#egg=Aviso_Schema-master
 Cython==0.20.2
 Django==1.6.5
 Hoover==0.6.0
@@ -24,6 +25,7 @@ logilab-astng==0.24.3
 logilab-common==0.62.1
 lxml==3.3.6
 netaddr==0.7.13
+newrelic==2.60.0.46
 numexpr==2.4
 numpy==1.11.0
 openpyxl==2.2.2
