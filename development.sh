@@ -1,8 +1,6 @@
 tmux new-session -s development -n servers -d
 
-tmux split-window -v -t development
-tmux send-keys -t development:1.1 'sst' C-m
-tmux send-keys -t development:1.2 'mst' C-m
+tmux send-keys -t development:1 'sst' C-m
 
 tmux new-window -n workers -t development
 tmux split-window -v -t development:2
