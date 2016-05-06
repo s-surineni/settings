@@ -181,7 +181,8 @@ This command does not push text to `kill-ring'."
 (beacon-mode 1)
 (windmove-default-keybindings)		;move windows with shift and arrow keys
 (fset 'yes-or-no-p 'y-or-n-p)
-;setting env variables
+					;setting env variables
+(setq python-check-command (expand-file-name "~/.local/bin/flake8"))
 (setq confirm-nonexistent-file-or-buffer nil)
 (setq ido-create-new-buffer 'always)
 (setq make-backup-files nil);stop making bakcup files
