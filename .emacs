@@ -119,7 +119,7 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-w") 'xah-copy-line-or-region)
 (global-set-key (kbd "C-y") 'scroll-up)
 (global-set-key (kbd "C-z") 'undo)
-(global-set-key (kbd "C-;") 'comment-or-uncomment-region-or-line);for commenting and uncommenting
+(global-set-key (kbd "C-/") 'comment-or-uncomment-region-or-line);for commenting and uncommenting
 (global-set-key (kbd "<backtab>") 'company-complete)
 (global-set-key (kbd "M-a") 'beginning-of-buffer)
 (global-set-key (kbd "M-b") 'backward-char)
