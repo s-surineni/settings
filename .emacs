@@ -1,6 +1,8 @@
  ;encoding system
 (set-language-environment "UTF-8")					
 (set-default-coding-systems 'utf-8-unix)
+(setq python-check-command (expand-file-name "~/.local/bin/flake8"))
+
 ;functions
 (defun xah-cut-line-or-region ()
   "Cut current line, or text selection.
@@ -378,6 +380,7 @@ This command does not push text to `kill-ring'."
 ;;      (tern-ac-setup)))
 
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'exec-path "~/.local/bin/")
 ;; SHOW FILE PATH IN FRAME TITLE
 (setq-default frame-title-format "%l %b (%f)")
 (setq web-mode-engines-alist '(("django" . "\\.html\\'")))
