@@ -211,7 +211,7 @@ This command does not push text to `kill-ring'."
  '(custom-enabled-themes nil)
  '(custom-safe-themes
    (quote
-    ("6df30cfb75df80e5808ac1557d5cc728746c8dbc9bc726de35b15180fa6e0ad9" "38ba6a938d67a452aeb1dada9d7cdeca4d9f18114e9fc8ed2b972573138d4664" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
+    ("5ee12d8250b0952deefc88814cf0672327d7ee70b16344372db9460e9a0e3ffc" "6df30cfb75df80e5808ac1557d5cc728746c8dbc9bc726de35b15180fa6e0ad9" "38ba6a938d67a452aeb1dada9d7cdeca4d9f18114e9fc8ed2b972573138d4664" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
  '(delete-selection-mode t)
  '(desktop-save-mode t)
  '(electric-indent-mode t)
@@ -403,4 +403,6 @@ Also returns nil if pid is nil."
   (when (not (emacs-process-p ad-return-value))
     (setq ad-return-value nil)))
 ;;; desktop-override-stale-locks.el ends here
-(load-theme 'monokai t)
+
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+(load "tomorrow-night-bright-theme")
