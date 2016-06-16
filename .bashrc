@@ -119,11 +119,11 @@ export TENV=$HOME/test/dependencyTester/testerDependencyV
 export JAVA_HOME=/usr/lib/jvm/java-8-oracle
 
 PATH=$PATH:/opt/google/chrome; #export PATH
-PATH=$PATH:/home/sampath/eclipse/java-mars/eclipse; #export PATH
-PATH=$PATH:/home/vinnu/installed/gradle/bin #improper way
+PATH=$PATH:~/eclipse/java-mars/eclipse; #export PATH
+PATH=$PATH:~/installed/gradle/bin #improper way
 export ANDROID_HOME=$HOME/develop/android/android-sdk-linux #proper way
 export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
-export PATH=${PATH}:~/.local/bin/
+export PATH=${PATH}:~/.local/bin:/home/sampath/software/node-v4.4.5-linux-x64/bin
 [ -z "$TMUX" ] && export TERM=xterm-256color
 export HISTSIZE=1000000
 export HISTFILESIZE=1000000000

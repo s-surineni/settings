@@ -1,8 +1,7 @@
  ;encoding system
-(set-language-environment "UTF-8")					
+(set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8-unix)
 (setq python-check-command (expand-file-name "~/.local/bin/flake8"))
-
 ;functions
 (defun xah-cut-line-or-region ()
   "Cut current line, or text selection.
@@ -19,7 +18,7 @@ Version 2015-06-10"
                (kill-region (region-beginning) (region-end) t)
              (kill-region (line-beginning-position) (line-beginning-position 2))))))
 
-(defun xah-copy-line-or-region ()
+(defun xah-copy-line-or-region 
   "Copy current line, or text selection.
 When called repeatedly, append copy subsequent lines.
 When `universal-argument' is called first, copy whole buffer (respects `narrow-to-region').
@@ -27,16 +26,16 @@ When `universal-argument' is called first, copy whole buffer (respects `narrow-t
 URL `http://ergoemacs.org/emacs/emacs_copy_cut_current_line.html'
 Version 2015-09-18"
   (interactive)
-  (let (¦Îp1 ¦Îp2)
+  (let (ï¿½ï¿½p1 ï¿½ï¿½p2)
     (if current-prefix-arg
-        (progn (setq ¦Îp1 (point-min))
-               (setq ¦Îp2 (point-max)))
+        (progn (setq ï¿½ï¿½p1 (point-min))
+               (setq ï¿½ï¿½p2 (point-max)))
       (progn
         (if (use-region-p)
-            (progn (setq ¦Îp1 (region-beginning))
-                   (setq ¦Îp2 (region-end)))
-          (progn (setq ¦Îp1 (line-beginning-position))
-                 (setq ¦Îp2 (+ (line-end-position) 1))))))
+            (progn (setq ï¿½ï¿½p1 (region-beginning))
+                   (setq ï¿½ï¿½p2 (region-end)))
+          (progn (setq ï¿½ï¿½p1 (line-beginning-position))
+                 (setq ï¿½ï¿½p2 (+ (line-end-position) 1))))))
     (if (eq last-command this-command)
         (progn
           (kill-append "\n" nil)
@@ -45,7 +44,7 @@ Version 2015-09-18"
           (kill-append (buffer-substring-no-properties (line-beginning-position) (line-end-position)) nil)
           (message "Line copy appended"))
       (progn
-        (kill-ring-save ¦Îp1 ¦Îp2)
+        (kill-ring-save ï¿½ï¿½p1 ï¿½ï¿½p2)
         (if current-prefix-arg
             (message "Buffer text copied")
           (message "Text copied"))))))
@@ -117,6 +116,7 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-k") 'volatile-kill-buffer)
 (global-set-key (kbd "C-l") 'goto-line) ; Ctrl+Shift+k
 (global-set-key (kbd "C-o") 'find-file) ; finding files
+(global-set-key (kbd "C-q") 'rgrep) ; finding files
 (global-set-key (kbd "C-v") 'yank)
 (global-set-key (kbd "C-w") 'xah-copy-line-or-region)
 (global-set-key (kbd "C-y") 'scroll-up)
@@ -155,7 +155,7 @@ This command does not push text to `kill-ring'."
 (add-to-list 'package-archives
              '("elpa" . "http://elpa.gnu.org/packages/") t)
 (defvar prelude-packages
-  '(aggressive-indent org solarized-theme web-mode projectile epc 
+  '(aggressive-indent org solarized-theme web-mode projectile epc
 		      js2-mode ac-js2 tern transpose-frame elpy
 		      flx-ido magit beacon dash dash-functional
 		      flymake-jslint keyfreq groovy-mode)
@@ -208,10 +208,10 @@ This command does not push text to `kill-ring'."
  '(cua-overwrite-cursor-color "#b58900")
  '(cua-read-only-cursor-color "#859900")
  '(cursor-type (quote bar))
- '(custom-enabled-themes (quote (solarized-light)))
+ '(custom-enabled-themes nil)
  '(custom-safe-themes
    (quote
-    ("38ba6a938d67a452aeb1dada9d7cdeca4d9f18114e9fc8ed2b972573138d4664" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
+    ("6df30cfb75df80e5808ac1557d5cc728746c8dbc9bc726de35b15180fa6e0ad9" "38ba6a938d67a452aeb1dada9d7cdeca4d9f18114e9fc8ed2b972573138d4664" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
  '(delete-selection-mode t)
  '(desktop-save-mode t)
  '(electric-indent-mode t)
@@ -368,7 +368,7 @@ This command does not push text to `kill-ring'."
 (define-key yas-minor-mode-map (kbd "<tab>") nil)
 (define-key yas-minor-mode-map (kbd "TAB") nil)
 (define-key yas-minor-mode-map (kbd "<C-tab>") 'yas-expand)
-(server-start)
+;; (server-start)
 
 (add-hook 'js-mode-hook 'js2-minor-mode)
 (add-hook 'js2-mode-hook 'ac-js2-mode)
@@ -388,3 +388,19 @@ This command does not push text to `kill-ring'."
 (setq web-mode-enable-auto-expanding t)
 (setq web-mode-enable-css-colorization t)
 
+(defun emacs-process-p (pid)
+  "If pid is the process ID of an emacs process, return t, else nil.
+Also returns nil if pid is nil."
+  (when pid
+    (let ((attributes (process-attributes pid)) (cmd))
+      (dolist (attr attributes)
+        (if (string= "comm" (car attr))
+            (setq cmd (cdr attr))))
+      (if (and cmd (or (string= "emacs" cmd) (string= "emacs.exe" cmd))) t))))
+
+(defadvice desktop-owner (after pry-from-cold-dead-hands activate)
+  "Don't allow dead emacsen to own the desktop file."
+  (when (not (emacs-process-p ad-return-value))
+    (setq ad-return-value nil)))
+;;; desktop-override-stale-locks.el ends here
+(load-theme 'monokai t)
