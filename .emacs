@@ -114,10 +114,11 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-d") 'my-delete-word) ; cut
 (global-set-key (kbd "C-e") 'move-end-of-line)
 (global-set-key (kbd "C-f") 'forward-word)
-(global-set-key (kbd "C-k") 'volatile-kill-buffer)
+(global-set-key (kbd "C-k") 'query-replace)
 (global-set-key (kbd "C-l") 'goto-line) ; Ctrl+Shift+k
 (global-set-key (kbd "C-o") 'find-file) ; finding files
 (global-set-key (kbd "C-q") 'rgrep) ; finding files
+(global-set-key (kbd "C-t") 'magit-status) ; finding files
 (global-set-key (kbd "C-v") 'yank)
 (global-set-key (kbd "C-w") 'xah-copy-line-or-region)
 (global-set-key (kbd "C-y") 'scroll-up)
@@ -144,6 +145,7 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-S-v") 'split-window-right);splits windwo vertically
 (global-set-key (kbd "C-S-x") 'server-edit) ;
 (global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-x k") 'volatile-kill-buffer)
 (global-set-key (kbd "M-S-d") 'my-delete-line-backward) ; Ctrl+Shift+k
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (require 'package)
