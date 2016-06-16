@@ -2,6 +2,7 @@
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8-unix)
 (setq python-check-command (expand-file-name "~/.local/bin/flake8"))
+
 ;functions
 (defun xah-cut-line-or-region ()
   "Cut current line, or text selection.
@@ -18,7 +19,7 @@ Version 2015-06-10"
                (kill-region (region-beginning) (region-end) t)
              (kill-region (line-beginning-position) (line-beginning-position 2))))))
 
-(defun xah-copy-line-or-region 
+(defun xah-copy-line-or-region ()
   "Copy current line, or text selection.
 When called repeatedly, append copy subsequent lines.
 When `universal-argument' is called first, copy whole buffer (respects `narrow-to-region').
@@ -26,16 +27,16 @@ When `universal-argument' is called first, copy whole buffer (respects `narrow-t
 URL `http://ergoemacs.org/emacs/emacs_copy_cut_current_line.html'
 Version 2015-09-18"
   (interactive)
-  (let (��p1 ��p2)
+  (let (ŠÎp1 ŠÎp2)
     (if current-prefix-arg
-        (progn (setq ��p1 (point-min))
-               (setq ��p2 (point-max)))
+        (progn (setq ŠÎp1 (point-min))
+               (setq ŠÎp2 (point-max)))
       (progn
         (if (use-region-p)
-            (progn (setq ��p1 (region-beginning))
-                   (setq ��p2 (region-end)))
-          (progn (setq ��p1 (line-beginning-position))
-                 (setq ��p2 (+ (line-end-position) 1))))))
+            (progn (setq ŠÎp1 (region-beginning))
+                   (setq ŠÎp2 (region-end)))
+          (progn (setq ŠÎp1 (line-beginning-position))
+                 (setq ŠÎp2 (+ (line-end-position) 1))))))
     (if (eq last-command this-command)
         (progn
           (kill-append "\n" nil)
@@ -44,7 +45,7 @@ Version 2015-09-18"
           (kill-append (buffer-substring-no-properties (line-beginning-position) (line-end-position)) nil)
           (message "Line copy appended"))
       (progn
-        (kill-ring-save ��p1 ��p2)
+        (kill-ring-save ŠÎp1 ŠÎp2)
         (if current-prefix-arg
             (message "Buffer text copied")
           (message "Text copied"))))))
