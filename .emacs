@@ -4,6 +4,12 @@
 (setq python-check-command (expand-file-name "~/.local/bin/flake8"))
 
 ;functions
+;; white space mode to hilight long lines
+(setq whitespace-style '(lines))
+(setq whitespace-line-column 78)
+(global-whitespace-mode 1)
+
+
 (defun xah-cut-line-or-region ()
   "Cut current line, or text selection.
 When `universal-argument' is called first, cut whole buffer (respects `narrow-to-region').
@@ -104,6 +110,17 @@ This command does not push text to `kill-ring'."
 (add-hook 'python-mode-hook
           (lambda()
             (local-unset-key (kbd "<backtab>"))))
+
+;(use-package smartparens-config
+;	     :ensure smartparens
+;	     :config
+;	     (progn
+;	       (show-smartparens-global-mode t)))
+;
+;(add-hook 'prog-mode-hook 'turn-on-smartparens-strict-mode)
+;(add-hook 'markdown-mode-hook 'turn-on-smartparens-strict-mode)
+
+
 ;key bindings
 (global-set-key (kbd "RET") 'newline-and-indent);return will indent now
 (global-set-key (kbd "<f2>") 'xah-cut-line-or-region) ; cut
@@ -130,8 +147,10 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "M-d") 'delete-and-join-forward)
 (global-set-key (kbd "M-e") 'end-of-buffer)
 (global-set-key (kbd "M-f") 'forward-char)
+(global-set-key (kbd "M-q") 'find-dired)
+(global-set-key (kbd "M-s") 'save-buffer)
 (global-set-key (kbd "M-w") 'xah-cut-line-or-region)
-(global-set-key (kbd "M-y") 'scroll-down)
+;; (global-set-key (kbd "M-y") 'scroll-down)
 (global-set-key (kbd "<M-backspace>") 'my-backward-delete-word)
 (global-set-key (kbd "C-S-a") 'mark-whole-buffer)
 (global-set-key (kbd "C-S-b") 'windmove-left)
@@ -141,11 +160,14 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-S-h") 'split-window-below);splits window horizontally
 (global-set-key (kbd "C-S-n") 'windmove-down)
 (global-set-key (kbd "C-S-p") 'windmove-up)
-(global-set-key (kbd "C-S-s") 'save-buffer) ; cut
 (global-set-key (kbd "C-S-v") 'split-window-right);splits windwo vertically
 (global-set-key (kbd "C-S-x") 'server-edit) ;
+;; (global-set-key (kbd "C-x b") 'windmove-left) ;
+;; (global-set-key (kbd "C-x f") 'windmove-right)
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x k") 'volatile-kill-buffer)
+;; (global-set-key (kbd "C-x n") 'windmove-down)
+;; (global-set-key (kbd "C-x p") 'windmove-up)
 (global-set-key (kbd "M-S-d") 'my-delete-line-backward) ; Ctrl+Shift+k
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (require 'package)
@@ -201,8 +223,6 @@ This command does not push text to `kill-ring'."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ac-disable-faces nil)
- '(ansi-color-names-vector
-   ["#eee8d5" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#839496"])
  '(column-number-mode t)
  '(company-dabbrev-downcase nil)
  '(compilation-message-face (quote default))
@@ -219,9 +239,11 @@ This command does not push text to `kill-ring'."
  '(desktop-save-mode t)
  '(electric-indent-mode t)
  '(electric-pair-mode t)
- '(fci-rule-color "#eee8d5")
  '(flx-ido-mode t)
  '(global-aggressive-indent-mode nil)
+ '(grep-find-ignored-directories
+   (quote
+    ("SCCS" "RCS" "CVS" "MCVS" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" "bin")))
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
  '(highlight-symbol-colors
    (--map
