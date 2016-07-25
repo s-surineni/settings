@@ -1,7 +1,10 @@
- ;encoding system
+;; emacs related functionality
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; encoding system
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8-unix)
-(setq python-check-command (expand-file-name "~/.local/bin/flake8"))
+
 
 ;; key bindings
 (global-set-key (kbd "RET") 'newline-and-indent);return will indent now
@@ -165,3 +168,13 @@ This command does not push text to `kill-ring'."
 
 (provide 'prelude-packages)
 ;; prelude end
+
+;; enabling modes
+(beacon-mode 1)
+
+;;customizing modes
+;; js mode
+(add-hook 'js-mode-hook 'flymake-jslint-load)
+
+;; python config
+(setq python-check-command (expand-file-name "~/.local/bin/flake8"))
