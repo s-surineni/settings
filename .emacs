@@ -4,10 +4,14 @@
 (setq confirm-nonexistent-file-or-buffer nil)
 (setq make-backup-files nil);stop making bakcup files
 (setq column-number-mode t)
-(setq-default cursor-type 'bar) 
+(setq-default cursor-type 'bar)
+(desktop-save-mode 1)
+(electric-indent-mode 1)
+(electric-pair-mode t)
 ;; encoding system
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8-unix)
+(delete-selection-mode 1)
 
 
 ;; key bindings
@@ -180,6 +184,13 @@ This command does not push text to `kill-ring'."
 
 ;; ido-mode
 (setq ido-create-new-buffer 'always)
+
+;;flx-ido mode
+(ido-mode 1)
+(flx-ido-mode t)
+(ido-everywhere t)
+(setq ido-enable-flex-matching t)
+(setq ido-use-faces nil)
 
 ;; js mode
 (add-hook 'js-mode-hook 'flymake-jslint-load)
