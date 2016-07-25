@@ -113,6 +113,16 @@ This command does not push text to `kill-ring'."
 ;; (global-set-key (kbd "C-x b") 'windmove-left) ;
 ;; (global-set-key (kbd "C-x f") 'windmove-right)
 (global-set-key (kbd "C-x g") 'magit-status)
+
+(defun volatile-kill-buffer ()
+   "Kill current buffer unconditionally."
+   (interactive)
+   (let ((buffer-modified-p nil))
+     (kill-buffer (current-buffer))))
+(add-hook 'python-mode-hook
+          (lambda()
+            (local-unset-key (kbd "<backtab>"))))
+
 (global-set-key (kbd "C-x k") 'volatile-kill-buffer)
 ;; (global-set-key (kbd "C-x n") 'windmove-down)
 ;; (global-set-key (kbd "C-x p") 'windmove-up)
