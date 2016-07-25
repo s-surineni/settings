@@ -1,4 +1,7 @@
 ;; emacs related functionality
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode nil)
 (fset 'yes-or-no-p 'y-or-n-p)
 (windmove-default-keybindings)		;move windows with shift and arrow keys
 (setq confirm-nonexistent-file-or-buffer nil)
@@ -8,8 +11,7 @@
 (desktop-save-mode 1)
 (electric-indent-mode 1)
 (electric-pair-mode t)
-(menu-bar-mode -1)
-(scroll-bar-mode nil)
+
 (setq scroll-step 1)
 (setq show-paren-delay 0)
 (show-paren-mode t)
@@ -159,7 +161,7 @@ This command does not push text to `kill-ring'."
 (add-to-list 'package-archives
              '("elpa" . "http://elpa.gnu.org/packages/") t)
 (defvar prelude-packages
-  '(aggressive-indent org solarized-theme web-mode projectile epc
+  '(aggressive-indent org web-mode projectile epc
 		      js2-mode ac-js2 tern transpose-frame elpy
 		      flx-ido magit beacon dash dash-functional
 		      flymake-jslint keyfreq groovy-mode)
@@ -182,6 +184,10 @@ This command does not push text to `kill-ring'."
 
 (provide 'prelude-packages)
 ;; prelude end
+
+;; enabling theme
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+;; (load-theme 'solarized t)
 
 ;; enabling modes
 (beacon-mode 1)
@@ -211,3 +217,17 @@ This command does not push text to `kill-ring'."
 ;; python config
 (elpy-enable)
 (setq python-check-command (expand-file-name "~/.local/bin/flake8"))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("b2910a5302ac57f0a18a5d2a3fda6206996350e981666a501ffb4406666c7d60" default))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
