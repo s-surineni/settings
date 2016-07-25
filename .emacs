@@ -9,6 +9,18 @@
 (global-set-key [f5] 'revert-buffer)
 (global-set-key (kbd "C-a") 'back-to-indentation)
 (global-set-key (kbd "C-b") 'backward-word)
+
+(defun my-delete-word (arg)
+  "Delete characters forward until encountering the end of a word.
+With argument, do this that many times.
+This command does not push text to `kill-ring'."
+  (interactive "p")
+  (delete-region
+   (point)
+   (progn
+     (forward-word arg)
+     (point))))
+
 (global-set-key (kbd "C-d") 'my-delete-word) ; cut
 (global-set-key (kbd "C-e") 'move-end-of-line)
 (global-set-key (kbd "C-f") 'forward-word)
@@ -83,6 +95,14 @@ Version 2015-06-10"
 (global-set-key (kbd "<M-backspace>") 'my-backward-delete-word)
 (global-set-key (kbd "C-S-a") 'mark-whole-buffer)
 (global-set-key (kbd "C-S-b") 'windmove-left)
+
+(defun my-backward-delete-word (arg)
+  "Delete characters backward until encountering the beginning of a word.
+With argument, do this that many times.
+This command does not push text to `kill-ring'."
+  (interactive "p")
+  (my-delete-word (- arg)))
+
 (global-set-key (kbd "C-S-d") 'my-backward-delete-word)
 (global-set-key (kbd "C-S-e") 'delete-window)
 (global-set-key (kbd "C-S-f") 'windmove-right)
