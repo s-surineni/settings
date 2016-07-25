@@ -4,7 +4,6 @@
 (setq python-check-command (expand-file-name "~/.local/bin/flake8"))
 
 ;; key bindings
-;key bindings
 (global-set-key (kbd "RET") 'newline-and-indent);return will indent now
 (global-set-key [f5] 'revert-buffer)
 (global-set-key (kbd "C-a") 'back-to-indentation)
