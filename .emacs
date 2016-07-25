@@ -8,6 +8,12 @@
 (desktop-save-mode 1)
 (electric-indent-mode 1)
 (electric-pair-mode t)
+(menu-bar-mode -1)
+(scroll-bar-mode nil)
+(setq scroll-step 1)
+(setq show-paren-delay 0)
+(show-paren-mode t)
+
 ;; encoding system
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8-unix)
@@ -198,6 +204,9 @@ This command does not push text to `kill-ring'."
 ;; keyfreq-mode
 (keyfreq-mode 1)
 (keyfreq-autosave-mode 1)
+
+;; web-mode
+(setq web-mode-markup-indent-offset 4)
 
 ;; python config
 (elpy-enable)
