@@ -3,7 +3,8 @@
 (windmove-default-keybindings)		;move windows with shift and arrow keys
 (setq confirm-nonexistent-file-or-buffer nil)
 (setq make-backup-files nil);stop making bakcup files
-
+(setq column-number-mode t)
+(setq-default cursor-type 'bar) 
 ;; encoding system
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8-unix)
@@ -188,4 +189,5 @@ This command does not push text to `kill-ring'."
 (keyfreq-autosave-mode 1)
 
 ;; python config
+(elpy-enable)
 (setq python-check-command (expand-file-name "~/.local/bin/flake8"))
