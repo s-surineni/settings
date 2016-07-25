@@ -128,3 +128,37 @@ This command does not push text to `kill-ring'."
 ;; (global-set-key (kbd "C-x p") 'windmove-up)
 (global-set-key (kbd "M-S-d") 'my-delete-line-backward) ; Ctrl+Shift+k
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+
+;; prelude start
+(package-initialize)
+(require 'cl)
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("elpa" . "http://elpa.gnu.org/packages/") t)
+(defvar prelude-packages
+  '(aggressive-indent org solarized-theme web-mode projectile epc
+		      js2-mode ac-js2 tern transpose-frame elpy
+		      flx-ido magit beacon dash dash-functional
+		      flymake-jslint keyfreq groovy-mode)
+  "A list of packages to ensure are installed at launch.")
+
+(defun prelude-packages-installed-p ()
+  (cl-loop for p in prelude-packages
+	   when (not (package-installed-p p)) do (cl-return nil)
+	   finally (cl-return t)))
+
+(unless (prelude-packages-installed-p)
+  ;; check for new packages (package versions)
+  (message "%s" "Emacs Prelude is now refreshing its package database...")
+  (package-refresh-contents)
+  (message "%s" " done.")
+  ;; install the missing packages
+  (dolist (p prelude-packages)
+    (when (not (package-installed-p p))
+      (package-install p))))
+
+(provide 'prelude-packages)
+;; prelude end
