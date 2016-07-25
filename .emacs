@@ -236,7 +236,8 @@ This command does not push text to `kill-ring'."
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("b2910a5302ac57f0a18a5d2a3fda6206996350e981666a501ffb4406666c7d60" default))))
+    ;; this was added for theme
+    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "b2910a5302ac57f0a18a5d2a3fda6206996350e981666a501ffb4406666c7d60" default))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
