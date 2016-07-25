@@ -129,9 +129,12 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "M-S-d") 'my-delete-line-backward) ; Ctrl+Shift+k
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-;; prelude start
-(package-initialize)
+(require 'package)
 (require 'cl)
+(package-initialize)
+;; prelude start
+
+
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives
