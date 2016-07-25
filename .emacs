@@ -1,6 +1,6 @@
 ;; emacs related functionality
-(menu-bar-mode -1)
-(tool-bar-mode -1)
+(menu-bar-mode nil)
+(tool-bar-mode nil)
 (scroll-bar-mode nil)
 (fset 'yes-or-no-p 'y-or-n-p)
 (windmove-default-keybindings)		;move windows with shift and arrow keys
@@ -239,7 +239,8 @@ This command does not push text to `kill-ring'."
  '(custom-enabled-themes (quote (solarized-dark)))
  '(custom-safe-themes
    (quote
-    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default))))
+    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
