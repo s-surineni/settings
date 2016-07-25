@@ -1,6 +1,8 @@
 ;; emacs related functionality
 (fset 'yes-or-no-p 'y-or-n-p)
 (windmove-default-keybindings)		;move windows with shift and arrow keys
+(setq confirm-nonexistent-file-or-buffer nil)
+(setq make-backup-files nil);stop making bakcup files
 
 ;; encoding system
 (set-language-environment "UTF-8")
@@ -174,8 +176,16 @@ This command does not push text to `kill-ring'."
 (beacon-mode 1)
 
 ;;customizing modes
+
+;; ido-mode
+(setq ido-create-new-buffer 'always)
+
 ;; js mode
 (add-hook 'js-mode-hook 'flymake-jslint-load)
+
+;; keyfreq-mode
+(keyfreq-mode 1)
+(keyfreq-autosave-mode 1)
 
 ;; python config
 (setq python-check-command (expand-file-name "~/.local/bin/flake8"))
