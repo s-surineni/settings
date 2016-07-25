@@ -404,7 +404,9 @@ This command does not push text to `kill-ring'."
 ;;      (require 'tern-auto-complete)
 ;;      (tern-ac-setup)))
 
+(require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
 (add-to-list 'exec-path "~/.local/bin/")
 ;; SHOW FILE PATH IN FRAME TITLE
 (setq-default frame-title-format "%l %b (%f)")
@@ -412,6 +414,7 @@ This command does not push text to `kill-ring'."
 (setq web-mode-enable-auto-pairing t)
 (setq web-mode-enable-auto-expanding t)
 (setq web-mode-enable-css-colorization t)
+(setq web-mode-code-indent-offset 4)
 
 (defun emacs-process-p (pid)
   "If pid is the process ID of an emacs process, return t, else nil.
