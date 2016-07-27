@@ -11,7 +11,7 @@
 (desktop-save-mode 1)
 (electric-indent-mode 1)
 (electric-pair-mode t)
-
+(setq uniquify-buffer-name-style 'forward)
 (setq scroll-step 1)
 (setq show-paren-delay 0)
 (show-paren-mode t)
@@ -173,7 +173,7 @@ This command does not push text to `kill-ring'."
 (add-to-list 'package-archives
              '("elpa" . "http://elpa.gnu.org/packages/") t)
 (defvar prelude-packages
-  '(aggressive-indent org web-mode projectile epc
+  '(aggressive-indent org web-mode projectile epc ido-vertical-mode
 		      js2-mode ac-js2 tern transpose-frame elpy
 		      flx-ido magit beacon dash dash-functional
 		      flymake-jslint keyfreq groovy-mode)
@@ -199,13 +199,20 @@ This command does not push text to `kill-ring'."
 
 ;; enabling theme
 ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-;; (load-theme 'solarized t)
+(load-theme 'zenburn t)
 
 ;; enabling modes
 (beacon-mode 1)
+(add-hook 'after-init-hook 'global-company-mode)
+(projectile-global-mode)
+(smartparens-global-mode t)
+(ido-vertical-mode 1)
 
 ;;customizing modes
 
+;; company mode
+(setq company-idle-delay 0)
+ 
 ;; ido-mode
 (setq ido-create-new-buffer 'always)
 
@@ -223,27 +230,66 @@ This command does not push text to `kill-ring'."
 (keyfreq-mode 1)
 (keyfreq-autosave-mode 1)
 
+;; smartparens
+(require 'smartparens-config)
+
+;; vertical ido mode
+(setq ido-vertical-define-keys 'C-n-and-C-p-only)
+
+
 ;; web-mode
 (setq web-mode-markup-indent-offset 4)
+(setq web-mode-code-indent-offset 4)
+(setq web-mode-css-indent-offset 4)
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.vue?\\'" . web-mode))
 
 ;; python config
 (elpy-enable)
 (setq python-check-command (expand-file-name "~/.local/bin/flake8"))
 
 ;; added by theme
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (solarized-dark)))
- '(custom-safe-themes
-   (quote
-    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
- )
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
+ '(custom-safe-themes
+   (quote
+    ("cdbd0a803de328a4986659d799659939d13ec01da1f482d838b68038c1bb35e8" default)))
+ '(fci-rule-color "#383838")
+ '(nrepl-message-colors
+   (quote
+    ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
+ '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
+ '(vc-annotate-background "#2B2B2B")
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#BC8383")
+     (40 . "#CC9393")
+     (60 . "#DFAF8F")
+     (80 . "#D0BF8F")
+     (100 . "#E0CF9F")
+     (120 . "#F0DFAF")
+     (140 . "#5F7F5F")
+     (160 . "#7F9F7F")
+     (180 . "#8FB28F")
+     (200 . "#9FC59F")
+     (220 . "#AFD8AF")
+     (240 . "#BFEBBF")
+     (260 . "#93E0E3")
+     (280 . "#6CA0A3")
+     (300 . "#7CB8BB")
+     (320 . "#8CD0D3")
+     (340 . "#94BFF3")
+     (360 . "#DC8CC3"))))
+ '(vc-annotate-very-old-color "#DC8CC3"))
