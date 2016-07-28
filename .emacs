@@ -15,6 +15,8 @@
 (setq scroll-step 1)
 (setq show-paren-delay 0)
 (show-paren-mode t)
+;; reverts buffers changed on disk
+(global-auto-revert-mode)
 
 ;; encoding system
 (set-language-environment "UTF-8")
@@ -96,7 +98,7 @@ Version 2015-09-18"
   (setq remote-file-name-inhibit-cache t))
 
 (global-set-key (kbd "C-/") 'comment-or-uncomment-region-or-line);for commenting and uncommenting
-(global-set-key (kbd "<backtab>") 'company-complete)
+(global-set-key (kbd "<backtab>") 'auto-complete)
 (global-set-key (kbd "M-a") 'beginning-of-buffer)
 (global-set-key (kbd "M-b") 'backward-char)
 (global-set-key (kbd "M-d") 'delete-and-join-forward)
@@ -199,19 +201,23 @@ This command does not push text to `kill-ring'."
 
 ;; enabling theme
 ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'zenburn t)
+;; (load-theme 'zenburn t)
 
 ;; enabling modes
 (beacon-mode 1)
-(add-hook 'after-init-hook 'global-company-mode)
+;; (add-hook 'after-init-hook 'global-company-mode)
 (projectile-global-mode)
 (smartparens-global-mode t)
 (ido-vertical-mode 1)
+(global-auto-complete-mode t)
 
 ;;customizing modes
 
+;; auto-complete mode
+(ac-config-default)
+
 ;; company mode
-(setq company-idle-delay 0)
+;; (setq company-idle-delay 0)
  
 ;; ido-mode
 (setq ido-create-new-buffer 'always)
@@ -265,7 +271,7 @@ This command does not push text to `kill-ring'."
    ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
  '(custom-safe-themes
    (quote
-    ("cdbd0a803de328a4986659d799659939d13ec01da1f482d838b68038c1bb35e8" default)))
+    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "cdbd0a803de328a4986659d799659939d13ec01da1f482d838b68038c1bb35e8" default)))
  '(fci-rule-color "#383838")
  '(nrepl-message-colors
    (quote
