@@ -213,6 +213,7 @@ This command does not push text to `kill-ring'."
 (sml/setup)
 (ido-vertical-mode 1)
 (global-auto-complete-mode t)
+(which-function-mode 1)
 (yas-global-mode 1)
 
 ;;customizing modes
