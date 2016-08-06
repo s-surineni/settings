@@ -14,6 +14,7 @@
 (setq uniquify-buffer-name-style 'forward)
 (setq scroll-step 1)
 (setq show-paren-delay 0)
+(setq-default frame-title-format "%l %b (%f)")
 (show-paren-mode t)
 ;; reverts buffers changed on disk
 (global-auto-revert-mode)
@@ -176,7 +177,7 @@ This command does not push text to `kill-ring'."
              '("elpa" . "http://elpa.gnu.org/packages/") t)
 (defvar prelude-packages
   '(aggressive-indent org web-mode projectile epc ido-vertical-mode
-		      js2-mode ac-js2 tern transpose-frame elpy
+		      company js2-mode ac-js2 tern transpose-frame elpy
 		      flx-ido magit beacon dash dash-functional
 		      flymake-jslint keyfreq groovy-mode)
   "A list of packages to ensure are installed at launch.")
@@ -208,16 +209,25 @@ This command does not push text to `kill-ring'."
 ;; (add-hook 'after-init-hook 'global-company-mode)
 (projectile-global-mode)
 (smartparens-global-mode t)
+(setq sml/theme 'dark)
+(sml/setup)
 (ido-vertical-mode 1)
 (global-auto-complete-mode t)
+(yas-global-mode 1)
 
 ;;customizing modes
 
 ;; auto-complete mode
 (ac-config-default)
+(setq ac-delay 0)
 
 ;; company mode
 ;; (setq company-idle-delay 0)
+
+;; diminish mode
+(diminish 'projectile-mode)
+;; (eval-after-load "filladapt" '(diminish 'filladapt-mode))
+
  
 ;; ido-mode
 (setq ido-create-new-buffer 'always)
@@ -271,7 +281,7 @@ This command does not push text to `kill-ring'."
    ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
  '(custom-safe-themes
    (quote
-    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "cdbd0a803de328a4986659d799659939d13ec01da1f482d838b68038c1bb35e8" default)))
+    ("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "cdbd0a803de328a4986659d799659939d13ec01da1f482d838b68038c1bb35e8" default)))
  '(fci-rule-color "#383838")
  '(nrepl-message-colors
    (quote
