@@ -18,6 +18,15 @@
 (show-paren-mode t)
 ;; reverts buffers changed on disk
 (global-auto-revert-mode)
+;; mode line format
+;; (setq mode-line-format
+;;           (list
+;;            ;; value of `mode-name'
+;;            "%m: "
+;;            ;; value of current buffer name
+;;            "buffer %b, "
+;;            ;; value of current line number
+;;            "line %l "))
 
 ;; encoding system
 (set-language-environment "UTF-8")
@@ -102,7 +111,9 @@ Version 2015-09-18"
 (global-set-key (kbd "<backtab>") 'auto-complete)
 (global-set-key (kbd "M-a") 'beginning-of-buffer)
 (global-set-key (kbd "M-b") 'backward-char)
+(global-set-key (kbd "M-<backspace>") 'sp-backward-unwrap-sexp)
 (global-set-key (kbd "M-d") 'delete-and-join-forward)
+(global-set-key (kbd "M-<delete>") 'sp-unwrap-sexp)
 (global-set-key (kbd "M-e") 'end-of-buffer)
 (global-set-key (kbd "M-f") 'forward-char)
 (global-set-key (kbd "M-q") 'find-dired)
@@ -208,6 +219,7 @@ This command does not push text to `kill-ring'."
 (beacon-mode 1)
 ;; (add-hook 'after-init-hook 'global-company-mode)
 (projectile-global-mode)
+;; (rich-minority-mode 1)
 (smartparens-global-mode t)
 (setq sml/theme 'dark)
 (sml/setup)
@@ -226,7 +238,7 @@ This command does not push text to `kill-ring'."
 ;; (setq company-idle-delay 0)
 
 ;; diminish mode
-(diminish 'projectile-mode)
+;; (diminish 'projectile-mode)
 ;; (eval-after-load "filladapt" '(diminish 'filladapt-mode))
 
  
