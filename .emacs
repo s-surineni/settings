@@ -221,6 +221,7 @@ This command does not push text to `kill-ring'."
 (projectile-global-mode)
 ;; (rich-minority-mode 1)
 (smartparens-global-mode t)
+(setq sml/no-confirm-load-theme t)
 (setq sml/theme 'dark)
 (sml/setup)
 (ido-vertical-mode 1)
