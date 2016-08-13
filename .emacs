@@ -27,6 +27,11 @@
 ;;            "buffer %b, "
 ;;            ;; value of current line number
 ;;            "line %l "))
+;; Tell emacs where is your personal elisp lib dir
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+
+;; load the packaged named xyz.
+;; (load "seq-24") ;; best not to include the ending “.el” or “.elc”
 
 ;; encoding system
 (set-language-environment "UTF-8")
@@ -205,7 +210,7 @@ This command does not push text to `kill-ring'."
   '(aggressive-indent org web-mode projectile epc ido-vertical-mode
 		      company js2-mode ac-js2 tern transpose-frame elpy
 		      flx-ido magit beacon dash dash-functional
-		      flymake-jslint keyfreq groovy-mode)
+		      flymake-jslint keyfreq groovy-mode smartparens)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
@@ -236,9 +241,9 @@ This command does not push text to `kill-ring'."
 (projectile-global-mode)
 ;; (rich-minority-mode 1)
 (smartparens-global-mode t)
-(setq sml/no-confirm-load-theme t)
-(setq sml/theme 'dark)
-(sml/setup)
+;;(setq sml/no-confirm-load-theme t)
+;;(setq sml/theme 'dark)
+;; (sml/setup)
 (ido-vertical-mode 1)
 (global-auto-complete-mode t)
 (which-function-mode 1)
