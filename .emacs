@@ -10,7 +10,6 @@
 (setq-default cursor-type 'bar)
 (desktop-save-mode 1)
 (electric-indent-mode 1)
-(electric-pair-mode t)
 (setq uniquify-buffer-name-style 'forward)
 (setq scroll-step 1)
 (setq show-paren-delay 0)
