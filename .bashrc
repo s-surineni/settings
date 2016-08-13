@@ -124,6 +124,7 @@ PATH=$PATH:~/installed/gradle/bin #improper way
 export ANDROID_HOME=$HOME/develop/android/android-sdk-linux #proper way
 export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 export PATH=${PATH}:~/.local/bin:/home/sampath/software/node-v4.4.5-linux-x64/bin
+export PATH=${PATH}:/home/sampath/installed/node/bin
 [ -z "$TMUX" ] && export TERM=xterm-256color
 export HISTSIZE=1000000
 export HISTFILESIZE=1000000000
