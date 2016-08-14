@@ -240,8 +240,8 @@ This command does not push text to `kill-ring'."
 (projectile-global-mode)
 ;; (rich-minority-mode 1)
 (smartparens-global-mode t)
-;;(setq sml/no-confirm-load-theme t)
-;;(setq sml/theme 'dark)
+;; (setq sml/no-confirm-load-theme t)
+;; (setq sml/theme 'dark)
 ;; (sml/setup)
 (ido-vertical-mode 1)
 (global-auto-complete-mode t)
@@ -258,7 +258,10 @@ This command does not push text to `kill-ring'."
 ;; (setq company-idle-delay 0)
 
 ;; diminish mode
-;; (diminish 'projectile-mode)
+(diminish 'projectile-mode)
+(diminish 'auto-complete-mode)
+(diminish 'smartparens-mode)
+
 ;; (eval-after-load "filladapt" '(diminish 'filladapt-mode))
 
  
