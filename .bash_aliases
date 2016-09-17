@@ -32,3 +32,4 @@ alias semac="sudo emacsclient -t"                # used to be "sudo emacs -nw"
 alias emacsc="emacsclient -c -a emacs"           # new - opens the GUI with alternate non-daemon
 alias superKill="/home/sam/myscripts/killer.sh"           # new - opens the GUI with alternate non-daemon
 alias sttu="git status -uno"           # new - opens the GUI with alternate non-daemon
+alias android="/home/sampath/software/android-studio/bin/studio.sh"

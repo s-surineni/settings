@@ -15,7 +15,11 @@ tmux send-keys -t development:3 'cs' C-m
 tmux new-window -n mongo -t development
 tmux send-keys -t development:4 'mongo gnana' C-m
 
+tmux new-window -n webpack -t development
+tmux send-keys -t development:5 'cd /home/sampath/projects/analytics-server/welcome' C-m
+tmux send-keys -t development:5 'npm run dev-hot' C-m
+
 tmux new-window -n console -t development
-tmux select-window -t development:5
+tmux select-window -t development:6
 tmux attach -t development
 
