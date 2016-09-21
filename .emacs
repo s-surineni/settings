@@ -246,6 +246,8 @@ This command does not push text to `kill-ring'."
 (global-auto-complete-mode t)
 (which-function-mode 1)
 (yas-global-mode 1)
+(define-globalized-minor-mode my-global-fci-mode fci-mode turn-on-fci-mode)
+(my-global-fci-mode 1)
 
 ;;customizing modes
 
