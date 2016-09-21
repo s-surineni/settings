@@ -208,7 +208,7 @@ This command does not push text to `kill-ring'."
   '(aggressive-indent org web-mode projectile epc ido-vertical-mode
 		      company js2-mode ac-js2 tern transpose-frame elpy
 		      flx-ido magit beacon dash dash-functional
-		      flymake-jslint keyfreq groovy-mode smartparens)
+		      keyfreq groovy-mode smartparens)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
@@ -248,6 +248,19 @@ This command does not push text to `kill-ring'."
 (yas-global-mode 1)
 (define-globalized-minor-mode my-global-fci-mode fci-mode turn-on-fci-mode)
 (my-global-fci-mode 1)
+(defvar-local company-fci-mode-on-p nil)
+
+(defun company-turn-off-fci (&rest ignore)
+  (when (boundp 'fci-mode)
+    (setq company-fci-mode-on-p fci-mode)
+    (when fci-mode (fci-mode -1))))
+
+(defun company-maybe-turn-on-fci (&rest ignore)
+  (when company-fci-mode-on-p (fci-mode 1)))
+
+(add-hook 'company-completion-started-hook 'company-turn-off-fci)
+(add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
+(add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)
 
 ;;customizing modes
 
@@ -277,7 +290,7 @@ This command does not push text to `kill-ring'."
 (setq ido-use-faces nil)
 
 ;; js mode
-(add-hook 'js-mode-hook 'flymake-jslint-load)
+;; (add-hook 'js-mode-hook 'flymake-jslint-load)
 
 ;; keyfreq-mode
 (keyfreq-mode 1)
