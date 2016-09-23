@@ -12,9 +12,7 @@
 (electric-indent-mode 1)
 (setq uniquify-buffer-name-style 'forward)
 (setq scroll-step 1)
-(setq show-paren-delay 0)
 (setq-default frame-title-format "%l %b (%f)")
-(show-paren-mode t)
 ;; reverts buffers changed on disk
 (global-auto-revert-mode)
 ;; mode line format
@@ -298,6 +296,7 @@ This command does not push text to `kill-ring'."
 
 ;; smartparens
 (require 'smartparens-config)
+(show-smartparens-global-mode +1)
 
 ;; vertical ido mode
 (setq ido-vertical-define-keys 'C-n-and-C-p-only)
@@ -308,7 +307,6 @@ This command does not push text to `kill-ring'."
 (setq web-mode-code-indent-offset 4)
 (setq web-mode-css-indent-offset 4)
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.vue?\\'" . web-mode))
 
 ;; python config
 (elpy-enable)
