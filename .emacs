@@ -204,7 +204,8 @@ This command does not push text to `kill-ring'."
 (add-to-list 'package-archives
              '("elpa" . "http://elpa.gnu.org/packages/") t)
 (defvar prelude-packages
-  '(aggressive-indent auto-complete color-theme-sanityinc-tomorrow
+  '(aggressive-indent auto-complete auto-package-update
+		      color-theme-sanityinc-tomorrow
   		      diminish fill-column-indicator org web-mode
 		      projectile epc ido-vertical-mode
 		      company js2-mode ac-js2 tern transpose-frame elpy
@@ -234,6 +235,13 @@ This command does not push text to `kill-ring'."
 (add-to-list 'custom-theme-load-path "/home/sampath/.emacs.d/themes/tomorrow-theme/")
 ;; (require 'tomorrow-night-theme)
 ;; (load-theme tomorrow-night-paradise t)
+
+;; for automatically updating the packages
+(add-to-list 'load-path "/path/to/auto-package-update")
+(require 'auto-package-update)
+(auto-package-update-maybe)
+(auto-package-update-at-time "03:00")
+(setq auto-package-update-delete-old-versions t)
 
 ;; enabling modes
 (beacon-mode 1)
