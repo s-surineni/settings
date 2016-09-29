@@ -25,7 +25,8 @@
 ;;            ;; value of current line number
 ;;            "line %l "))
 ;; Tell emacs where is your personal elisp lib dir
-(add-to-list 'load-path "~/.emacs.d/lisp/")
+(add-to-list 'load-path "/home/sampath/.emacs.d/lisp/")
+(add-to-list 'load-path "/home/sampath/.emacs.d/themes/tomorrow-theme/")
 
 ;; load the packaged named xyz.
 ;; (load "seq-24") ;; best not to include the ending “.el” or “.elc”
@@ -129,7 +130,7 @@ Version 2015-09-18"
 (global-set-key (kbd "M-a") 'beginning-of-buffer)
 (global-set-key (kbd "M-b") 'backward-char)
 (global-set-key (kbd "M-<backspace>") 'sp-backward-unwrap-sexp)
-(global-set-key (kbd "M-d") 'delete-and-join-forward)
+(global-set-key (kbd "M-[") 'delete-and-join-forward)
 (global-set-key (kbd "M-<delete>") 'sp-unwrap-sexp)
 (global-set-key (kbd "M-e") 'end-of-buffer)
 (global-set-key (kbd "M-f") 'forward-char)
@@ -203,7 +204,9 @@ This command does not push text to `kill-ring'."
 (add-to-list 'package-archives
              '("elpa" . "http://elpa.gnu.org/packages/") t)
 (defvar prelude-packages
-  '(aggressive-indent org web-mode projectile epc ido-vertical-mode
+  '(aggressive-indent auto-complete color-theme-sanityinc-tomorrow
+  		      diminish fill-column-indicator org web-mode
+		      projectile epc ido-vertical-mode
 		      company js2-mode ac-js2 tern transpose-frame elpy
 		      flx-ido magit beacon dash dash-functional
 		      keyfreq groovy-mode smartparens)
@@ -228,8 +231,9 @@ This command does not push text to `kill-ring'."
 ;; prelude end
 
 ;; enabling theme
-;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-;; (load-theme 'zenburn t)
+(add-to-list 'custom-theme-load-path "/home/sampath/.emacs.d/themes/tomorrow-theme/")
+;; (require 'tomorrow-night-theme)
+;; (load-theme tomorrow-night-paradise t)
 
 ;; enabling modes
 (beacon-mode 1)
@@ -246,20 +250,19 @@ This command does not push text to `kill-ring'."
 (yas-global-mode 1)
 (define-globalized-minor-mode my-global-fci-mode fci-mode turn-on-fci-mode)
 (my-global-fci-mode 1)
-(defvar-local company-fci-mode-on-p nil)
-
-(defun company-turn-off-fci (&rest ignore)
-  (when (boundp 'fci-mode)
-    (setq company-fci-mode-on-p fci-mode)
-    (when fci-mode (fci-mode -1))))
-
-(defun company-maybe-turn-on-fci (&rest ignore)
-  (when company-fci-mode-on-p (fci-mode 1)))
-
-(add-hook 'company-completion-started-hook 'company-turn-off-fci)
-(add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
-(add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)
-
+;; to solve mis-alignment of auto-complete mode
+(defvar sanityinc/fci-mode-suppressed nil)
+(defadvice popup-create (before suppress-fci-mode activate)
+  "Suspend fci-mode while popups are visible"
+  (set (make-local-variable 'sanityinc/fci-mode-suppressed) fci-mode)
+  (when fci-mode
+    (turn-off-fci-mode)))
+(defadvice popup-delete (after restore-fci-mode activate)
+  "Restore fci-mode when all popups have closed"
+  (when (and (not popup-instances) sanityinc/fci-mode-suppressed)
+    (setq sanityinc/fci-mode-suppressed nil)
+    (turn-on-fci-mode)))
+;; this completes auto-complete issue
 ;;customizing modes
 
 ;; auto-complete mode
@@ -293,6 +296,11 @@ This command does not push text to `kill-ring'."
 ;; keyfreq-mode
 (keyfreq-mode 1)
 (keyfreq-autosave-mode 1)
+;; mmm-mode
+;; (require 'mmm-mode)
+;; (mmm-add-mode-ext-class 'web-mode "\\.vue\\'" 'vue)
+;; (setq mmm-global-mode 'maybe)
+
 
 ;; smartparens
 (require 'smartparens-config)
@@ -307,6 +315,7 @@ This command does not push text to `kill-ring'."
 (setq web-mode-code-indent-offset 4)
 (setq web-mode-css-indent-offset 4)
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.vue?\\'" . web-mode))
 
 ;; python config
 (elpy-enable)
@@ -325,21 +334,59 @@ This command does not push text to `kill-ring'."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector
    ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
- '(custom-enabled-themes (quote (solarized-dark)))
+ '(compilation-message-face (quote default))
+ '(cua-global-mark-cursor-color "#2aa198")
+ '(cua-normal-cursor-color "#839496")
+ '(cua-overwrite-cursor-color "#b58900")
+ '(cua-read-only-cursor-color "#859900")
+ '(custom-enabled-themes (quote (sanityinc-tomorrow-blue)))
  '(custom-safe-themes
    (quote
-    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "cdbd0a803de328a4986659d799659939d13ec01da1f482d838b68038c1bb35e8" default)))
+    ("cf08ae4c26cacce2eebff39d129ea0a21c9d7bf70ea9b945588c1c66392578d1" "5ee12d8250b0952deefc88814cf0672327d7ee70b16344372db9460e9a0e3ffc" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "4aafea32abe07a9658d20aadcae066e9c7a53f8e3dfbd18d8fa0b26c24f9082c" "0e219d63550634bc5b0c214aced55eb9528640377daf486e13fb18a32bf39856" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "cdbd0a803de328a4986659d799659939d13ec01da1f482d838b68038c1bb35e8" default)))
  '(fci-rule-color "#383838")
+ '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
+ '(highlight-symbol-colors
+   (--map
+    (solarized-color-blend it "#002b36" 0.25)
+    (quote
+     ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
+ '(highlight-symbol-foreground-color "#93a1a1")
+ '(highlight-tail-colors
+   (quote
+    (("#073642" . 0)
+     ("#546E00" . 20)
+     ("#00736F" . 30)
+     ("#00629D" . 50)
+     ("#7B6000" . 60)
+     ("#8B2C02" . 70)
+     ("#93115C" . 85)
+     ("#073642" . 100))))
+ '(hl-bg-colors
+   (quote
+    ("#7B6000" "#8B2C02" "#990A1B" "#93115C" "#3F4D91" "#00629D" "#00736F" "#546E00")))
+ '(hl-fg-colors
+   (quote
+    ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
+ '(magit-diff-use-overlays nil)
  '(menu-bar-mode nil)
  '(nrepl-message-colors
    (quote
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
+ '(pos-tip-background-color "#073642")
+ '(pos-tip-foreground-color "#93a1a1")
+ '(safe-local-variable-values (quote ((encoding . utf-8))))
  '(scroll-bar-mode nil)
+ '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
+ '(term-default-bg-color "#002b36")
+ '(term-default-fg-color "#839496")
  '(tool-bar-mode nil)
  '(vc-annotate-background "#2B2B2B")
+ '(vc-annotate-background-mode nil)
  '(vc-annotate-color-map
    (quote
     ((20 . "#BC8383")
@@ -360,5 +407,13 @@ This command does not push text to `kill-ring'."
      (320 . "#8CD0D3")
      (340 . "#94BFF3")
      (360 . "#DC8CC3"))))
- '(vc-annotate-very-old-color "#DC8CC3"))
+ '(vc-annotate-very-old-color "#DC8CC3")
+ '(weechat-color-list
+   (quote
+    (unspecified "#002b36" "#073642" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#839496" "#657b83")))
+ '(xterm-color-names
+   ["#073642" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#eee8d5"])
+ '(xterm-color-names-bright
+   ["#002b36" "#cb4b16" "#586e75" "#657b83" "#839496" "#6c71c4" "#93a1a1" "#fdf6e3"]))
 (put 'upcase-region 'disabled nil)
+;; (load-theme 'zenburn t)

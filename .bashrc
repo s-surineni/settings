@@ -130,3 +130,7 @@ export PATH=${PATH}:/home/sampath/installed/kibana/bin
 [ -z "$TMUX" ] && export TERM=xterm-256color
 export HISTSIZE=1000000
 export HISTFILESIZE=1000000000
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/sampath/.sdkman"
+[[ -s "/home/sampath/.sdkman/bin/sdkman-init.sh" ]] && source "/home/sampath/.sdkman/bin/sdkman-init.sh"
