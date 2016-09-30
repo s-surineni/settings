@@ -12,6 +12,7 @@
 (electric-indent-mode 1)
 (setq uniquify-buffer-name-style 'forward)
 (setq scroll-step 1)
+(set-default 'truncate-lines t)
 (setq-default frame-title-format "%l %b (%f)")
 ;; reverts buffers changed on disk
 (global-auto-revert-mode)
@@ -68,10 +69,12 @@ This command does not push text to `kill-ring'."
    (progn
      (forward-word arg)
      (point))))
-
+;; (global-set-key (kbd "<return>") 'newline-and-indent)
 (global-set-key (kbd "C-d") 'my-delete-word) ; cut
 (global-set-key (kbd "C-e") 'move-end-of-line)
 (global-set-key (kbd "C-f") 'forward-word)
+(global-set-key (kbd "C-h") 'projectile-find-file)
+(global-set-key (kbd "C-j") 'ido-switch-buffer)
 (global-set-key (kbd "C-k") 'query-replace)
 (global-set-key (kbd "C-l") 'goto-line) ; Ctrl+Shift+k
 (global-set-key (kbd "C-o") 'find-file) ; finding files
@@ -130,8 +133,8 @@ Version 2015-09-18"
 (global-set-key (kbd "M-a") 'beginning-of-buffer)
 (global-set-key (kbd "M-b") 'backward-char)
 (global-set-key (kbd "M-<backspace>") 'sp-backward-unwrap-sexp)
-(global-set-key (kbd "M-[") 'delete-and-join-forward)
-(global-set-key (kbd "M-<delete>") 'sp-unwrap-sexp)
+(global-set-key (kbd "M-d") 'delete-and-join-forward)
+(global-set-key (kbd "M-[") 'sp-unwrap-sexp)
 (global-set-key (kbd "M-e") 'end-of-buffer)
 (global-set-key (kbd "M-f") 'forward-char)
 (global-set-key (kbd "M-q") 'find-dired)
@@ -323,7 +326,10 @@ This command does not push text to `kill-ring'."
 (setq web-mode-code-indent-offset 4)
 (setq web-mode-css-indent-offset 4)
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-;; (add-to-list 'auto-mode-alist '("\\.vue?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.vue?\\'" . web-mode))
+(add-hook 'after-change-major-mode-hook
+	  (lambda () (if (string= major-mode "web-mode")
+			 (turn-off-fci-mode) (turn-on-fci-mode))))
 
 ;; python config
 (elpy-enable)
@@ -425,3 +431,4 @@ This command does not push text to `kill-ring'."
    ["#002b36" "#cb4b16" "#586e75" "#657b83" "#839496" "#6c71c4" "#93a1a1" "#fdf6e3"]))
 (put 'upcase-region 'disabled nil)
 ;; (load-theme 'zenburn t)
+(color-theme-sanityinc-tomorrow-eighties)
