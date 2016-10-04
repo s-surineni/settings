@@ -1,7 +1,7 @@
 ;; emacs related functionality
-(menu-bar-mode nil)
-(tool-bar-mode nil)
-(scroll-bar-mode nil)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
 (windmove-default-keybindings)		;move windows with shift and arrow keys
 (setq confirm-nonexistent-file-or-buffer nil)
@@ -12,7 +12,6 @@
 (electric-indent-mode 1)
 (setq uniquify-buffer-name-style 'forward)
 (setq scroll-step 1)
-(set-default 'truncate-lines t)
 (setq-default frame-title-format "%l %b (%f)")
 ;; reverts buffers changed on disk
 (global-auto-revert-mode)
@@ -56,6 +55,8 @@ Also returns nil if pid is nil."
 ;; key bindings
 (global-set-key (kbd "RET") 'newline-and-indent);return will indent now
 (global-set-key [f5] 'revert-buffer)
+(global-set-key (kbd "C--") 'split-window-below)
+(global-set-key (kbd "C-\\") 'split-window-right)
 (global-set-key (kbd "C-a") 'back-to-indentation)
 (global-set-key (kbd "C-b") 'backward-word)
 
@@ -132,7 +133,7 @@ Version 2015-09-18"
 (global-set-key (kbd "<backtab>") 'auto-complete)
 (global-set-key (kbd "M-a") 'beginning-of-buffer)
 (global-set-key (kbd "M-b") 'backward-char)
-(global-set-key (kbd "M-<backspace>") 'sp-backward-unwrap-sexp)
+(global-set-key (kbd "M-]") 'sp-backward-unwrap-sexp)
 (global-set-key (kbd "M-d") 'delete-and-join-forward)
 (global-set-key (kbd "M-[") 'sp-unwrap-sexp)
 (global-set-key (kbd "M-e") 'end-of-buffer)
@@ -261,6 +262,7 @@ This command does not push text to `kill-ring'."
 (yas-global-mode 1)
 (define-globalized-minor-mode my-global-fci-mode fci-mode turn-on-fci-mode)
 (my-global-fci-mode 1)
+(setq fci-handle-truncate-lines nil)
 ;; to solve mis-alignment of auto-complete mode
 (defvar sanityinc/fci-mode-suppressed nil)
 (defadvice popup-create (before suppress-fci-mode activate)
@@ -274,6 +276,23 @@ This command does not push text to `kill-ring'."
     (setq sanityinc/fci-mode-suppressed nil)
     (turn-on-fci-mode)))
 ;; this completes auto-complete issue
+
+;; this is to solve problem with company-mode
+(defvar-local company-fci-mode-on-p nil)
+
+(defun company-turn-off-fci (&rest ignore)
+  (when (boundp 'fci-mode)
+    (setq company-fci-mode-on-p fci-mode)
+    (when fci-mode (fci-mode -1))))
+
+(defun company-maybe-turn-on-fci (&rest ignore)
+  (when company-fci-mode-on-p (fci-mode 1)))
+
+(add-hook 'company-completion-started-hook 'company-turn-off-fci)
+(add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
+(add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)
+;; company-mode issue solved
+
 ;;customizing modes
 
 ;; auto-complete mode
@@ -327,6 +346,7 @@ This command does not push text to `kill-ring'."
 (setq web-mode-css-indent-offset 4)
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.vue?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.gradle\\'" . groovy-mode))
 (add-hook 'after-change-major-mode-hook
 	  (lambda () (if (string= major-mode "web-mode")
 			 (turn-off-fci-mode) (turn-on-fci-mode))))
@@ -357,7 +377,7 @@ This command does not push text to `kill-ring'."
  '(cua-normal-cursor-color "#839496")
  '(cua-overwrite-cursor-color "#b58900")
  '(cua-read-only-cursor-color "#859900")
- '(custom-enabled-themes (quote (sanityinc-tomorrow-blue)))
+ '(custom-enabled-themes (quote (sanityinc-tomorrow-eighties)))
  '(custom-safe-themes
    (quote
     ("cf08ae4c26cacce2eebff39d129ea0a21c9d7bf70ea9b945588c1c66392578d1" "5ee12d8250b0952deefc88814cf0672327d7ee70b16344372db9460e9a0e3ffc" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "4aafea32abe07a9658d20aadcae066e9c7a53f8e3dfbd18d8fa0b26c24f9082c" "0e219d63550634bc5b0c214aced55eb9528640377daf486e13fb18a32bf39856" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "cdbd0a803de328a4986659d799659939d13ec01da1f482d838b68038c1bb35e8" default)))
@@ -386,7 +406,6 @@ This command does not push text to `kill-ring'."
    (quote
     ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
  '(magit-diff-use-overlays nil)
- '(menu-bar-mode nil)
  '(nrepl-message-colors
    (quote
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
@@ -394,11 +413,9 @@ This command does not push text to `kill-ring'."
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(safe-local-variable-values (quote ((encoding . utf-8))))
- '(scroll-bar-mode nil)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(term-default-bg-color "#002b36")
  '(term-default-fg-color "#839496")
- '(tool-bar-mode nil)
  '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-background-mode nil)
  '(vc-annotate-color-map
