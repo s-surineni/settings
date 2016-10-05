@@ -127,6 +127,7 @@ export PATH=${PATH}:~/.local/bin:/home/sampath/software/node-v4.4.5-linux-x64/bi
 export PATH=${PATH}:/home/sampath/installed/node/bin
 export PATH=${PATH}:/home/sampath/installed/elasticsearch/bin
 export PATH=${PATH}:/home/sampath/installed/kibana/bin
+export PATH=${PATH}:~/eclipse/eclipse
 [ -z "$TMUX" ] && export TERM=xterm-256color
 export HISTSIZE=1000000
 export HISTFILESIZE=1000000000
