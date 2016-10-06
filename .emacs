@@ -131,6 +131,7 @@ Version 2015-09-18"
 
 (global-set-key (kbd "C-/") 'comment-or-uncomment-region-or-line);for commenting and uncommenting
 (global-set-key (kbd "<backtab>") 'auto-complete)
+(define-key yas-minor-mode-map (kbd "C-<tab>") 'yas-expand)
 (global-set-key (kbd "M-a") 'beginning-of-buffer)
 (global-set-key (kbd "M-b") 'backward-char)
 (global-set-key (kbd "M-]") 'sp-backward-unwrap-sexp)
