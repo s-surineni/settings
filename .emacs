@@ -1,4 +1,5 @@
 ;; emacs related functionality
+
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -131,7 +132,6 @@ Version 2015-09-18"
 
 (global-set-key (kbd "C-/") 'comment-or-uncomment-region-or-line);for commenting and uncommenting
 (global-set-key (kbd "<backtab>") 'auto-complete)
-(define-key yas-minor-mode-map (kbd "C-<tab>") 'yas-expand)
 (global-set-key (kbd "M-a") 'beginning-of-buffer)
 (global-set-key (kbd "M-b") 'backward-char)
 (global-set-key (kbd "M-]") 'sp-backward-unwrap-sexp)
@@ -199,6 +199,7 @@ This command does not push text to `kill-ring'."
 (require 'package)
 (require 'cl)
 (package-initialize)
+
 ;; prelude start
 
 
@@ -261,6 +262,8 @@ This command does not push text to `kill-ring'."
 (global-auto-complete-mode t)
 (which-function-mode 1)
 (yas-global-mode 1)
+(define-key yas-minor-mode-map (kbd "C-<tab>") 'yas-expand)
+
 (define-globalized-minor-mode my-global-fci-mode fci-mode turn-on-fci-mode)
 (my-global-fci-mode 1)
 (setq fci-handle-truncate-lines nil)
