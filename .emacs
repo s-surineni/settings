@@ -1,5 +1,5 @@
 ;; emacs related functionality
-
+(server-start)
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -76,7 +76,9 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-e") 'move-end-of-line)
 (global-set-key (kbd "C-f") 'forward-word)
 (global-set-key (kbd "C-h") 'projectile-find-file)
+(global-set-key (kbd "C-S-h") 'projectile-find-file-other-window)
 (global-set-key (kbd "C-j") 'ido-switch-buffer)
+(global-set-key (kbd "C-S-j") 'ido-switch-buffer-other-window)
 (global-set-key (kbd "C-k") 'query-replace)
 (global-set-key (kbd "C-l") 'goto-line) ; Ctrl+Shift+k
 (global-set-key (kbd "C-o") 'find-file) ; finding files
@@ -135,7 +137,7 @@ Version 2015-09-18"
 (global-set-key (kbd "M-a") 'beginning-of-buffer)
 (global-set-key (kbd "M-b") 'backward-char)
 (global-set-key (kbd "M-]") 'sp-backward-unwrap-sexp)
-(global-set-key (kbd "M-d") 'delete-and-join-forward)
+(global-set-key (kbd "M-d") 'delete-char)
 (global-set-key (kbd "M-[") 'sp-unwrap-sexp)
 (global-set-key (kbd "M-e") 'end-of-buffer)
 (global-set-key (kbd "M-f") 'forward-char)
@@ -158,7 +160,7 @@ Version 2015-06-10"
              (kill-region (line-beginning-position) (line-beginning-position 2))))))
 
 (global-set-key (kbd "M-w") 'xah-cut-line-or-region)
-;; (global-set-key (kbd "M-y") 'scroll-down)
+(global-set-key (kbd "C-S-y") 'scroll-down)
 (global-set-key (kbd "C-S-a") 'mark-whole-buffer)
 (global-set-key (kbd "C-S-b") 'windmove-left)
 
@@ -172,10 +174,8 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-S-d") 'my-backward-delete-word)
 (global-set-key (kbd "C-S-e") 'delete-window)
 (global-set-key (kbd "C-S-f") 'windmove-right)
-(global-set-key (kbd "C-S-h") 'split-window-below);splits window horizontally
 (global-set-key (kbd "C-S-n") 'windmove-down)
 (global-set-key (kbd "C-S-p") 'windmove-up)
-(global-set-key (kbd "C-S-v") 'split-window-right);splits windwo vertically
 (global-set-key (kbd "C-S-x") 'server-edit) ;
 ;; (global-set-key (kbd "C-x b") 'windmove-left) ;
 ;; (global-set-key (kbd "C-x f") 'windmove-right)
@@ -259,7 +259,9 @@ This command does not push text to `kill-ring'."
 ;; (setq sml/theme 'dark)
 ;; (sml/setup)
 (ido-vertical-mode 1)
+(require 'auto-complete)
 (global-auto-complete-mode t)
+(setq ac-ignore-case nil)
 (which-function-mode 1)
 (yas-global-mode 1)
 (define-key yas-minor-mode-map (kbd "C-<tab>") 'yas-expand)
