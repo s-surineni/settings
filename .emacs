@@ -227,7 +227,7 @@ Use in `isearch-mode-end-hook'."
              '("elpa" . "http://elpa.gnu.org/packages/") t)
 (defvar prelude-packages
   '(aggressive-indent auto-complete auto-package-update
-		      color-theme-sanityinc-tomorrow
+		      color-theme-sanityinc-tomorrow hungry-delete
   		      diminish fill-column-indicator org web-mode
 		      projectile epc ido-vertical-mode
 		      company js2-mode ac-js2 tern transpose-frame elpy
@@ -278,6 +278,8 @@ Use in `isearch-mode-end-hook'."
 (require 'auto-complete)
 (global-auto-complete-mode t)
 (setq ac-ignore-case nil)
+(require 'hungry-delete)
+(global-hungry-delete-mode)
 (which-function-mode 1)
 (yas-global-mode 1)
 (define-key yas-minor-mode-map (kbd "C-<tab>") 'yas-expand)
