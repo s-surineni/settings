@@ -84,6 +84,7 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "C-o") 'find-file) ; finding files
 (global-set-key (kbd "C-q") 'rgrep) ; finding files
 (global-set-key (kbd "C-t") 'magit-status) ; finding files
+(setq magit-refresh-status-buffer nil)
 (global-set-key (kbd "C-v") 'yank)
 
 (defun xah-copy-line-or-region ()
@@ -133,6 +134,7 @@ Version 2015-09-18"
   (setq remote-file-name-inhibit-cache t))
 
 (global-set-key (kbd "C-/") 'comment-or-uncomment-region-or-line);for commenting and uncommenting
+(global-set-key (kbd "M-/") 'comment-dwim);for commenting and uncommenting
 (global-set-key (kbd "<backtab>") 'auto-complete)
 (global-set-key (kbd "M-a") 'beginning-of-buffer)
 (global-set-key (kbd "M-b") 'backward-char)
@@ -189,6 +191,20 @@ This command does not push text to `kill-ring'."
 (add-hook 'python-mode-hook
           (lambda()
             (local-unset-key (kbd "<backtab>"))))
+
+
+;; after search is done we will endup at beginning of the search
+(add-hook 'isearch-mode-end-hook
+          #'endless/goto-match-beginning)
+(defun endless/goto-match-beginning ()
+  "Go to the start of current isearch match.
+Use in `isearch-mode-end-hook'."
+  (when (and isearch-forward
+             (number-or-marker-p isearch-other-end)
+             (not mark-active)
+             (not isearch-mode-end-hook-quit))
+    (goto-char isearch-other-end)))
+
 
 (global-set-key (kbd "C-x k") 'volatile-kill-buffer)
 ;; (global-set-key (kbd "C-x n") 'windmove-down)
