@@ -12,6 +12,7 @@
 (desktop-save-mode 1)
 (electric-indent-mode 1)
 (setq uniquify-buffer-name-style 'forward)
+(setq echo-keystrokes 0.1)
 (setq scroll-step 1)
 (setq-default frame-title-format "%l %b (%f)")
 ;; reverts buffers changed on disk
@@ -230,7 +231,7 @@ Use in `isearch-mode-end-hook'."
 		      color-theme-sanityinc-tomorrow hungry-delete
   		      diminish fill-column-indicator org web-mode
 		      projectile epc ido-vertical-mode
-		      company js2-mode ac-js2 tern transpose-frame elpy
+		      company js2-mode js2-refactor ac-js2 tern transpose-frame elpy
 		      flx-ido magit beacon dash dash-functional
 		      keyfreq groovy-mode smartparens)
   "A list of packages to ensure are installed at launch.")
@@ -266,6 +267,10 @@ Use in `isearch-mode-end-hook'."
 (setq auto-package-update-delete-old-versions t)
 
 ;; enabling modes
+
+(require 'js2-refactor)
+(add-hook 'js2-mode-hook #'js2-refactor-mode)
+(js2r-add-keybindings-with-prefix "C-c C-m")
 (beacon-mode 1)
 ;; (add-hook 'after-init-hook 'global-company-mode)
 (projectile-global-mode)
