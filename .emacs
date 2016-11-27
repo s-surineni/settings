@@ -382,7 +382,7 @@ Use in `isearch-mode-end-hook'."
 
 ;; python config
 (elpy-enable)
-(setq python-check-command (expand-file-name "~/.local/bin/flake8"))
+;; (setq python-check-command (expand-file-name "~/.local/bin/flake8"))
 
 ;; added by theme
 
@@ -400,7 +400,7 @@ Use in `isearch-mode-end-hook'."
  '(custom-enabled-themes (quote (sanityinc-tomorrow-eighties)))
  '(custom-safe-themes
    (quote
-    ("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default)))
+    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default)))
  '(fci-rule-color "#383838")
  '(magit-diff-use-overlays nil)
  '(nrepl-message-colors
