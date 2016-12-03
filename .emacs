@@ -164,7 +164,6 @@ Version 2015-06-10"
 
 (global-set-key (kbd "M-w") 'xah-cut-line-or-region)
 (global-set-key (kbd "C-S-y") 'scroll-down)
-(global-set-key (kbd "C-S-a") 'mark-whole-buffer)
 (global-set-key (kbd "C-S-b") 'windmove-left)
 
 (defun my-backward-delete-word (arg)
