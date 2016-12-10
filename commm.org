@@ -11,13 +11,19 @@
 ** grep -r -i --include \*.h --include \*.cpp CP_Image ~/path[12345] | mailx -s GREP email@domain.com
 ** grep -rl --include \*.py date
 ** grep -rl P'<'tenant_name
+* find 
+** find . -name tecmint.txt
+** find /home -iname tecmint.txt
+** find . -type f -name "*.php"
 * git
+** git remote set-url --push origin git@github.com:User/forked.git
 ** git reset HEAD --hard
 ** git reset --hard #Revert changes to modified files including modified
 ** git clean -fd #remove all untracked files and directories
 ** git checkout -- . #remove only unstaged changes
 ** git rm --cached [filenames...]
 ** git show branch:file
+** git diff mybranch master -- myfile.cs
 * linux
 ** lsof -i :8080x
 ** SIGSToP
@@ -26,15 +32,20 @@
 ** 'tenant/'+window.Info.client+'/config'
 * mongodb
 ** db.taskcheck.com.datameta.drop()
-** db.users.find({"name": /.*m.*/})
-** db.getCollectionNames().forEach(function(c) {
-   if(c.match("^damballa")) { 
-       print(c);
-   }
- });
+
 * vim
 ** end of line $,A
 ** Begin of line I
-** :%s/foo/bar/gc search replace
-* find
-** find / -name art  2>&1 | grep -v "Permission denied"
+** :%s/foo/bar/gc search replace 
+* Ubuntu
+** /usr/local/bin
+* curl
+** curl -s -XPOST http://localhost:9200/_bulk --data-binary @damballa ;echo
+** ssh sampath@sg-bastion.avisoaws.com
+** ssh -i keys/sg-vpc-es-keys.pem ubuntu@10.1.15.203
+source /opt/sdk-env/bin/activate
+cd /opt/python-sdk/src
+~/elasticsearch-2.2.0/bin/elasticsearch
+$ curl -XGET 'http://localhost:9200/_cluster/health?pretty=true'
+* virtualenv
+** pip install ./downloads/SomePackage-1.0.4.tar.gz
