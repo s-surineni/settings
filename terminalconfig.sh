@@ -6,4 +6,5 @@ parse_git_branch() {
 }
 COLOR1="\[\033[1;33m\]"     #First color
 COLOR2="\[\033[0;33m\]"     #Second color
-export PS1="${COLOR1}[\w]\$(parse_git_branch)\n\\$ \[$(tput sgr0)\]"
+# export PS1="${COLOR1}[\w]\$(parse_git_branch)\n\\$ \[$(tput sgr0)\]"
+PS1="\[\e[1;33m\]\w\$(parse_git_branch)\n\$\[\e[0m\] "
