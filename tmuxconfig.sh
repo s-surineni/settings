@@ -1,4 +1,4 @@
-
+# source-file ~/settings/tmuxconfig.sh
 set -g prefix C-x
 
 # # bind 'C-x C-x' to type 'C-x'
