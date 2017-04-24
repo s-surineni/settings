@@ -23,7 +23,3 @@ fi
 if [ -f ~/settings/paths.sh ]; then
 	. ~/settings/paths.sh
 fi
-
-if [ -f ~/settings/terminalconfig.sh ]; then
-	. ~/settings/terminalconfig.sh
-fi
