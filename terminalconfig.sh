@@ -1,5 +1,5 @@
-# if [ -f ~/myconfig/terminalconfig.sh ]; then
-# 	. ~/myconfig/terminalconfig.sh
+# if [ -f ~/settings/terminalconfig.sh ]; then
+# 	. ~/settings/terminalconfig.sh
 # fi
 
 export HISTSIZE=1000000
@@ -22,4 +22,8 @@ fi
 # Source global definitions
 if [ -f ~/settings/paths.sh ]; then
 	. ~/settings/paths.sh
+fi
+
+if [ -f ~/settings/terminalconfig.sh ]; then
+	. ~/settings/terminalconfig.sh
 fi
