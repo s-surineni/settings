@@ -14,18 +14,18 @@ set-window-option -g mode-keys vi
 # # Window management / navigation
 
 # # move between windows
-bind -n C-b previous-window
-bind -n C-f next-window
-bind -n C-l last-window
+bind  C-b previous-window
+bind  C-f next-window
+bind  C-l last-window
 
 # pane selection commands
-bind -n M-p select-pane -U
-bind -n M-n select-pane -D
-bind -n M-b select-pane -L
-bind -n M-f select-pane -R
+bind  M-p select-pane -U
+bind  M-n select-pane -D
+bind  M-b select-pane -L
+bind  M-f select-pane -R
 
 unbind [
-bind -n C-w copy-mode
+bind  C-w copy-mode
 bind -t vi-copy v begin-selection
 bind -t vi-copy y copy-selection
 bind -t vi-copy Escape cancel
@@ -37,15 +37,15 @@ set -g base-index 1
 setw -g pane-base-index 1
 # unbind-key -n C-r
 bind r source-file ~/.tmux.conf \; display "Reloaded!"
-bind -n C-h split-window -v
-bind -n C-v split-window -h
+bind  C-h split-window -v
+bind  C-v split-window -h
 bind  C-r send-keys -R \; clear-history
 # # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 # close all tmux windows
-bind -n M-x kill-server
-bind -n M-o new-window
+bind  M-x kill-server
+bind  M-o new-window
 # # move x clipboard into tmux paste buffer
 # #bind C-p run "tmux set-buffer \"$(xclip -o)\"; tmux paste-buffer"
 # # move tmux copy buffer into x clipboard
