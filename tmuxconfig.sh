@@ -1,5 +1,5 @@
 # source-file ~/settings/tmuxconfig.sh
-set -g prefix C-x
+set -g prefix C-a
 
 # # bind 'C-x C-x' to type 'C-x'
 bind C-x send-prefix
