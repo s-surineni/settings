@@ -2,7 +2,7 @@
 set -g prefix C-a
 
 # # bind 'C-x C-x' to type 'C-x'
-bind C-x send-prefix
+bind C-a send-prefix
 set -g mouse on
 set -g default-terminal "screen-256color"
 set -g terminal-overrides 'xterm*:smcup@:rmcup@'
