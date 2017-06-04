@@ -37,8 +37,8 @@ set -g base-index 1
 setw -g pane-base-index 1
 # unbind-key -n C-r
 bind r source-file ~/.tmux.conf \; display "Reloaded!"
-bind  C-h split-window -v
-bind  C-v split-window -h
+bind  - split-window -v
+bind  \ split-window -h
 bind  C-r send-keys -R \; clear-history
 # # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
