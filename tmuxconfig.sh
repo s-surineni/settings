@@ -26,9 +26,9 @@ bind  M-f select-pane -R
 
 unbind [
 bind  C-w copy-mode
-bind -t vi-copy v begin-selection
-bind -t vi-copy y copy-selection
-bind -t vi-copy Escape cancel
+# bind -t vi-copy v begin-selection
+# bind -t vi-copy y copy-selection
+# bind -t vi-copy Escape cancel
 # #bind -t vi-copy 'v' begin-selection
 # #bind -t vi-copy 'y' copy-selection
 # #set -g mode-mouse on
