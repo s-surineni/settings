@@ -19,16 +19,16 @@ bind  C-f next-window
 bind  C-l last-window
 
 # pane selection commands
-bind  M-p select-pane -U
-bind  M-n select-pane -D
-bind  M-b select-pane -L
-bind  M-f select-pane -R
+bind  p select-pane -U
+bind  n select-pane -D
+bind  b select-pane -L
+bind  f select-pane -R
 
 unbind [
 bind  C-w copy-mode
-bind -t vi-copy v begin-selection
-bind -t vi-copy y copy-selection
-bind -t vi-copy Escape cancel
+# bind -t vi-copy v begin-selection
+# bind -t vi-copy y copy-selection
+# bind -t vi-copy Escape cancel
 # #bind -t vi-copy 'v' begin-selection
 # #bind -t vi-copy 'y' copy-selection
 # #set -g mode-mouse on
