@@ -44,8 +44,6 @@ bind  C-r send-keys -R \; clear-history
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 # close all tmux windows
-bind  M-x kill-server
-bind  M-o new-window
 # # move x clipboard into tmux paste buffer
 # #bind C-p run "tmux set-buffer \"$(xclip -o)\"; tmux paste-buffer"
 # # move tmux copy buffer into x clipboard
