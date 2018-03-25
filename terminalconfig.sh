@@ -1,3 +1,4 @@
+# place this in .bashrc
 # if [ -f ~/settings/terminalconfig.sh ]; then
 # 	. ~/settings/terminalconfig.sh
 # fi
