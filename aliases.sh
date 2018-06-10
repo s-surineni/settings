@@ -19,4 +19,4 @@ alias emax="emacsclient -n"                      # used to be "emacs -nw"
 alias semac="sudo emacsclient -t"                # used to be "sudo emacs -nw"
 alias emacsc="emacsclient -c -a emacs"           # new - opens the GUI with alternate non-daemon
 alias sttu="git status -uno"           # new - opens the GUI with alternate non-daemon
-
+alias sudo="sudo "
