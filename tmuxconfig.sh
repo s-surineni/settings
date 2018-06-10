@@ -1,3 +1,4 @@
+# put this in ~/.tmux.conf
 # source-file ~/settings/tmuxconfig.sh
 set -g prefix C-a
 
