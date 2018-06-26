@@ -1,5 +1,5 @@
-# add in .tmux.conf
-# source-file ~/settings/tmuxconfig.sh 
+# put this in ~/.tmux.conf
+# source-file ~/settings/tmuxconfig.sh
 set -g prefix C-a
 
 # # bind 'C-x C-x' to type 'C-x'
