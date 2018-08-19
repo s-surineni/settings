@@ -5,6 +5,7 @@ else
     git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 fi
 
+# after this do ctrl - a + I to install packages
 if [ -d ~/.tmux/plugins/tpm ]
 then
     echo "tmux package manager installed"
