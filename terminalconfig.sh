@@ -15,3 +15,5 @@ fi
 if [ -f ~/settings/paths.sh ]; then
 	. ~/settings/paths.sh
 fi
+
+source ~/settings/zsh_config.sh
