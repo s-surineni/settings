@@ -1,5 +1,7 @@
 # put this in ~/.tmux.conf
 # source-file ~/settings/tmuxconfig.sh
+# set -g default-shell /usr/bin/zsh
+set -g default-shell $SHELL
 set -g prefix C-a
 
 # # bind 'C-x C-x' to type 'C-x'
