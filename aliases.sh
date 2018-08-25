@@ -21,3 +21,4 @@ alias emacsc="emacsclient -c -a emacs"           # new - opens the GUI with alte
 alias sttu="git status -uno"           # new - opens the GUI with alternate non-daemon
 alias sudo="sudo "
 alias emaxs="SUDO_EDITOR=\"emacsclient -n\" sudo -e"
+alias tmux="tmux -u"
