@@ -1,19 +1,12 @@
-alias stt="git status"
-alias ct="git commit -m "
+# For git
 alias act="git commit -am "
-alias stt="git status"
-alias sd="cd $HOME/projects/analytics-server/"
-alias md="cd $HOME/projects/master/analytics-server/"
-alias worker="$HOME/worker.sh"
-alias batch="$HOME/batch.sh"
-alias mister="$HOME/master.sh"
-alias x="exit"
-alias listb="git branch"
-alias pus="git push origin master"
-alias pul="git pull origin master"
+alias ct="git commit -m "
 alias tst="cd $HOME/test"
 alias cot="git checkout "
-alias gtrash="git checkout -- ."
+alias stt="git status"
+
+alias x="exit"
+
 
 alias emax="emacsclient -n"                      # used to be "emacs -nw"
 alias semac="sudo emacsclient -t"                # used to be "sudo emacs -nw"
@@ -22,3 +15,7 @@ alias sttu="git status -uno"           # new - opens the GUI with alternate non-
 alias sudo="sudo "
 alias emaxs="SUDO_EDITOR=\"emacsclient -n\" sudo -e"
 alias tmux="tmux -u"
+
+
+# python
+alias python="python3"
