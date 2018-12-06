@@ -29,6 +29,7 @@ bind  f select-pane -R
 
 unbind [
 bind  C-w copy-mode
+set-option -g history-limit 10000
 # bind -t vi-copy v begin-selection
 # bind -t vi-copy y copy-selection
 # bind -t vi-copy Escape cancel
