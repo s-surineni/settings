@@ -13,7 +13,7 @@ set -g terminal-overrides 'xterm*:smcup@:rmcup@'
 # # (Note: if in vi mode, to get command mode you need to hit ESC twice.)
 set -g status-keys emacs
 # #cpy pste keys
-set-window-option -g mode-keys vi
+set-window-option -g mode-keys emacs
 # # Window management / navigation
 
 # # move between windows
@@ -29,7 +29,7 @@ bind  f select-pane -R
 
 unbind [
 bind  C-w copy-mode
-set-option -g history-limit 10000
+set-option -g history-limit 2000000
 # bind -t vi-copy v begin-selection
 # bind -t vi-copy y copy-selection
 # bind -t vi-copy Escape cancel
