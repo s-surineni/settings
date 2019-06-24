@@ -17,3 +17,5 @@ if [ -f ~/settings/paths.sh ]; then
 fi
 
 source ~/settings/zsh_config.sh
+
+source ~/settings/org_specific.sh
