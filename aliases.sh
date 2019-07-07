@@ -18,4 +18,5 @@ alias tmux="tmux -u"
 
 
 # python
-alias python="python3"
+# alias python="python3"
+gedit() { /usr/bin/gedit $@ & disown ;}
