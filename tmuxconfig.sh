@@ -53,3 +53,5 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 # # move tmux copy buffer into x clipboard
 # #bind C-y run "tmux save-buffer - | xclip -i" 
 run '~/.tmux/plugins/tpm/tpm'
+
+bind X kill-server
