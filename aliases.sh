@@ -15,7 +15,7 @@ alias sttu="git status -uno"           # new - opens the GUI with alternate non-
 alias sudo="sudo "
 alias emaxs="SUDO_EDITOR=\"emacsclient -n\" sudo -e"
 alias tmux="tmux -u"
-
+alias notebook='sh ~/scripts/notebook.sh'
 
 # python
 # alias python="python3"
