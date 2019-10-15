@@ -7,13 +7,13 @@ tmux split-window -v -t analytics_server
 
 tmux select-window -t analytics_server:1
 tmux send-keys -t analytics_server 'cd ~/projects/aviso/analytics-server/welcome/' C-m
-nvm use 12.10.0 C-m
+tmux send-keys -t analytics_server 'nvm use 12.10.0' C-m
 tmux send-keys -t analytics_server 'npm run dev-hot'  C-m
 
 tmux split-window -h -t analytics_server
 tmux select-window -t analytics_server:3
 tmux send-keys -t analytics_server 'cd ~/projects/aviso/analytics-server/welcome/static/js/' C-m
-nvm use 12.10.0 C-m
+tmux send-keys -t analytics_server 'nvm use 12.10.0' C-m
 tmux send-keys -t analytics_server 'node napp.js' C-m
 
 tmux new-window -t analytics_server
