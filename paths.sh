@@ -12,3 +12,5 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 # export JAVA_HOME=~/software/jjava/jdk1.8.0_201
 # PATH=${JAVA_HOME}/bin:${PATH}
 # export PATH
+# for virtualenvwrapper
+VIRTUALENVWRAPPER_PYTHON=$(which python3)
