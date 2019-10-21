@@ -20,3 +20,6 @@ fi
 . $REPO_LOCATION/zsh_config.sh
 
 . $REPO_LOCATION/org_specific.sh
+
+
+source /usr/local/bin/virtualenvwrapper.sh

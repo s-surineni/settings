@@ -14,3 +14,6 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 # export PATH
 # for virtualenvwrapper
 VIRTUALENVWRAPPER_PYTHON=$(which python3)
+export WORKON_HOME=~/.virtualenvs
+# export PATH=~/software/mongodb/mongodb-osx-x86_64-3.2.22/bin:$PATH
+export PATH=$PATH:/usr/local/Cellar/mongodb-community@3.2/3.2.22/bin
