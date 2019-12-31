@@ -51,7 +51,12 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 # # move x clipboard into tmux paste buffer
 # #bind C-p run "tmux set-buffer \"$(xclip -o)\"; tmux paste-buffer"
 # # move tmux copy buffer into x clipboard
-# #bind C-y run "tmux save-buffer - | xclip -i" 
+# #bind C-y run "tmux save-buffer - | xclip -i"
+
+bind-key -r < swap-window -t -
+bind-key -r > swap-window -t +
+
+
 run '~/.tmux/plugins/tpm/tpm'
 
 bind X kill-server
