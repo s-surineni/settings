@@ -42,7 +42,7 @@ setw -g pane-base-index 1
 # unbind-key -n C-r
 bind r source-file ~/.tmux.conf \; display "Reloaded!"
 bind  - split-window -v -c "#{pane_current_path}"
-bind  \ split-window -h -c "#{pane_current_path}"
+bind  \\ split-window -h -c "#{pane_current_path}"
 bind  C-r send-keys -R \; clear-history
 # # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
