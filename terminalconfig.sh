@@ -3,7 +3,7 @@
 # if [ -f ~/settings/terminalconfig.sh ]; then
 # 	. ~/settings/terminalconfig.sh
 # fi
-REPO_LOCATION=~/sampath/settings
+REPO_LOCATION=~/settings
 export HISTSIZE=1000000
 export HISTFILESIZE=1000000000
 
