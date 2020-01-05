@@ -22,4 +22,3 @@ fi
 . $REPO_LOCATION/org_specific.sh
 
 
-source /usr/local/bin/virtualenvwrapper.sh
