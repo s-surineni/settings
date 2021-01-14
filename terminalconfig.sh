@@ -1,9 +1,3 @@
-#!/bin/bash
-# place this in .bashrc
-# if [ -f ~/settings/terminalconfig.sh ]; then
-# 	. ~/settings/terminalconfig.sh
-# fi
-REPO_LOCATION=~/settings
 export HISTSIZE=1000000
 export HISTFILESIZE=1000000000
 
@@ -20,5 +14,3 @@ fi
 . $REPO_LOCATION/zsh_config.sh
 
 . $REPO_LOCATION/org_specific.sh
-
-
