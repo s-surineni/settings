@@ -4,3 +4,7 @@
 REPO_LOCATION=/Users/ssurineni/ironman/settings
 . $REPO_LOCATION/terminalconfig.sh
 ```
+
+# put this in ~/.tmux.conf
+# source-file ~/settings/tmuxconfig.sh
+# set -g default-shell /usr/bin/zsh
