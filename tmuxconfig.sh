@@ -37,6 +37,7 @@ set-option -g history-limit 2000000
 # #bind -t vi-copy 'y' copy-selection
 # #set -g mode-mouse on
 set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'tmux-plugins/tmux-copycat'
 set -g base-index 1
 setw -g pane-base-index 1
 # unbind-key -n C-r
