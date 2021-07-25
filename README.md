@@ -10,3 +10,6 @@ REPO_LOCATION=/Users/ssurineni/ironman/settings
 ``` shell
 source-file ~/ironman/settings/tmuxconfig.sh
 ```
+
+
+# set -g default-shell /usr/bin/zsh
