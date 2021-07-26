@@ -13,5 +13,3 @@ if [ -f $REPO_LOCATION/paths.sh ]; then
 fi
 
 . $REPO_LOCATION/zsh_config.sh
-
-. $REPO_LOCATION/org_specific.sh
