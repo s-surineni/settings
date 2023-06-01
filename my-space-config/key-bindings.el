@@ -1,3 +1,7 @@
+;; (when (file-exists-p "/home/recorder/settings/my-space-config/key-bindings.el")
+;;   (load-file "/home/recorder/settings/my-space-config/key-bindings.el")
+;;   )
+;; put this in user-config
 ;; movement bindings
 (global-set-key (kbd "M-f") 'forward-char)
 (global-set-key (kbd "M-b") 'backward-char)
