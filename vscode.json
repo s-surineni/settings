@@ -1,0 +1,8 @@
+{
+    "codeGenie.advanced.currentVersion": "5.2.1",
+    "codeGenie.advanced.chat.enabled": false,
+    "editor.minimap.enabled": false,
+    "workbench.editor.limit.value": 3,
+    "workbench.editor.limit.enabled": true,
+    "workbench.editor.limit.perEditorGroup": true
+}
