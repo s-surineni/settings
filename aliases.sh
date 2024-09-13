@@ -6,7 +6,7 @@ alias stt="git status"
 alias pullhead='git pull origin $(git rev-parse --abbrev-ref HEAD)'
 alias x="exit"
 alias gitcl="git checkout -- ."
-
+alias gitre="git restore --staged"
 
 alias emax="emacsclient -n"                      # used to be "emacs -nw"
 alias semac="sudo emacsclient -t"                # used to be "sudo emacs -nw"
