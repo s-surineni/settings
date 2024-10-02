@@ -1,7 +1,3 @@
-# my config starts
-echo "loading zsh_config.sh "
-
-
 plugins=(
     git
     zsh-autosuggestions
@@ -9,3 +5,7 @@ plugins=(
 )
 
 ZSH_THEME="bira"
+
+source $ZSH/oh-my-zsh.sh
+
+
