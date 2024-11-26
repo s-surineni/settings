@@ -2,7 +2,11 @@
 * open `.zshrc` and add below block
 ``` shell
 REPO_LOCATION=$HOME/ironman/settings
-. $REPO_LOCATION/terminalconfig.sh
+
+
+if [ -f $REPO_LOCATION/terminalconfig.sh ]; then
+	. $REPO_LOCATION/terminalconfig.sh
+fi
 ```
 ## tmux config
 * put below in `~/.tmux.conf`

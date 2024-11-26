@@ -1,7 +1,3 @@
-# my config starts
-echo "loading zsh_config.sh "
-
-
 plugins=(
     git
     zsh-autosuggestions
@@ -9,3 +5,12 @@ plugins=(
 )
 
 ZSH_THEME="bira"
+
+function acp() {
+    git commit -m "$1"
+    git push origin HEAD
+}
+
+source $ZSH/oh-my-zsh.sh
+
+
