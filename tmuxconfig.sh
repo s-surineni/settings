@@ -18,9 +18,9 @@ set-window-option -g mode-keys emacs
 # Window management / navigation
 
 # move between windows
-bind  C-b previous-window
-bind  C-f next-window
-bind  C-l last-window
+# bind  C-b previous-window
+# bind  C-f next-window
+# bind  C-l last-window
 
 # pane selection commands
 bind  p select-pane -U
