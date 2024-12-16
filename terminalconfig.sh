@@ -9,13 +9,3 @@ fi
 
 . $REPO_LOCATION/zsh_config.sh
 
-function acp() {
-    git commit -am "$1"
-    git push origin HEAD
-}
-
-
-function cp() {
-    git commit -m "$1"
-    git push origin HEAD
-}

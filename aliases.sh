@@ -14,3 +14,15 @@ alias emacsc="emacsclient -c -a emacs"           # new - opens the GUI with alte
 alias sttu="git status -uno"
 alias emaxs="SUDO_EDITOR=\"emacsclient -n\" sudo -e"
 alias tmux="tmux -u"
+
+
+function gacp() {
+    git commit -am "$1"
+    git push origin HEAD
+}
+
+
+function gcp() {
+    git commit -m "$1"
+    git push origin HEAD
+}
