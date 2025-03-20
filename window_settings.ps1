@@ -12,5 +12,15 @@ function gacp {
     git push
 }
 
+function gacpp {
+    param (
+        [string]$message
+    )
+    git add .
+    git commit -m $message
+    git pull origin $(git rev-parse --abbrev-ref HEAD)
+    git push
+}
+
 # Export the function to be available in the session
 # Export-ModuleMember -Function gacp
