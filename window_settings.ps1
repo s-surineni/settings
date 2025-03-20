@@ -1,3 +1,4 @@
+# . "C:\Users\sampa\projects\settings\window_settings.ps1"
 function Get-GitStatus { git status } 
 Set-Alias -Name stt -Value Get-GitStatus
 
