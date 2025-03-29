@@ -2,6 +2,8 @@
 function Get-GitStatus { git status } 
 Set-Alias -Name stt -Value Get-GitStatus
 
+function Get-GitStatusuno { git status -uno } 
+Set-Alias -Name sttu -Value Get-GitStatusuno
 
 function gacp {
     param (
