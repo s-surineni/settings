@@ -25,5 +25,11 @@ function gacpp {
     git push
 }
 
-# Export the function to be available in the session
-# Export-ModuleMember -Function gacp
+function cot {
+    param(
+        [Parameter(ValueFromRemainingArguments = $true)]
+        $Args
+    )
+    git checkout @Args
+}
+Set-Alias -Name cot -Value cot
