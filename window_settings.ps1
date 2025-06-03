@@ -25,11 +25,11 @@ function gacpp {
     git push
 }
 
-function cot {
+function Invoke-GitCheckout {
     param(
         [Parameter(ValueFromRemainingArguments = $true)]
         $Args
     )
     git checkout @Args
 }
-Set-Alias -Name cot -Value cot
+Set-Alias -Name cot -Value Invoke-GitCheckout
